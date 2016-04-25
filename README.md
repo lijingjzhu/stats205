@@ -1,2 +1,2 @@
-# stats205
-Analysis of Police Killing Data for STATS 205 Nonparametric Statistics
+# STATS 205 Nonparametic Statistics
+Analysis of Police Killing Data 
