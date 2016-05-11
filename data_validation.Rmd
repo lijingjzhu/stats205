@@ -1,30 +1,106 @@
 ---
-title: "STATS 205 Data Validation"
+title: "STATS 205: Police Killings Data Validation"
 author: "Julie Zhu"
 date: "April 25, 2016"
-output: html_document
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    theme: spacelab
+    tango: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-## R Markdown
+# Introduction
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The goal of this study is to pre-process our data and remove any errors. We will do this in the data validation step. After we vet the data (removing rows, fixing errors, inputing missing values), we can begin our analysis.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+We will first load in our libraries and our data.
+
+```{r}
+# Libraries
+library(ggplot2)
+library(purrr)
+library(readr)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+```
 
 ```{r cars}
-summary(cars)
+police_killings <- read_csv("counted_2015.csv")
 ```
 
-## Including Plots
+# Understanding the Data
 
-You can also embed plots, for example:
+We will first take a look at `The Guardian`'s police killings dataset by itself before we join with census data. 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+The dataset has 1,145 observations and 14 variables. 
+
+```{r}
+dim(police_killings)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Looking at the summary, we see at the `uid` column doesn't quite match up with the number of observations we have. Name is a factor (which makes sense), but so is age, which is due to the fact that some ages are unknown.
+
+We also see that the data is only from the year 2015, which is what we wanted.
+
+```{r}
+summary(police_killings)
+```
+
+We first introduce null values to the known ages and then convert the rest of the ages to a number.
+
+```{r}
+police_killings <- police_killings %>%
+  mutate(age = ifelse(age == "Unknown", NA, as.numeric(age)))
+```
+
+Next, we try to understand what the other columns are. The `armed` column describes whether or not the deceased was armed during police confrontation. There are many factors to this variable including `No`, `Disputed`, and `Firearm`. So the predictor also lists what type of "armed" item they had.
+
+```{r}
+levels(factor(police_killings$armed))
+```
+
+Gender comes in three categories: male, female, and non-conforming.
+
+```{r}
+levels(factor(police_killings$gender))
+```
+
+`Classification` denotes how the victim died. These include gunshot, death in custody (though not specified how), and tasering. 
+
+```{r}
+levels(factor(police_killings$classification))
+```
+
+# Null Values
+
+We also want to explore null values in the data set and perhaps determine if there are any patterns. First we set all unknown values to null, since the null isn't already included in the data set.
+
+```{r}
+police_killings[police_killings == "Unknown"] <- NA
+```
+
+
+We see that there are 92 total null values in the data. We know that 4 of these came from age. 
+
+```{r}
+sum(is.na(police_killings))
+```
+
+Since the number of null values in the data set is less than 10% of the data, we decided to remove these rows.
+
+```{r}
+police_killings <- police_killings %>%
+  na.omit()
+```
+
+We now end up with 1,061 rows with 14 columns. 
+
+# Descriptive Statistics
+
+In this section, we hope to explore the distribution
