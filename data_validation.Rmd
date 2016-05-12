@@ -20,6 +20,7 @@ The goal of this study is to pre-process our data and remove any errors. We will
 
 We will first load in our libraries and our data.
 
+https://www.census.gov/popest/data/index.html
 ```{r}
 # Libraries
 library(ggplot2)
@@ -28,10 +29,22 @@ library(readr)
 library(lubridate)
 library(tidyr)
 library(dplyr)
+library(stringr)
+library(datasets)
+
+# Parameters
+file_out <- "police_killings.csv"
+police_file <- "counted_2015.csv"
+gender_file <- "gender.csv"
+population_file <- "population.csv"
+race_file <- "ethnicity.csv"
 ```
 
 ```{r cars}
-police_killings <- read_csv("counted_2015.csv")
+police_killings <- read_csv(police_file)
+gender <- read_csv(gender_file, col_names = TRUE)
+population <- read_csv(population_file, col_names = TRUE)
+ethnicity <- read_csv(race_file, col_names = FALSE)
 ```
 
 # Understanding the Data
@@ -65,26 +78,34 @@ Next, we try to understand what the other columns are. The `armed` column descri
 levels(factor(police_killings$armed))
 ```
 
-Gender comes in three categories: male, female, and non-conforming.
-
-```{r}
-levels(factor(police_killings$gender))
-```
-
 `Classification` denotes how the victim died. These include gunshot, death in custody (though not specified how), and tasering. 
 
 ```{r}
 levels(factor(police_killings$classification))
 ```
 
-# Null Values
+## Filtering Gender
+
+Gender comes in three categories: male, female, and non-conforming. We see that most of the killed are men, but there is only 1 non-conforming victim. We will remove this victim due to its small sample size and its inability to have any concrete analysis done on the specific group.
+
+```{r}
+table(police_killings$gender)
+```
+
+We will just quickly filter that out. 
+
+```{r}
+police_killings <- police_killings %>%
+  filter(!(gender == "Non-conforming"))
+```
+
+## Null Values
 
 We also want to explore null values in the data set and perhaps determine if there are any patterns. First we set all unknown values to null, since the null isn't already included in the data set.
 
 ```{r}
 police_killings[police_killings == "Unknown"] <- NA
 ```
-
 
 We see that there are 92 total null values in the data. We know that 4 of these came from age. 
 
@@ -103,4 +124,202 @@ We now end up with 1,061 rows with 14 columns.
 
 # Descriptive Statistics
 
-In this section, we hope to explore the distribution
+In this section, we hope to explore the distribution of some variables by visualizing them using plots.
+
+We will obtain our census data for normalization from `https://www.census.gov/`.
+
+## Age
+
+```{r}
+police_killings %>%
+  ggplot() +
+  geom_histogram(mapping = aes(x = age), binwidth = 5) +
+  labs(x = "Age", y = "Count")
+```
+
+## Gender
+
+We first clean the gender census data. 
+
+```{r}
+police_killings %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = gender)) +
+  labs(x = "Gender", y = "Count")
+```
+
+## Normalized Gender
+
+We may not need to do this. 
+
+```{r}
+population_vars <- c("total_pop", "male_pop", "female_pop")
+
+gender <- gender[2:nrow(gender), 3:6] %>%
+  rename(state = `GEO.display-label`,
+         total_pop = `cen42010sex0_age999`,
+         male_pop = `cen42010sex1_age999`,
+         female_pop = `cen42010sex2_age999`) %>%
+  dmap_at(population_vars, as.numeric) %>%
+  mutate(female_pct = female_pop/total_pop,
+         male_pct = male_pop/total_pop)
+```
+
+```{r}
+gender_norm <- gender %>% 
+  filter(state == "United States") %>%
+  gather(gender_pct, pct_pop, female_pct:male_pct) %>%
+  select(gender_pct, pct_pop) %>%
+  rename(gender = gender_pct) %>%
+  mutate(gender = ifelse(gender == "female_pct", "Female", "Male"))
+  
+police_killings %>%
+  count(gender) %>%
+  left_join(gender_norm, by = c("gender" = "gender")) %>%
+  mutate(count = n*pct_pop) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = gender, y = count), stat = "identity") +
+  labs(x = "Gender", y = "Count")
+```
+
+## Ethnicity
+
+We will combine Arab and Other to conform to census
+```{r}
+police_killings %>%
+  mutate(raceethnicity = ifelse(raceethnicity == "Arab-American", 
+                                "Other", raceethnicity)) %>%
+  count(raceethnicity) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(raceethnicity, -n), y = n), 
+           stat = "identity") +
+  labs(x = "Ethnicity", y = "Count") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+
+## Normalized Ethnicity
+
+```{r}
+ethnicity <- ethnicity[seq(22, 35, by = 2), 1:2] %>%
+  rename(raceethnicity = X1,
+         pct = X2)
+
+race_names <- c("Black", "Native American", "Asian", "Pacific Islander", "Other", "Hispanic/Latino", "White")
+ethnicity$raceethnicity <- race_names
+
+add_together <- c("Asian", "Pacific Islander")
+```
+
+Setting Arab as other, because no census data
+
+```{r}
+police_killings <- police_killings %>%
+  mutate(raceethnicity = ifelse(raceethnicity == "Arab-American", 
+                                "Other", raceethnicity))
+```
+
+```{r}
+police_killings %>%
+  count(raceethnicity) %>%
+  left_join(ethnicity, by = c("raceethnicity" = "raceethnicity")) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(raceethnicity, -n), y = n), 
+           stat = "identity") +
+  labs(x = "Ethnicity", y = "Count") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+## Armed
+
+```{r}
+police_killings %>%
+  count(armed) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(armed, -n), y = n), 
+           stat = "identity") +
+  labs(x = "Armed", y = "Count") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+
+## Classification
+
+```{r}
+police_killings %>%
+  count(classification) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(classification, -n), y = n), 
+           stat = "identity") +
+  labs(x = "Death Classification", y = "Count") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+
+## State
+
+```{r}
+police_killings %>%
+  count(state) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(state, -n), y = n), 
+           stat = "identity") +
+  labs(x = "State", y = "Count") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+## Normalized by Population State
+
+```{r}
+data(state)
+
+state_info <- data_frame(state_name = state.name,
+                    state_abb = state.abb)
+
+colnames(population) <- c(seq(1, ncol(population)))
+
+population <- population[9:59, ] %>%
+  select(1, 9) %>%
+  rename(state = `1`,
+         pop = `9`) %>%
+  mutate(state = str_replace(state, ".", "")) %>%
+  left_join(state_info, by = c("state" = "state_name")) %>%
+  select(-state)
+```
+
+```{r}
+police_killings %>%
+  count(state) %>%
+  left_join(population, by = c("state" = "state_abb")) %>%
+  filter(!(state == "DC")) %>%
+  mutate(pop_pct = n/pop) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(state, -pop_pct), y = pop_pct), 
+           stat = "identity") +
+  labs(x = "State", y = "Percent of State Population") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+## Month
+
+```{r}
+police_killings$month <- ordered(police_killings$month, 
+                                 levels = c("January", "February",
+                                            "March", "April", 
+                                            "May", "June", 
+                                            "July,", "August", "September", 
+                                            "October", "November", 
+                                            "December"))
+
+police_killings %>%
+  filter(!is.na(month)) %>%
+  count(month) %>%
+  ggplot() +
+  geom_line(mapping = aes(x = month, y = n), stat = "identity",
+            group = 1) +
+  labs(x = "Month", y = "Count")
+```
+
+# Next Steps 
+
+## Writing Out Data
+
+```{r}
+write.csv(x = police_killings, file = file_out)
+```
