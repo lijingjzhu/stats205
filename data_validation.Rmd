@@ -1,6 +1,6 @@
 ---
 title: "STATS 205: Police Killings Data Validation"
-author: "Julie Zhu"
+author: "Julie Zhu and Emily Alsentzer"
 date: "April 25, 2016"
 output:
   html_document:
@@ -16,11 +16,17 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 # Introduction
 
-The goal of this study is to pre-process our data and remove any errors. We will do this in the data validation step. After we vet the data (removing rows, fixing errors, inputing missing values), we can begin our analysis.
+The goal of this study is to pre-process our data and remove any errors. After we vet the data (removing rows, fixing errors, inputing missing values), we can begin our analysis. We first look at some quick distributions of our variables to understand the spread of our data before we start performing tests and answering our research questions. 
 
-We will first load in our libraries and our data.
+We will first load in our libraries and our data. We obtain our gender and population data from the census: https://www.census.gov/popest/data/index.html
 
-https://www.census.gov/popest/data/index.html
+In the data, we have:
+
+* Removed NAs
+* Removed 1 gender non-conforming victim
+* Combined Asian victims with Pacific Islander victims
+* Combined Arab-American victims with Other victims
+
 ```{r}
 # Libraries
 library(ggplot2)
@@ -49,7 +55,7 @@ ethnicity <- read_csv(race_file, col_names = FALSE)
 
 # Understanding the Data
 
-We will first take a look at `The Guardian`'s police killings dataset by itself before we join with census data. 
+We will first take a look at `The Guardian`'s police killings dataset by itself before we join with census data. We want to understand the missing values as well as the size of the data. 
 
 The dataset has 1,145 observations and 14 variables. 
 
@@ -72,13 +78,13 @@ police_killings <- police_killings %>%
   mutate(age = ifelse(age == "Unknown", NA, as.numeric(age)))
 ```
 
-Next, we try to understand what the other columns are. The `armed` column describes whether or not the deceased was armed during police confrontation. There are many factors to this variable including `No`, `Disputed`, and `Firearm`. So the predictor also lists what type of "armed" item they had.
+Next, we try to understand what the other columns are. The `armed` column describes whether or not the deceased was armed during police confrontation. There are many factors to this variable including `No`, `Disputed`, and `Firearm`. So the predictor also lists what type of "armed" item they had. We have an unknown variable as well. We might want to replace this later. 
 
 ```{r}
 levels(factor(police_killings$armed))
 ```
 
-`Classification` denotes how the victim died. These include gunshot, death in custody (though not specified how), and tasering. 
+`Classification` denotes how the victim died. These include gunshot, death in custody (though not specified how), and tasering. We have 5 levels here. No unknowns.
 
 ```{r}
 levels(factor(police_killings$classification))
@@ -120,15 +126,17 @@ police_killings <- police_killings %>%
   na.omit()
 ```
 
-We now end up with 1,061 rows with 14 columns. 
+We now end up with 1,060 rows with 14 columns. 
 
 # Descriptive Statistics
 
 In this section, we hope to explore the distribution of some variables by visualizing them using plots.
 
-We will obtain our census data for normalization from `https://www.census.gov/`.
+We obtain our census data for normalization from `https://www.census.gov/` and our ethnicity data from `http://kff.org/other/state-indicator/distribution-by-raceethnicity/`.
 
 ## Age
+
+First, we look at age. We make a simple histogram and we see that the distribution of ages is somewhat right-skewed. We have a couple of minors killed by police and some elderly. Most police killing victims are middle aged. 
 
 ```{r}
 police_killings %>%
@@ -139,7 +147,7 @@ police_killings %>%
 
 ## Gender
 
-We first clean the gender census data. 
+Before normalization, we see that there is an extreme gender disparity in those killed by the police. Men are overwhelming killed more so than women. 
 
 ```{r}
 police_killings %>%
@@ -150,7 +158,9 @@ police_killings %>%
 
 ## Normalized Gender
 
-We may not need to do this. 
+Even with we normalize for gender (which is a near 50-50 split), we see the same gender disparity in people killed by the police. 
+
+In order to see this visually, we need to wrangle some data and transform the census gender data for 2015. 
 
 ```{r}
 population_vars <- c("total_pop", "male_pop", "female_pop")
@@ -165,6 +175,8 @@ gender <- gender[2:nrow(gender), 3:6] %>%
          male_pct = male_pop/total_pop)
 ```
 
+We have a line indicating if women or men were killed equally by the police. This represents the ratio of the sample proportion of females and males killed by the police over the actual proportion of females and males in the United States. 
+
 ```{r}
 gender_norm <- gender %>% 
   filter(state == "United States") %>%
@@ -176,19 +188,27 @@ gender_norm <- gender %>%
 police_killings %>%
   count(gender) %>%
   left_join(gender_norm, by = c("gender" = "gender")) %>%
-  mutate(count = n*pct_pop) %>%
+  mutate(prop = n/nrow(police_killings),
+         count = prop/pct_pop) %>%
   ggplot() +
   geom_bar(mapping = aes(x = gender, y = count), stat = "identity") +
-  labs(x = "Gender", y = "Count")
+  labs(x = "Gender", y = "Percent Increase in Gender Killed") + 
+  geom_hline(yintercept = 1)
 ```
 
 ## Ethnicity
 
-We will combine Arab and Other to conform to census
+In order to conform to census data, we will classify `Arab-American` victims with the `Other` victims. 
+```{r}
+police_killings <- police_killings %>%
+  mutate(raceethnicity = ifelse(raceethnicity == "Arab-American", 
+                                "Other", raceethnicity))
+```
+
+Going off of raw counts, we see that there are more white and black victims than the rest of the ethnicities combined. 
+
 ```{r}
 police_killings %>%
-  mutate(raceethnicity = ifelse(raceethnicity == "Arab-American", 
-                                "Other", raceethnicity)) %>%
   count(raceethnicity) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(raceethnicity, -n), y = n), 
@@ -199,6 +219,8 @@ police_killings %>%
 
 ## Normalized Ethnicity
 
+Normalizing for the ethnic breakdown in the population, we get a result that is quite different. We first wrangle the ethnicity data so that we have nicer race names and the like. We also combine Asian and Pacific Islander in our ethnicity data so that it matches the race and ethinicites we have in our `police_killings` data.
+
 ```{r}
 ethnicity <- ethnicity[seq(22, 35, by = 2), 1:2] %>%
   rename(raceethnicity = X1,
@@ -208,9 +230,16 @@ race_names <- c("Black", "Native American", "Asian", "Pacific Islander", "Other"
 ethnicity$raceethnicity <- race_names
 
 add_together <- c("Asian", "Pacific Islander")
+
+ethnicity <- ethnicity %>%
+  dmap_at("pct", as.numeric) %>%
+  mutate(raceethnicity = ifelse(raceethnicity %in% add_together, 
+                                "Asian/Pacific Islander", raceethnicity)) %>%
+  group_by(raceethnicity) %>%
+  summarise(pop_pct = sum(pct)/100)
 ```
 
-Setting Arab as other, because no census data
+We also have no census data for `Arab-American`, so we will group that in with other. 
 
 ```{r}
 police_killings <- police_killings %>%
@@ -218,17 +247,25 @@ police_killings <- police_killings %>%
                                 "Other", raceethnicity))
 ```
 
+After normalizing for ethnicity, we see that the proportion of black victims killed is almost twice as if they were to randomly sample people off the street. Hispanic and Native American proportions were very similar to their true proportion in the United States. We see that White and Asian victims are less likely to be killed. 
+
 ```{r}
 police_killings %>%
   count(raceethnicity) %>%
   left_join(ethnicity, by = c("raceethnicity" = "raceethnicity")) %>%
+  mutate(race_pct = (n/nrow(police_killings)),
+         change = race_pct/pop_pct) %>%
   ggplot() +
-  geom_bar(mapping = aes(x = reorder(raceethnicity, -n), y = n), 
+  geom_bar(mapping = aes(x = reorder(raceethnicity, -change), y = change), 
            stat = "identity") +
-  labs(x = "Ethnicity", y = "Count") +
-  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+  labs(x = "Ethnicity", y = "Percent Increase in Killings of Ethnicity") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1)) + 
+  geom_hline(yintercept = 1)
 ```
+
 ## Armed
+
+Next, we examine whether the victims were armed. Firearms are the most common form of armed victims. However, interestingly enough, we see that there are also a lot of unarmed victims that were shot as well. 
 
 ```{r}
 police_killings %>%
@@ -242,6 +279,8 @@ police_killings %>%
 
 ## Classification
 
+Most of the victims that the police killed were killed by a gunshot. Tasering, death in custody, and other causes are a lot less likely.
+
 ```{r}
 police_killings %>%
   count(classification) %>%
@@ -254,6 +293,8 @@ police_killings %>%
 
 ## State
 
+Looking at state, we see that with raw deaths, California takes the cake with over 150 police killings. 
+
 ```{r}
 police_killings %>%
   count(state) %>%
@@ -265,6 +306,10 @@ police_killings %>%
 ```
 
 ## Normalized by Population State
+
+Once we normalize the number of people killed, we see that the state rankings are quite different. 
+
+We first wrangle the `state` data into a useable form. 
 
 ```{r}
 data(state)
@@ -283,6 +328,10 @@ population <- population[9:59, ] %>%
   select(-state)
 ```
 
+We filter out DC since we don't have a population estimate for DC. We now see that New Mexico, Okaloma, and Wyoming have the highest police killings rate than any other state (besides DC, since we don't have information for them). 
+
+A potential route to go here is to see if the ranking of the states is statistically significant from the ranking of the states by proportion of Black populations. 
+
 ```{r}
 police_killings %>%
   count(state) %>%
@@ -298,6 +347,8 @@ police_killings %>%
 
 ## Month
 
+Lastly, we look at the time of the killings. We first order the factors (which are months) so that we can track the number of killings over time. 
+
 ```{r}
 police_killings$month <- ordered(police_killings$month, 
                                  levels = c("January", "February",
@@ -306,19 +357,28 @@ police_killings$month <- ordered(police_killings$month,
                                             "July,", "August", "September", 
                                             "October", "November", 
                                             "December"))
+```
 
+We see that there are the most killings in March. There seems to be a huge decline until June, which is the month with the lowest number of police killings. It locally peaks again in August before dipping for the year. We can test again if these cyclical patterns are statistically significant. 
+
+```{r}
 police_killings %>%
   filter(!is.na(month)) %>%
   count(month) %>%
   ggplot() +
   geom_line(mapping = aes(x = month, y = n), stat = "identity",
             group = 1) +
-  labs(x = "Month", y = "Count")
+  labs(x = "Month", y = "Count") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
 ```
 
 # Next Steps 
 
+Next steps would be to proceed to perform the tests listed in our project proposal. We want to test the significances and the influences of different levels of each factors (in comparison to other factors). We see some potential with the geographic location data and the time series data. Hopefully, we can expand on these suggestions later.  
+
 ## Writing Out Data
+
+Finally, we can write out our edited data to a new file so that we can load it in quickly for our next study. 
 
 ```{r}
 write.csv(x = police_killings, file = file_out)
