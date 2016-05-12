@@ -39,11 +39,11 @@ library(stringr)
 library(datasets)
 
 # Parameters
-file_out <- "police_killings.csv"
-police_file <- "counted_2015.csv"
-gender_file <- "gender.csv"
-population_file <- "population.csv"
-race_file <- "ethnicity.csv"
+file_out <- "data/police_killings.csv"
+police_file <- "data/counted_2015.csv"
+gender_file <- "data/gender.csv"
+population_file <- "data/population.csv"
+race_file <- "data/ethnicity.csv"
 ```
 
 ```{r cars}
