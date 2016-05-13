@@ -1,5 +1,5 @@
 ---
-title: "STATS 205: Police Killings Data Validation"
+title: "STATS 205: Police Killings Data Validation!"
 author: "Julie Zhu and Emily Alsentzer"
 date: "April 25, 2016"
 output:
