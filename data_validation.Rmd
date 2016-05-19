@@ -222,6 +222,7 @@ police_killings %>%
 Normalizing for the ethnic breakdown in the population, we get a result that is quite different. We first wrangle the ethnicity data so that we have nicer race names and the like. We also combine Asian and Pacific Islander in our ethnicity data so that it matches the race and ethinicites we have in our `police_killings` data.
 
 ```{r}
+total_pop <- ethnicity[3, 2] %>% as.numeric()
 ethnicity <- ethnicity[seq(22, 35, by = 2), 1:2] %>%
   rename(raceethnicity = X1,
          pct = X2)
@@ -253,12 +254,13 @@ After normalizing for ethnicity, we see that the proportion of black victims kil
 police_killings %>%
   count(raceethnicity) %>%
   left_join(ethnicity, by = c("raceethnicity" = "raceethnicity")) %>%
-  mutate(race_pct = (n/nrow(police_killings)),
-         change = race_pct/pop_pct) %>%
+  mutate(pop_pct = pop_pct*total_pop,
+         prop = (n/pop_pct)*100000) %>%
   ggplot() +
-  geom_bar(mapping = aes(x = reorder(raceethnicity, -change), y = change), 
+  geom_bar(mapping = aes(x = reorder(raceethnicity, -prop), y = prop), 
            stat = "identity") +
   labs(x = "Ethnicity", y = "Percent Increase in Killings of Ethnicity") +
+  coord_cartesian()
   theme(axis.text.x = element_text(angle = 35, hjust = 1)) + 
   geom_hline(yintercept = 1)
 ```
