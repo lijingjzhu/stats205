@@ -1,5 +1,5 @@
 ---
-title: "STATS 205: The Guardian Police Killings Data Validation"
+title: "STATS 205: The Guardian Police Killings Data Cleaning"
 author: "Julie Zhu and Emily Alsentzer"
 date: "April 25, 2016"
 output:
@@ -41,7 +41,7 @@ library(stringr)
 library(datasets)
 
 # Parameters
-file_out <- "data/police_killings.csv"
+file_out <- "data/guardian_police.csv"
 police_file <- "data/counted_2015.csv"
 gender_file <- "data/gender.csv"
 population_file <- "data/population.csv"
@@ -161,7 +161,7 @@ police_killings %>%
 
 Even with we normalize for gender (which is a near 50-50 split), we see the same gender disparity in people killed by the police. 
 
-In order to see this visually, we need to wrangle some data and transform the census gender data for 2015. 
+In order to see this visually, we need to wrangle some data and transform the census gender data for 2015. Note that this graph may not be completely necessary. 
 
 ```{r}
 population_vars <- c("total_pop", "male_pop", "female_pop")
@@ -262,8 +262,7 @@ police_killings %>%
            stat = "identity") +
   labs(x = "Ethnicity", y = "Percent Increase in Killings of Ethnicity") +
   coord_cartesian()
-  theme(axis.text.x = element_text(angle = 35, hjust = 1)) + 
-  geom_hline(yintercept = 1)
+  theme(axis.text.x = element_text(angle = 35, hjust = 1)) 
 ```
 
 ## Armed
@@ -296,11 +295,11 @@ police_killings %>%
 
 ## State
 
-Looking at state, we see that with raw deaths, California takes the cake with over 150 police killings. 
-
+Looking at state, we see that with raw deaths, California takes the cake with over 150 police killings. Rounding out the top 5 we have California, Texas, Florida, Arizona, and Georgia. 
 ```{r}
 police_killings %>%
   count(state) %>%
+  top_n(10) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(state, -n), y = n), 
            stat = "identity") +
@@ -331,13 +330,14 @@ population <- population[9:59, ] %>%
   select(-state)
 ```
 
-We filter out DC since we don't have a population estimate for DC. We now see that New Mexico, Okaloma, and Wyoming have the highest police killings rate than any other state (besides DC, since we don't have information for them). 
+We filter out DC since we don't have a population estimate for DC. Rounding out the top five, we have Oklahoma, Arizona, Colorado, Louisiana, and California. 
 
 A potential route to go here is to see if the ranking of the states is statistically significant from the ranking of the states by proportion of Black populations. 
 
 ```{r}
 police_killings %>%
   count(state) %>%
+  top_n(10) %>%
   left_join(population, by = c("state" = "state_abb")) %>%
   filter(!(state == "DC")) %>%
   mutate(pop_pct = n/pop) %>%
@@ -378,6 +378,31 @@ police_killings %>%
 # Next Steps 
 
 Next steps would be to proceed to perform the tests listed in our project proposal. We want to test the significances and the influences of different levels of each factors (in comparison to other factors). We see some potential with the geographic location data and the time series data. Hopefully, we can expand on these suggestions later.  
+
+## Date Conversion
+
+Lastly, we turn the three date features (day, month, year) into a single date so it is easier to analyze. 
+
+```{r}
+police_killings <- police_killings %>%
+  mutate(month = ifelse(month == "January", 1, month),
+         month = ifelse(month == "February", 2, month),
+         month = ifelse(month == "March", 3, month),
+         month = ifelse(month == "April", 4, month),
+         month = ifelse(month == "May", 5, month),
+         month = ifelse(month == "June", 6, month),
+         month = ifelse(month == "July", 7, month),
+         month = ifelse(month == "August", 8, month),
+         month = ifelse(month == "September", 9, month),
+         month = ifelse(month == "October", 10, month),
+         month = ifelse(month == "November", 11, month),
+         month = ifelse(month == "December", 12, month)) %>%
+  mutate(date = ymd(str_c(year, month, day, sep = "-"))) %>%
+  rename(race = raceethnicity) %>%
+  select(-c(month, day, year))
+```
+
+As an after thought, we also renamed the column `raceethnicity` to `race` so we can deal with shorter variable names. Yay. 
 
 ## Writing Out Data
 

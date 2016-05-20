@@ -1,0 +1,65 @@
+---
+title: 'STATS 205: Joining Data'
+author: "Julie Zhu"
+date: "May 19, 2016"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    theme: spacelab
+    tango: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Introduction
+
+The goal of this study is to combine the two data sets that we have from the Washington Post and The Guardian. We want to do quick data validation for the joined data sets to see if our data is credible. 
+
+We will first load in our libraries and our data. We obtain our gender and population data from the census: https://www.census.gov/popest/data/index.html like before. 
+
+In the data, we have:
+
+* Joined the data
+* Filtered out less credible observation. 
+
+For our data, we used the pre-processed `The Guardian` data from 2015 and pre-processed `The Washington Post` data from 2015. 
+
+```{r}
+# Libraries
+library(ggplot2)
+library(purrr)
+library(readr)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(datasets)
+
+# Parameters
+file_out <- "data/police_killings.csv"
+guardian_file <- "data/guardian_police.csv"
+washington_file <- "data/washington_police.csv"
+gender_file <- "data/gender.csv"
+population_file <- "data/population.csv"
+race_file <- "data/ethnicity.csv"
+
+# Reading in data
+guardian <- read_csv(guardian_file)
+washington <- read_csv(washington_file)
+gender <- read_csv(gender_file, col_names = TRUE)
+population <- read_csv(population_file, col_names = TRUE)
+ethnicity <- read_csv(race_file, col_names = FALSE)
+```
+
+After loading, we will start the join immediately since we have pre-processed the data already. 
+
+# Joining the Data
+
+
+```{r}
+
+```
+
