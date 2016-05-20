@@ -73,6 +73,8 @@ df <- washington %>%
 
 # Descriptive Statistics
 
+In this section, we will be doing some quick summary statistics. 
+
 ## Ethnicity
 
 Going off of raw counts, we see that there are more white and black victims than the rest of the ethnicities combined. There are some missing values, so we filter those out first. Here, we actually see that there are more Native American victims than Other victims. Overall the number of Asian, Native American, and Other victims killed seemed to be about the same. 
