@@ -260,7 +260,7 @@ police_killings %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(raceethnicity, -prop), y = prop), 
            stat = "identity") +
-  labs(x = "Ethnicity", y = "Percent Increase in Killings of Ethnicity") +
+  labs(x = "Ethnicity", y = "Number of Ethnic Race Killed per 100,000") +
   coord_cartesian()
   theme(axis.text.x = element_text(angle = 35, hjust = 1)) 
 ```

@@ -291,7 +291,7 @@ ethnicity <- ethnicity %>%
   summarise(pop_pct = sum(pct)/100)
 ```
 
-After normalizing for ethnicity, we see that the proportion of black victims killed is almost twice as if they were to randomly sample people off the street. Hispanic and Native American proportions were very similar to their true proportion in the United States. We see that White and Asian victims are less likely to be killed. 
+After normalizing for ethnicity, we see that the proportion of black victims killed is almost twice as if they were to randomly sample people off the street. Hispanic and Native American are second. We see that White, Other, and Asian victims are less likely to be killed. 
 
 ```{r}
 washington %>%
@@ -303,7 +303,7 @@ washington %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(race, -prop), y = prop), 
            stat = "identity") +
-  labs(x = "Ethnicity", y = "Number of Ethic Race Killed per 100,000") +
+  labs(x = "Ethnicity", y = "Number of Ethnic Race Killed per 100,000") +
   theme(axis.text.x = element_text(angle = 35, hjust = 1)) 
 ```
 

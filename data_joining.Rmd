@@ -23,7 +23,8 @@ We will first load in our libraries and our data. We obtain our gender and popul
 In the data, we have:
 
 * Joined the data
-* Filtered out less credible observation. 
+* Filtered out less credible observations
+* Preliminary demographic analysis
 
 For our data, we used the pre-processed `The Guardian` data from 2015 and pre-processed `The Washington Post` data from 2015. 
 
@@ -58,8 +59,155 @@ After loading, we will start the join immediately since we have pre-processed th
 
 # Joining the Data
 
+We first tried to join on name, but we see that a lot of names were mispelled or their middle name was included. This gave for a lot of unmatched victims. So instead, we chose to join on multiple other variables that together would make a unique "fingerprint". 
 
 ```{r}
-
+df <- washington %>%
+  full_join(guardian, by = c("date" = "date", "gender" = "gender", 
+                              "age" = "age", "state" = "state", 
+                             "race" = "race", "city" = "city")) %>%
+  select(name.x, date, manner_of_death, armed.x, armed.y, gender, age, state, 
+         race, city, signs_of_mental_illness, threat_level, flee, body_camera, 
+         classification) 
 ```
 
+# Descriptive Statistics
+
+## Ethnicity
+
+Going off of raw counts, we see that there are more white and black victims than the rest of the ethnicities combined. There are some missing values, so we filter those out first. Here, we actually see that there are more Native American victims than Other victims. Overall the number of Asian, Native American, and Other victims killed seemed to be about the same. 
+
+```{r}
+df %>%
+  count(race) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(race, -n), y = n), 
+           stat = "identity") +
+  labs(x = "Ethnicity", y = "Count") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+
+## Normalized Ethnicity
+
+Normalizing for the ethnic breakdown in the population, we get a result that is quite different. We first wrangle the ethnicity data so that we have nicer race names and the like. We also combine Asian and Pacific Islander in our ethnicity data so that it matches the race and ethinicites we have in our `police_killings` data.
+
+```{r}
+total_pop <- ethnicity[3, 2] %>% as.numeric()
+ethnicity <- ethnicity[seq(22, 35, by = 2), 1:2] %>%
+  rename(raceethnicity = X1,
+         pct = X2)
+
+race_names <- c("Black", "Native American", "Asian", "Pacific Islander", "Other", "Hispanic/Latino", "White")
+ethnicity$raceethnicity <- race_names
+
+add_together <- c("Asian", "Pacific Islander")
+
+ethnicity <- ethnicity %>%
+  dmap_at("pct", as.numeric) %>%
+  mutate(raceethnicity = ifelse(raceethnicity %in% add_together, 
+                                "Asian/Pacific Islander", raceethnicity)) %>%
+  group_by(raceethnicity) %>%
+  summarise(pop_pct = sum(pct)/100)
+```
+
+After normalizing for ethnicity, we see that the proportion of black victims killed is almost twice as if they were to randomly sample people off the street. Native American populations came in second. We see that White, Other, and Asian victims are less likely to be killed. 
+
+```{r}
+df %>%
+  count(race) %>%
+  filter(!is.na(race)) %>%
+  left_join(ethnicity, by = c("race" = "raceethnicity")) %>%
+  mutate(pop_pct = pop_pct*total_pop,
+         prop = (n/pop_pct)*100000) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(race, -prop), y = prop), 
+           stat = "identity") +
+  labs(x = "Ethnicity", y = "Number of Ethnic Race Killed per 100,000") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1)) 
+```
+
+## State
+
+Looking at state, we see that with raw deaths, California takes the cake with over 150 police killings. Rounding out the top 5 we have California, Texas, Florida, Arizona, Georgia, and Colorado.
+
+```{r}
+df %>%
+  count(state) %>%
+  top_n(10) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(state, -n), y = n), 
+           stat = "identity") +
+  labs(x = "State", y = "Count") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+## Normalized by Population State
+
+Once we normalize the number of people killed, we see that the state rankings are quite different. 
+
+We first wrangle the `state` data into a useable form. 
+
+```{r}
+data(state)
+
+state_info <- data_frame(state_name = state.name,
+                    state_abb = state.abb)
+
+colnames(population) <- c(seq(1, ncol(population)))
+
+population <- population[9:59, ] %>%
+  select(1, 9) %>%
+  rename(state = `1`,
+         pop = `9`) %>%
+  mutate(state = str_replace(state, ".", "")) %>%
+  left_join(state_info, by = c("state" = "state_name")) %>%
+  select(-state)
+```
+
+We filter out DC since we don't have a population estimate for DC. Rounding out the top five, we have Oklahoma, Arizona, Colorado, Louisiana, and California. 
+
+A potential route to go here is to see if the ranking of the states is statistically significant from the ranking of the states by proportion of Black populations. 
+
+```{r}
+df %>%
+  count(state) %>%
+  top_n(10) %>%
+  left_join(population, by = c("state" = "state_abb")) %>%
+  filter(!(state == "DC")) %>%
+  mutate(pop_pct = n/pop) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(state, -pop_pct), y = pop_pct), 
+           stat = "identity") +
+  labs(x = "State", y = "Percent of State Population") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+## Month
+
+Month provides an interesting trend. Usually we see a spike in March, February, but a dip in June. This graph suggests that theres a spike in June and it trails off starting from August. 
+
+```{r}
+df %>%
+  mutate(month = month(date)) %>%
+  count(month) %>%
+  ggplot() +
+  geom_line(mapping = aes(x = factor(month), y = n), stat = "identity",
+            group = 1) +
+  labs(x = "Month", y = "Count") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1)) +
+  scale_x_discrete(labels = c("January","February","March","April", "May", 
+                              "June", "July", "August", "September",
+                              "October", "November", "December"))
+```
+
+# Next Steps 
+
+Next steps would be to perform the tests we outlined in our project proposal to test our questions. 
+
+## Writing Out Data
+
+Finally, we can write out our edited data to a new file so that we can load it in quickly for our next study. Since we got rid of the null values, we can output the new data into `police_killings.csv`.
+
+```{r}
+write.csv(x = df, file = file_out)
+```
