@@ -202,6 +202,12 @@ df %>%
                               "October", "November", "December"))
 ```
 
+# Data Filtering: Method of Death
+
+```{r}
+
+```
+
 # Next Steps 
 
 Next steps would be to perform the tests we outlined in our project proposal to test our questions. 
