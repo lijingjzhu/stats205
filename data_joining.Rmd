@@ -46,13 +46,19 @@ washington_file <- "data/washington_police.csv"
 gender_file <- "data/gender.csv"
 population_file <- "data/population.csv"
 race_file <- "data/ethnicity.csv"
+education_file <- "data/education.csv"
+income_file <- "data/income.csv"
+housing_file <- "data/housing.csv"
 
 # Reading in data
-guardian <- read_csv(guardian_file)
-washington <- read_csv(washington_file)
+guardian <- read_csv(guardian_file)[-1]
+washington <- read_csv(washington_file)[-1]
 gender <- read_csv(gender_file, col_names = TRUE)
 population <- read_csv(population_file, col_names = TRUE)
 ethnicity <- read_csv(race_file, col_names = FALSE)
+education <- read_csv(education_file, col_names = FALSE)
+income <- read_csv(income_file, col_names = FALSE)
+housing <- read_csv(housing_file, col_names = FALSE)
 ```
 
 After loading, we will start the join immediately since we have pre-processed the data already. 
@@ -65,11 +71,73 @@ We first tried to join on name, but we see that a lot of names were mispelled or
 df <- washington %>%
   full_join(guardian, by = c("date" = "date", "gender" = "gender", 
                               "age" = "age", "state" = "state", 
-                             "race" = "race", "city" = "city")) %>%
-  select(name.x, date, manner_of_death, armed.x, armed.y, gender, age, state, 
-         race, city, signs_of_mental_illness, threat_level, flee, body_camera, 
-         classification) 
+                             "race" = "race", "city" = "city")) 
 ```
+
+## Death Classification
+
+Mapping shot and tasered to the same category
+
+```{r}
+df$manner_of_death[!is.na(df$manner_of_death)] <- "Shot/Tasered"
+df$classification[df$classification == "Gunshot"|
+                    df$classification == "Taser"] <- "Shot/Tasered"
+```
+
+Filling in Null values
+```{r}
+df <- df %>%
+  mutate(classification = ifelse((is.na(classification) & 
+                                    !is.na(manner_of_death)), 
+                                 manner_of_death,
+                                 classification))
+```
+
+# Armed Discrepencies
+
+Getting rid of armed discrepencies
+
+```{r}
+remove_names <- df %>% 
+  filter(!is.na(armed.x), !is.na(armed.y), armed.x != armed.y) %>%
+  .$name.x
+
+df <- df %>% 
+  filter(!(name.x %in% remove_names)) %>%
+  mutate(armed = ifelse(!is.na(armed.y), armed.y, armed.x)) %>%
+  rename(name = name.x) %>%
+  select(-c(armed.x, armed.y, manner_of_death))
+```
+
+## Missing Dates
+
+We also have some weird date variables going on. We realize in `The Counted`
+dataset, we have a lot of missing dates of death as well. This makes the date
+kind of wonky when we join the two together. 
+
+```{r}
+date_missing <- guardian %>% filter(is.na(date)) %>% .$name
+df %>% filter(name.y %in% date_missing) %>% head()
+```
+
+```{r}
+df <- df %>% filter(!(name.y %in% date_missing))
+```
+
+## Missing Names
+
+```{r}
+df <- df %>%
+  mutate(name = ifelse(is.na(name), name.y, name)) %>%
+  select(-c(id, uid, name.y))
+```
+
+# Adding in income and education
+
+```{r}
+income
+```
+
 
 # Descriptive Statistics
 
