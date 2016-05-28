@@ -418,8 +418,9 @@ filter those out first. Here, we actually see that there are more Native
 American victims than Other victims. Overall the number of Asian, Native 
 American, and Other victims killed seemed to be about the same. 
 
-```{r}
+```{r, fig.width = 5, fig.height = 4}
 df %>%
+  filter(!is.na(race)) %>%
   count(race) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(race, -n), y = n), 
@@ -436,7 +437,7 @@ is quite different.
 After normalizing for ethnicity, we see that the proportion of black victims 
 killed is almost twice as if they were to randomly sample people off the street. Native American populations came in second. We see that White, Other, and Asian victims are less likely to be killed. 
 
-```{r}
+```{r, fig.width = 5, fig.height = 4}
 df %>%
   count(race) %>%
   filter(!is.na(race)) %>%
@@ -455,7 +456,7 @@ Looking at state, we see that with raw deaths, California takes the cake with
 over 150 police killings. Rounding out the top 5 we have California, Texas, 
 Florida, Arizona, Georgia, and Colorado.
 
-```{r}
+```{r, fig.width = 5, fig.height = 4}
 df %>%
   count(state) %>%
   top_n(10) %>%
@@ -479,18 +480,17 @@ A potential route to go here is to see if the ranking of the states is
 statistically significant from the ranking of the states by proportion of 
 Black populations. 
 
-```{r}
+```{r, fig.width = 5, fig.height = 4}
 df %>%
   count(state) %>%
   top_n(10) %>%
   left_join(population, by = c("state" = "state_abb")) %>%
   filter(!(state == "DC")) %>%
-  mutate(pop_pct = n/pop) %>%
+  mutate(pop_pct = n/pop*100000) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(state, -pop_pct), y = pop_pct), 
            stat = "identity") +
-  scale_y_continuous(labels = scales::percent) +
-  labs(x = "State", y = "Percent of State Population") +
+  labs(x = "State", y = "Number of State Killed per 100,000") +
   theme(axis.text.x = element_text(angle = 35, hjust = 1))
 ```
 

@@ -50,15 +50,13 @@ library(datasets)
 # Parameters
 file_out <- "data/guardian_police.csv"
 counted_file <- "data/counted_2015.csv"
-gender_file <- "data/gender.csv"
 population_file <- "data/population.csv"
-race_file <- "data/ethnicity.csv"
+race_file <- "data/race_and_ethnicity.csv"
 
 # Reading in data
 counted <- read_csv(counted_file)
-gender <- read_csv(gender_file, col_names = TRUE)
 population <- read_csv(population_file, col_names = TRUE)
-ethnicity <- read_csv(race_file, col_names = FALSE)
+ethnicity <- read_csv(race_file, col_names = TRUE)
 ```
 
 # Understanding the Data
@@ -134,24 +132,20 @@ null isn't already included in the data set.
 
 ```{r}
 counted[counted == "Unknown"] <- NA
+counted[counted == "Undetermined"] <- NA
 ```
 
-We see that there are 92 total null values in the data. We know that 4 of these 
-came from age. 
+We see that there are `r sum(is.na(counted))` total null values in the data. 
+We know that a few of these came from age. 
 
 ```{r}
 sum(is.na(counted))
 ```
 
-Since the number of null values in the data set is less than 10% of the data, 
-we decided to remove these rows.
+We will keep these null values just in case there is matching data from 
+the Washington Post data set.
 
-```{r}
-counted <- counted %>%
-  na.omit()
-```
-
-We now end up with 1,060 rows with 14 columns. 
+We now end up with `r nrow(counted)` rows with `r ncol(counted)` columns. 
 
 # Descriptive Statistics
 
@@ -167,8 +161,9 @@ First, we look at age. We make a simple histogram and we see that the
 distribution of ages is somewhat right-skewed. We have a couple of minors 
 killed by police and some elderly. Most police killing victims are middle aged. 
 
-```{r}
+```{r, fig.height = 4, fig.width = 4}
 counted %>%
+  filter(!is.na(age)) %>%
   ggplot() +
   geom_histogram(mapping = aes(x = age), binwidth = 5) +
   labs(x = "Age", y = "Count")
@@ -177,59 +172,16 @@ counted %>%
 ## Gender
 
 Before normalization, we see that there is an extreme gender disparity in 
-those killed by the police. Men are overwhelming killed more so than women. 
+those killed by the police. Men are overwhelming killed more so than women. In
+the united states, there is almost an even 50-50 split of women versus men (49.8
+versus 50.2). We clearly don't see this as the case here.
 
-```{r}
+```{r, fig.height = 4, fig.width = 4}
 counted %>%
+  filter(!is.na(gender)) %>%
   ggplot() +
   geom_bar(mapping = aes(x = gender)) +
   labs(x = "Gender", y = "Count")
-```
-
-## Normalized Gender
-
-Even with we normalize for gender (which is a near 50-50 split), we see the 
-same gender disparity in people killed by the police. 
-
-In order to see this visually, we need to wrangle some data and transform the 
-census gender data for 2015. Note that this graph may not be completely 
-necessary. 
-
-```{r}
-population_vars <- c("total_pop", "male_pop", "female_pop")
-
-gender <- gender[2:nrow(gender), 3:6] %>%
-  rename(state = `GEO.display-label`,
-         total_pop = `cen42010sex0_age999`,
-         male_pop = `cen42010sex1_age999`,
-         female_pop = `cen42010sex2_age999`) %>%
-  dmap_at(population_vars, as.numeric) %>%
-  mutate(female_pct = female_pop/total_pop,
-         male_pct = male_pop/total_pop)
-```
-
-We have a line indicating if women or men were killed equally by the police. 
-This represents the ratio of the sample proportion of females and males killed 
-by the police over the actual proportion of females and males in the United 
-States. 
-
-```{r}
-gender_norm <- gender %>% 
-  filter(state == "United States") %>%
-  gather(gender_pct, pct_pop, female_pct:male_pct) %>%
-  select(gender_pct, pct_pop) %>%
-  rename(gender = gender_pct) %>%
-  mutate(gender = ifelse(gender == "female_pct", "Female", "Male"))
-  
-counted %>%
-  count(gender) %>%
-  left_join(gender_norm, by = c("gender" = "gender")) %>%
-  mutate(prop = n/nrow(counted),
-         count = prop/pct_pop) %>%
-  ggplot() +
-  geom_bar(mapping = aes(x = gender, y = count), stat = "identity") +
-  labs(x = "Gender", y = "Percent Increase in Gender Killed") + 
-  geom_hline(yintercept = 1)
 ```
 
 ## Ethnicity
@@ -246,8 +198,9 @@ counted <- counted %>%
 Going off of raw counts, we see that there are more white and black victims 
 than the rest of the ethnicities combined. 
 
-```{r}
+```{r, fig.height = 4, fig.width = 4}
 counted %>%
+  filter(!is.na(raceethnicity)) %>%
   count(raceethnicity) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(raceethnicity, -n), y = n), 
@@ -263,23 +216,35 @@ is quite different. We first wrangle the ethnicity data so that we have nicer
 race names and the like. We also combine Asian and Pacific Islander in our 
 ethnicity data so that it matches the race and ethinicites we have in our `police_killings` data.
 
-```{r}
-total_pop <- ethnicity[3, 2] %>% as.numeric()
-ethnicity <- ethnicity[seq(22, 35, by = 2), 1:2] %>%
-  rename(raceethnicity = X1,
-         pct = X2)
+```{r, fig.height = 4, fig.width = 4}
+total_pop <- ethnicity[2, 4] %>% as.numeric()
+ethnicity <- ethnicity[,c(3, seq(6, 26, by = 2))] 
 
-race_names <- c("Black", "Native American", "Asian", "Pacific Islander", "Other", "Hispanic/Latino", "White")
-ethnicity$raceethnicity <- race_names
+race_names <- c("state", "Total", "White", "Black", "Native American", "Asian", "Pacific Islander", "Other", "Other1", "Other2", "Other3", "Hispanic/Latino")
+colnames(ethnicity) <- race_names
 
-add_together <- c("Asian", "Pacific Islander")
+ethnicity <- ethnicity[-1,]
 
-ethnicity <- ethnicity %>%
-  dmap_at("pct", as.numeric) %>%
-  mutate(raceethnicity = ifelse(raceethnicity %in% add_together, 
-                                "Asian/Pacific Islander", raceethnicity)) %>%
-  group_by(raceethnicity) %>%
-  summarise(pop_pct = sum(pct)/100)
+total_race <- ethnicity %>%
+  dmap_at(race_names[2:length(race_names)], as.numeric) %>%
+  mutate(county = lapply(str_split(state, ","), '[[', 1) %>% unlist(),
+         state = lapply(str_split(state, ","), '[[', 2) %>% unlist(),
+         Other = Other + Other1 + Other2 + Other3,
+         `Asian/Pacific Islander` = Asian + `Pacific Islander`,
+         county = tolower(county),
+         state = trimws(state)) %>%
+  select(-c(Other1, Other2, Other3, Asian, `Pacific Islander`)) %>%
+  group_by(state) %>%
+  summarise(White = sum(White),
+            Black = sum(Black),
+            `Native American` = sum(`Native American`),
+            `Asian/Pacific Islander` = sum(`Asian/Pacific Islander`),
+            Other = sum(Other),
+            `Hispanic/Latino` = sum(`Hispanic/Latino`)) %>%
+  ungroup() %>%
+  gather(race, pop, White:`Hispanic/Latino`) %>%
+  group_by(race) %>%
+  summarise(pop = sum(pop))
 ```
 
 We also have no census data for `Arab-American`, so we will group that in with 
@@ -296,17 +261,16 @@ killed is almost twice as if they were to randomly sample people off the street.
 proportion in the United States. We see that White and Asian victims are less 
 likely to be killed. 
 
-```{r}
+```{r, fig.height = 4, fig.width = 4}
 counted %>%
+  filter(!is.na(raceethnicity)) %>%
   count(raceethnicity) %>%
-  left_join(ethnicity, by = c("raceethnicity" = "raceethnicity")) %>%
-  mutate(pop_pct = pop_pct*total_pop,
-         prop = (n/pop_pct)*100000) %>%
+  left_join(total_race, by = c("raceethnicity" = "race")) %>%
+  mutate(prop = (n/pop)*100000) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(raceethnicity, -prop), y = prop), 
            stat = "identity") +
   labs(x = "Ethnicity", y = "Number of Ethnic Race Killed per 100,000") +
-  coord_cartesian()
   theme(axis.text.x = element_text(angle = 35, hjust = 1)) 
 ```
 
@@ -316,8 +280,9 @@ Next, we examine whether the victims were armed. Firearms are the most common
 form of armed victims. However, interestingly enough, we see that there are 
 also a lot of unarmed victims that were shot as well. 
 
-```{r}
+```{r, fig.height = 4, fig.width = 4}
 counted %>%
+  filter(!is.na(armed)) %>%
   count(armed) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(armed, -n), y = n), 
@@ -331,8 +296,9 @@ counted %>%
 Most of the victims that the police killed were killed by a gunshot. Tasering, 
 death in custody, and other causes are a lot less likely.
 
-```{r}
+```{r, fig.height = 4, fig.width = 4}
 counted %>%
+  filter(!is.na(classification)) %>%
   count(classification) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(classification, -n), y = n), 
@@ -344,10 +310,10 @@ counted %>%
 ## State
 
 Looking at state, we see that with raw deaths, California takes the cake with 
-over 150 police killings. Rounding out the top 5 we have California, Texas, 
+over 200 police killings. Rounding out the top 5 we have California, Texas, 
 Florida, Arizona, and Georgia. 
 
-```{r}
+```{r, fig.height = 4, fig.width = 4}
 counted %>%
   count(state) %>%
   top_n(10) %>%
@@ -370,7 +336,6 @@ data(state)
 
 state_info <- data_frame(state_name = state.name,
                     state_abb = state.abb)
-
 colnames(population) <- c(seq(1, ncol(population)))
 
 population <- population[9:59, ] %>%
@@ -383,24 +348,24 @@ population <- population[9:59, ] %>%
 ```
 
 We filter out DC since we don't have a population estimate for DC. Rounding 
-out the top five, we have Oklahoma, Arizona, Colorado, Louisiana, and 
+out the top five, we have Oklahoma, Arizona, Louisiana, Colorado, and 
 California. 
 
 A potential route to go here is to see if the ranking of the states is 
 statistically significant from the ranking of the states by proportion of 
 Black populations. 
 
-```{r}
+```{r, fig.height = 4, fig.width = 5}
 counted %>%
   count(state) %>%
   top_n(10) %>%
   left_join(population, by = c("state" = "state_abb")) %>%
   filter(!(state == "DC")) %>%
-  mutate(pop_pct = n/pop) %>%
+  mutate(pop_pct = n/pop*100000) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(state, -pop_pct), y = pop_pct), 
            stat = "identity") +
-  labs(x = "State", y = "Percent of State Population") +
+  labs(x = "State", y = "Number of State Killed per 100,000") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
@@ -424,7 +389,7 @@ decline until June, which is the month with the lowest number of police
 killings. It locally peaks again in August before dipping for the year. We can 
 test again if these cyclical patterns are statistically significant. 
 
-```{r}
+```{r, fig.height = 4, fig.width = 7}
 counted %>%
   filter(!is.na(month)) %>%
   count(month) %>%
