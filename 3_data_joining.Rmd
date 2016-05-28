@@ -1,0 +1,546 @@
+---
+title: 'STATS 205: Joining Data'
+author: "Julie Zhu"
+date: "May 28, 2016"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    theme: spacelab
+    tango: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Introduction
+
+The goal of this study is to combine the two data sets that we have from the 
+Washington Post and The Guardian. We want to do quick data validation for the 
+joined data sets to see if our data is credible. 
+
+We will first load in our libraries and our data. We obtain our gender and 
+population data from the census: https://www.census.gov/popest/data/index.html 
+like before. 
+
+In the data, we have:
+
+* Joined the data
+* Filtered out less credible observations
+* Added census variables (education, poverty rate, income)
+* Preliminary demographic analysis
+
+For our data, we used the pre-processed `The Guardian` data from 2015 and 
+pre-processed `The Washington Post` data from 2015. 
+
+```{r}
+# Libraries
+library(ggplot2)
+library(purrr)
+library(readr)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(datasets)
+
+# Parameters
+file_out <- "data/police_killings.csv"
+guardian_file <- "data/guardian_police.csv"
+washington_file <- "data/washington_police.csv"
+population_file <- "data/population.csv"
+race_file <- "data/race_and_ethnicity.csv"
+education_file <- "data/education.csv"
+poverty_file <- "data/poverty.csv"
+unemployment_file <- "data/unemployment.csv"
+county_file <- "data/county_to_city.csv"
+```
+
+First, we read in the pre-processed police killings data. We see that for our 
+pre-processed data, we have an empty column in the beginning, so we filter that 
+out when we read in the data. 
+
+```{r}
+# Reading in police killings data
+guardian <- read_csv(guardian_file)[-1]
+washington <- read_csv(washington_file)[-1]
+```
+
+## Population Data Pre-Processing
+
+After reading in the population data for each of the states, we want to 
+convert the population into their abbreviated names. This will make it easier
+for us to normalize the population of the states when we look at the geographic
+distribution of police killings.
+
+```{r}
+population <- read_csv(population_file, col_names = TRUE)
+```
+
+We use the data `state` from the library `datasets`. This will give us a nice
+mapping from state abbreviations to the state name. We create a data frame
+out the state data so that it is easier to join.
+
+```{r}
+data(state)
+state_info <- data_frame(state_name = state.name,
+                    state_abb = state.abb)
+```
+
+We rename the population data so that we have both the state name and its
+respective population. Then we join with our state to abbreviation mapping
+so that we have the state abbreviation and its respective population. 
+
+```{r}
+colnames(population) <- c(1:ncol(population))
+
+population <- population[9:59,] %>%
+  select(1, 9) %>%
+  rename(state = `1`,
+         pop = `9`) %>%
+  mutate(state = str_replace(state, ".", "")) %>%
+  left_join(state_info, by = c("state" = "state_name")) %>%
+  select(-state)
+```
+
+Our final populations data has 51 observations and 2 columns (state and state
+population).
+
+## Ethnicity Data Pre-Processing
+
+Next, we read in the ethnicity data. This dataset is a little harder to wrangle
+than the other ones. We first have to save the total population count. Next,
+we have to map the population of each ethnicity to its respective ethnicity
+name. 
+
+```{r}
+ethnicity <- read_csv(race_file, col_names = TRUE)
+```
+
+We actually see that in our American Community Survey data, there are more
+categorization of ethnicites than there are in our dataset. We will combine
+mixed races and the other ethnicites into one category. We first name the
+ethnicities appropriately. 
+
+We also save the total population of the United States for later 
+use/safekeeping.
+
+```{r}
+total_pop <- ethnicity[2, 4] %>% as.numeric()
+ethnicity <- ethnicity[,c(3, seq(6, 26, by = 2))] 
+
+race_names <- c("state", "Total", "White", "Black", "Native American", "Asian", "Pacific Islander", "Other", "Other1", "Other2", "Other3", "Hispanic/Latino")
+colnames(ethnicity) <- race_names
+```
+
+We take out the first column since it's just variable names that we don't need.
+
+```{r}
+ethnicity <- ethnicity[-1,]
+```
+
+We first map our population variables to a double type rather than a factor.
+We also extract the state feature from the county name feature. Next, we group
+all of our other races together and combine the Asian and Pacific Islander
+groups (since our police killings dataset groups them together). We want to 
+keep the county variable because it might be useful later.
+
+```{r}
+county_race <- ethnicity %>%
+  dmap_at(race_names[2:length(race_names)], as.numeric) %>%
+  mutate(county = lapply(str_split(state, ","), '[[', 1) %>% unlist(),
+         state = lapply(str_split(state, ","), '[[', 2) %>% unlist(),
+         Other = Other + Other1 + Other2 + Other3,
+         `Asian/Pacific Islander` = Asian + `Pacific Islander`,
+         county = tolower(county),
+         state = trimws(state)) %>%
+  select(-c(Other1, Other2, Other3, Asian, `Pacific Islander`))
+```
+ 
+We create another data set that has the aggregate sums of all the ethnicities.
+We group by state and sum up all of the numbers. We do a quick
+restructuring of the data to get race in a column and the total population of
+that race in another column.
+
+```{r}
+total_race <- county_race %>%
+  group_by(state) %>%
+  summarise(White = sum(White),
+            Black = sum(Black),
+            `Native American` = sum(`Native American`),
+            `Asian/Pacific Islander` = sum(`Asian/Pacific Islander`),
+            Other = sum(Other),
+            `Hispanic/Latino` = sum(`Hispanic/Latino`))
+
+total_race <- total_race %>%
+  gather(race, pop, White:`Hispanic/Latino`) %>%
+  group_by(race) %>%
+  summarise(pop = sum(pop))
+```
+
+## County Data Pre-Processing
+
+The county data set is an intermediate dataset that allows us to map cities
+to counties within states. We want to keep the three columns that has the
+city (`primary_city`), the state, and the county. 
+
+```{r}
+county <- read_csv(county_file, col_names = TRUE) %>%
+  select(primary_city, county, state)
+```
+
+## Education Data Pre-Processing
+
+Our education data needs come quick filtering so that we have the state, county,
+and education variables (percent of the population who has received an 
+education).
+
+We first read in the data and select the columns we want. We also define column
+names.
+
+```{r}
+education <- read_csv(education_file, col_names = TRUE, skip = 1)
+education <- education[,6:8]
+colnames(education) <- c("state", "county", "educ_pct")
+```
+
+We also extract the state variable from a long string so that it is more 
+readable.
+
+```{r}
+education <- education %>%
+  mutate(state = sapply(str_split(state, " - "), `[`, 2)) %>%
+  filter(!is.na(state))
+```
+
+## Unemployment Rate Pre-Processing
+
+Another variable we want to include is unemployment rate by county. This 
+variable is also pretty straightfoward. We read in the data and fix the column
+names after extracting the appropriate columns.
+
+Then, we extract the state and county from one of the variables. 
+
+```{r}
+unemployment <- read_csv(unemployment_file, col_name = TRUE)
+unemployment <- unemployment[-1, c(3, 10)]
+colnames(unemployment) <- c("county", "unemployment_rate")
+
+unemployment <- unemployment %>%
+  mutate(state = lapply(str_split(county, ","), `[[`, 2) %>% unlist(),
+         county = lapply(str_split(county, ","), `[[`, 1) %>% unlist()) 
+```
+
+## Poverty Rate Data Pre-Processing
+
+Lastly, we clean the povery data set. This one is pretty straightforward since
+we just need to select out four variables and rename them. We want to keep
+the state, county, the percentage of the people in that county that are below
+the poverty line, and the median household income for that county.
+
+```{r}
+poverty <- read_csv(poverty_file, col_names = TRUE, skip = 5)
+poverty <- poverty[,c(3, 4, 8, 23)] 
+colnames(poverty) <- c("state", "county", "poverty_pct", "med_income")
+```
+
+After loading, we will start the join immediately since we have pre-processed 
+the data already. 
+
+# Joining the Data
+
+We first tried to join the two police killing data on name, but we see that a 
+lot of names were mispelled or their middle name was included. This gave for a 
+lot of unmatched victims. So instead, we chose to join on multiple other 
+variables that together would make a unique "fingerprint". 
+
+```{r}
+df <- washington %>%
+  full_join(guardian, by = c("date" = "date", "gender" = "gender", 
+                              "age" = "age", "state" = "state", 
+                             "race" = "race", "city" = "city")) 
+```
+
+## Death Classification
+
+One important discrepency we notice in the data is that there are variables
+from the two data sets that correspond with each other. However, there are 
+different factors for these variables. 
+
+`manner_of_death` and `classification` both decribe how the victim died. They
+range from being tasered, shot, death in custody, and other methods. However,
+for the Washington Post data set, we only have two levels: `shot` and `shot and Tasered`. 
+We see that `shot` and `shot and Tasered` are two different levels for the 
+Counted data. To make things more simple, we combined these two categories 
+into one. We defaulted to the Counted data if there were any discrepancies. 
+
+```{r}
+df$manner_of_death[!is.na(df$manner_of_death)] <- "Shot/Tasered"
+df$classification[df$classification == "Gunshot"|
+                    df$classification == "Taser"] <- "Shot/Tasered"
+```
+
+We also note that the Counted data had missing values for classification, so we 
+used the Washington Post data since there aren't any missing values in that 
+dataset. We store the values in the variable `classification`. 
+
+```{r}
+df <- df %>%
+  mutate(classification = ifelse((is.na(classification) & 
+                                    !is.na(manner_of_death)), 
+                                 manner_of_death,
+                                 classification))
+```
+
+## Armed Discrepencies
+
+After joining the data, we also notice that there are some entries in which
+the `armed` variable do not match. We see that there are only around 40 to 50
+observations which this discrepency. We think that this number is small 
+enough to remove, so we proceeded to remove them. 
+
+First, we save the names of the victims who have these discrepencies.
+
+```{r}
+remove_names <- df %>% 
+  filter(!is.na(armed.x), !is.na(armed.y), armed.x != armed.y) %>%
+  .$name.x
+```
+
+We filter out these victims and rename some variables to reduce the size
+of our data set (like `manner_of_death` and `armed.x`).
+
+```{r}
+df <- df %>% 
+  filter(!(name.x %in% remove_names)) %>%
+  mutate(armed = ifelse(!is.na(armed.y), armed.y, armed.x)) %>%
+  rename(name = name.x) %>%
+  select(-c(armed.x, armed.y, manner_of_death))
+```
+
+## Missing Names
+
+We also note that there are some victims who appear in one data set, but not
+the other. We create one unified name column that keeps these users outside
+of the intersection. 
+
+```{r}
+df <- df %>%
+  mutate(name = ifelse(is.na(name), name.y, name)) %>%
+  select(-c(id, uid, name.y))
+```
+
+# Adding in Extra Data
+
+We have quite a few variables we want to add to our data set. In this section,
+we will add our education, poverty, and unemployment data. 
+
+We first want to map each city to county so we can gain poverty, income, 
+education, and race data. We convert all of the `county` labels to lower case 
+so that capitlization doesn't come back and bite us.
+
+```{r}
+county <- county %>%
+  select(primary_city, state, county) %>%
+  filter(!is.na(primary_city), !is.na(state), !is.na(county),
+         state %in% df$state) %>%
+  mutate(county = tolower(county),
+         primary_city = tolower(primary_city)) %>%
+  unique()
+
+poverty <- poverty %>%
+  mutate(county = tolower(county)) 
+
+education <- education %>%
+  mutate(county = str_replace_all(county, "[[:punct:]]", " "),
+         county = tolower(county)) 
+
+unemployment <- unemployment %>%
+  mutate(county = tolower(county),
+         state = trimws(state)) 
+```
+
+Next, we want to take care of misspellings and discrepencies in abbreviations.
+We first join by city and state to get county. Then from county, we do a little
+more maneuvering to align discrepencies in county spelling one more time. 
+
+Lastly, we join with the poverty, education, and unemployment data. 
+
+```{r}
+df <- df %>%
+  mutate(city = tolower(city),
+         city = str_replace(city, "^st ", "saint "),
+         city = str_replace(city, "^st. ", "saint ")) %>% 
+  left_join(county, by = c("state" = "state", "city" = "primary_city")) %>% 
+  mutate(county = tolower(county),
+         county = str_replace(county, "^st ", "st. "),
+         county = ifelse(county == "municipality of anchorage", 
+                         "anchorage borough", county),
+         county = ifelse(county == "do̱a ana county", "dona ana county",
+                         county)) %>%
+  mutate(county = ifelse(is.na(county), city, county)) %>%
+  left_join(poverty, by = c("state" = "state", "county" = "county")) 
+```
+
+Before we join with unemployment, education, and race data, we need to map
+the states to the abbreviations. We create a dataset with the mapping 
+variables.
+
+```{r}
+data(state)
+state_info <- data_frame(state = state.abb, state_name = state.name)
+```
+
+Now we join on the state names. Note that there was some white space in front
+of the names that we had to go back and remove in the pre-processing steps.
+
+```{r}
+df <- df %>%
+  left_join(state_info, by = c("state" = "state")) %>%
+  left_join(unemployment, by = c("county" = "county", 
+                                 "state_name" = "state")) %>% 
+  left_join(education, by = c("county" = "county", 
+                              "state_name" = "state")) %>% 
+  left_join(county_race, by = c("county" = "county", 
+                                "state_name" = "state")) 
+```
+
+# Descriptive Statistics
+
+In this section, we will be doing some quick summary statistics. 
+
+## Ethnicity
+
+Going off of raw counts, we see that there are more white and black victims than 
+the rest of the ethnicities combined. There are some missing values, so we 
+filter those out first. Here, we actually see that there are more Native 
+American victims than Other victims. Overall the number of Asian, Native 
+American, and Other victims killed seemed to be about the same. 
+
+```{r}
+df %>%
+  count(race) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(race, -n), y = n), 
+           stat = "identity") +
+  labs(x = "Ethnicity", y = "Count") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+
+## Normalized Ethnicity
+
+Normalizing for the ethnic breakdown in the population, we get a result that 
+is quite different. 
+
+After normalizing for ethnicity, we see that the proportion of black victims 
+killed is almost twice as if they were to randomly sample people off the street. Native American populations came in second. We see that White, Other, and Asian victims are less likely to be killed. 
+
+```{r}
+df %>%
+  count(race) %>%
+  filter(!is.na(race)) %>%
+  left_join(total_race, by = c("race" = "race")) %>%
+  mutate(prop = (n/pop)*100000) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(race, -prop), y = prop), 
+           stat = "identity") +
+  labs(x = "Ethnicity", y = "Number of Ethnic Race Killed per 100,000") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1)) 
+```
+
+## State
+
+Looking at state, we see that with raw deaths, California takes the cake with 
+over 150 police killings. Rounding out the top 5 we have California, Texas, 
+Florida, Arizona, Georgia, and Colorado.
+
+```{r}
+df %>%
+  count(state) %>%
+  top_n(10) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(state, -n), y = n), 
+           stat = "identity") +
+  labs(x = "State", y = "Count") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+
+## Normalized by Population State
+
+Once we normalize the number of people killed, we see that the state rankings 
+are quite different. 
+
+We filter out DC since we don't have a population estimate for DC. Rounding 
+out the top five, we have Oklahoma, Arizona, Colorado, Louisiana, and 
+California. 
+
+A potential route to go here is to see if the ranking of the states is 
+statistically significant from the ranking of the states by proportion of 
+Black populations. 
+
+```{r}
+df %>%
+  count(state) %>%
+  top_n(10) %>%
+  left_join(population, by = c("state" = "state_abb")) %>%
+  filter(!(state == "DC")) %>%
+  mutate(pop_pct = n/pop) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(state, -pop_pct), y = pop_pct), 
+           stat = "identity") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = "State", y = "Percent of State Population") +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+
+## Month
+
+Month provides an interesting trend. Usually we see a spike in March, February, 
+but a dip in June. This graph suggests that theres a spike in June and it 
+trails off starting from August. 
+
+```{r}
+df %>%
+  mutate(month = month(date)) %>%
+  count(month) %>%
+  ggplot() +
+  geom_line(mapping = aes(x = factor(month), y = n), stat = "identity",
+            group = 1) +
+  labs(x = "Month", y = "Count") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1)) +
+  scale_x_discrete(labels = c("January","February","March","April", "May", 
+                              "June", "July", "August", "September",
+                              "October", "November", "December"))
+```
+
+# Next Steps 
+
+Next steps would be to perform the tests we outlined in our project proposal 
+to test our questions. 
+
+## Writing Out Data
+
+Finally, we can write out our edited data to a new file so that we can load it 
+in quickly for our next study. Since we got rid of the null values, we can 
+output the new data into `police_killings.csv`.
+
+We rename the ethnicity populations to make them more understandable. 
+We also only keep those with the incident date in the year 2015.
+
+We end up with 1271 observations and 28 variables.
+
+```{r}
+df <- df %>%
+  rename(total_county_pop = Total,
+         white_county_pop = White,
+         black_county_pop = Black,
+         other_county_pop = Other,
+         native_county_pop = `Native American`,
+         asian_county_pop = `Asian/Pacific Islander`,
+         hispanic_county_pop = `Hispanic/Latino`) %>%
+  distinct(gender, age, city, race, name) %>%
+  filter(year(date) == 2015)
+
+write.csv(x = df, file = file_out)
+```

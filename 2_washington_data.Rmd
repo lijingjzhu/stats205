@@ -16,9 +16,11 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 # Introduction
 
-The goal of this study is to combine the two data sets that we have from the Washington Post and The Guardian. We want to do quick data validation for the Washington Post and get rid of funky entries. Then, we want to look at the results from the two data sets individually and compare the two. 
+The goal of this study is to combine the two data sets that we have from the Washington Post and The Guardian. We want to do quick data validation for the Washington Post and get rid of funky entries. Then, we want to look at the 
+results from the two data sets individually and compare the two. 
 
-We will first load in our libraries and our data. We obtain our gender and population data from the census: https://www.census.gov/popest/data/index.html
+We will first load in our libraries and our data. We obtain our gender and 
+population data from the census: https://www.census.gov/popest/data/index.html
 
 In the data, we have:
 
@@ -57,15 +59,22 @@ ethnicity <- read_csv(race_file, col_names = FALSE)
 
 # Understanding the Data
 
-We will first take a look at `The Washington Post`'s police killings dataset by itself before we join with the `police_killings` data. We want to understand the missing values as well as the size of the data. 
+We will first take a look at `The Washington Post`'s police killings dataset by 
+itself before we join with the `police_killings` data. We want to understand 
+the missing values as well as the size of the data. 
 
-The dataset has 1,357 observations and 14 variables. We have more observations and different predictors, however, than the Guardian data.
+The dataset has 1,357 observations and 14 variables. We have more observations 
+and different predictors, however, than the Guardian data.
 
 ```{r}
 dim(washington)
 ```
 
-Looking at the summary, we see the date is in a different format than the one found in `The Guardian` data set. We also see that now we have variables that mean the same thing, but have different factors and variable names. For example, `manner_of_death` is equivalent to the `classification` column in `The Guardian` data set. There are also slightly different levels. 
+Looking at the summary, we see the date is in a different format than the one 
+found in `The Guardian` data set. We also see that now we have variables that 
+mean the same thing, but have different factors and variable names. For example,
+`manner_of_death` is equivalent to the `classification` column in `The Guardian` 
+data set. There are also slightly different levels. 
 
 Some new variables include `signs_of_mental_illness`, `flee`, and `body_camera`. 
 
@@ -73,19 +82,28 @@ Some new variables include `signs_of_mental_illness`, `flee`, and `body_camera`.
 summary(washington)
 ```
 
-One of the first things we notice is that there aren't many null values (132). We do have categories such as `undetermined`, which wouldn't be too bad to just leave in the data. 
+One of the first things we notice is that there aren't many null values (132). 
+We do have categories such as `undetermined`, which wouldn't be too bad to just 
+leave in the data. 
 
 ```{r}
 levels(factor(washington$threat_level))
 ```
 
-One annoying feature we might have to replace is the race column. We have just letters for the races and we are unsure what these represent. The data nor the website specifies what the codes mean. We can try to match the individuals and make our best guess.
+One annoying feature we might have to replace is the race column. We have just 
+letters for the races and we are unsure what these represent. The data nor the 
+website specifies what the codes mean. We can try to match the individuals and 
+make our best guess.
 
 ```{r}
 levels(factor(washington$race))
 ```
 
-We also see that there are less levels for manner of death than there are for `The Guardian` data set. We see that there are only two factors: shot or shot and tasered. Clearly not all deaths of the victims in police are due to these two causes. Once we combine, we will see that there will be quite a few discrepencies. 
+We also see that there are less levels for manner of death than there are for 
+`The Guardian` data set. We see that there are only two factors: shot or shot 
+and tasered. Clearly not all deaths of the victims in police are due to these 
+two causes. Once we combine, we will see that there will be quite a few 
+discrepencies. 
 
 ```{r}
 levels(factor(washington$manner_of_death))
@@ -99,7 +117,8 @@ Gender in the `Washington Post` data comes in two categories: male and female. H
 table(washington$gender)
 ```
 
-We will try to rename the gender variable to that it matches with the genders in the other data set. 
+We will try to rename the gender variable to that it matches with the genders 
+in the other data set. 
 
 ```{r}
 washington$gender[washington$gender == "M"] <- "Male"
@@ -108,7 +127,9 @@ washington$gender[washington$gender == "F"] <- "Female"
 
 ## Renaming Manner of Death
 
-We also want to explore null values in the data set and perhaps determine if there are any patterns. First we set all unknown values to null, since the null isn't already included in the data set.
+We also want to explore null values in the data set and perhaps determine if 
+there are any patterns. First we set all unknown values to null, since the 
+null isn't already included in the data set.
 
 ```{r}
 levels(factor(washington$manner_of_death))
@@ -121,7 +142,8 @@ We see that there are 132 total null values in the data.
 sum(is.na(washington))
 ```
 
-Since the number of null values in the data set is less than 10% of the data, we decided to remove these rows.
+Since the number of null values in the data set is less than 10% of the data, 
+we decided to remove these rows.
 
 ```{r}
 police_killings <- police_killings %>%
@@ -132,7 +154,12 @@ We now end up with 1,060 rows with 14 columns.
 
 ## Renaming Armed
 
-There are a lot more factors for armed than there are for `The Guardian` dataset. We will try to map the Washington Post data set to the Guardian data set. We see that some of the categories line up exactly like knife, vehical, firearm (gun), and unarmed. However, some of them don't quite line up. We will categorize the ones who don't quite fit (undetermiend and unknown) into the Disputed category. 
+There are a lot more factors for armed than there are for `The Guardian` 
+dataset. We will try to map the Washington Post data set to the Guardian data 
+set. We see that some of the categories line up exactly like knife, vehical, 
+firearm (gun), and unarmed. However, some of them don't quite line up. We will
+categorize the ones who don't quite fit (undetermiend and unknown) into the 
+Disputed category. 
 
 ```{r}
 # levels(factor(washington$armed))
@@ -157,7 +184,11 @@ washington <- washington %>%
 
 ## Renaming Race
 
-We also notice that the race codes are a little different across the two data sets. However, we see that there are the same levels for the race predictor. The first letter of each race from `The Guardian` data set actually matches each letter code from `The Washington Post` data set. We do a quick transformation to change the races. 
+We also notice that the race codes are a little different across the two data 
+sets. However, we see that there are the same levels for the race predictor. 
+The first letter of each race from `The Guardian` data set actually matches 
+each letter code from `The Washington Post` data set. We do a quick 
+transformation to change the races. 
 
 ```{r}
 # levels(factor(police_killings$race))
@@ -174,13 +205,15 @@ washington <- washington %>%
 
 ## Null Values
 
-We want to get rid of the null values in our data set. Since we only have 132 nulls, we would be getting rid of less than 10% of our data. 
+We want to get rid of the null values in our data set. Since we only have 
+132 nulls, we would be getting rid of less than 10% of our data. 
 
 ```{r}
 washington <- washington %>% na.omit()
 ```
 
-We end up with 1244 observations, which is pretty good considering we got rid of all of our null values. 
+We end up with 1244 observations, which is pretty good considering we got rid 
+of all of our null values. 
 
 ```{r}
 dim(washington)
@@ -188,13 +221,19 @@ dim(washington)
 
 # Descriptive Statistics
 
-In this section, we hope to explore the distribution of some variables by visualizing them using plots. This is the same analysis as in the `data_cleaning.Rmd` file, but with the Washington Post data. 
+In this section, we hope to explore the distribution of some variables by 
+visualizing them using plots. This is the same analysis as in the 
+`1_counted_data.Rmd` file, but with the Washington Post data. 
 
-We obtain our census data for normalization from `https://www.census.gov/` and our ethnicity data from `http://kff.org/other/state-indicator/distribution-by-raceethnicity/`.
+We obtain our census data for normalization from 
+`https://www.census.gov/` and our ethnicity data from `http://kff.org/other/state-indicator/distribution-by-raceethnicity/`.
 
 ## Age
 
-First, we look at age. We make a simple histogram and we see that the distribution of ages is somewhat right-skewed. We have a couple of minors killed by police and some elderly. Most police killing victims are middle aged. This matches the results we did in our previous study.
+First, we look at age. We make a simple histogram and we see that the 
+distribution of ages is somewhat right-skewed. We have a couple of minors 
+killed by police and some elderly. Most police killing victims are middle aged. 
+This matches the results we did in our previous study.
 
 ```{r}
 washington %>%
@@ -205,7 +244,9 @@ washington %>%
 
 ## Gender
 
-Before normalization, we see that there is an extreme gender disparity in those killed by the police. Men are overwhelming killed more so than women. This is expected. 
+Before normalization, we see that there is an extreme gender disparity in those 
+killed by the police. Men are overwhelming killed more so than women. This 
+is expected. 
 
 ```{r}
 washington %>%
@@ -216,9 +257,12 @@ washington %>%
 
 ## Normalized Gender
 
-Even with we normalize for gender (which is a near 50-50 split), we see the same gender disparity in people killed by the police. 
+Even with we normalize for gender (which is a near 50-50 split), we see the 
+same gender disparity in people killed by the police. 
 
-In order to see this visually, we need to wrangle some data and transform the census gender data for 2015. Note that this graph may not be completely necessary. 
+In order to see this visually, we need to wrangle some data and transform the 
+census gender data for 2015. Note that this graph may not be completely 
+necessary. 
 
 ```{r}
 population_vars <- c("total_pop", "male_pop", "female_pop")
@@ -233,7 +277,10 @@ gender <- gender[2:nrow(gender), 3:6] %>%
          male_pct = male_pop/total_pop)
 ```
 
-We have a line indicating if women or men were killed equally by the police. This represents the ratio of the sample proportion of females and males killed by the police over the actual proportion of females and males in the United States. 
+We have a line indicating if women or men were killed equally by the police. 
+This represents the ratio of the sample proportion of females and males killed 
+by the police over the actual proportion of females and males in the United 
+States. 
 
 ```{r}
 gender_norm <- gender %>% 
@@ -256,7 +303,11 @@ washington %>%
 
 ## Ethnicity
 
-Going off of raw counts, we see that there are more white and black victims than the rest of the ethnicities combined. There are some missing values, so we filter those out first. Here, we actually see that there are fewer Native American victims than Other victims, something a little different than in the other data set. 
+Going off of raw counts, we see that there are more white and black victims 
+than the rest of the ethnicities combined. There are some missing values, so 
+we filter those out first. Here, we actually see that there are fewer Native 
+American victims than Other victims, something a little different than in the 
+other data set. 
 
 ```{r}
 washington %>%
@@ -270,7 +321,11 @@ washington %>%
 
 ## Normalized Ethnicity
 
-Normalizing for the ethnic breakdown in the population, we get a result that is quite different. We first wrangle the ethnicity data so that we have nicer race names and the like. We also combine Asian and Pacific Islander in our ethnicity data so that it matches the race and ethinicites we have in our `police_killings` data.
+Normalizing for the ethnic breakdown in the population, we get a result that 
+is quite different. We first wrangle the ethnicity data so that we have nicer 
+race names and the like. We also combine Asian and Pacific Islander in our 
+ethnicity data so that it matches the race and ethinicites we have in our 
+`police_killings` data.
 
 ```{r}
 total_pop <- ethnicity[3, 2] %>% as.numeric()
@@ -291,7 +346,10 @@ ethnicity <- ethnicity %>%
   summarise(pop_pct = sum(pct)/100)
 ```
 
-After normalizing for ethnicity, we see that the proportion of black victims killed is almost twice as if they were to randomly sample people off the street. Hispanic and Native American are second. We see that White, Other, and Asian victims are less likely to be killed. 
+After normalizing for ethnicity, we see that the proportion of black victims 
+killed is almost twice as if they were to randomly sample people off the street.
+Hispanic and Native American are second. We see that White, Other, and Asian 
+victims are less likely to be killed. 
 
 ```{r}
 washington %>%
@@ -309,7 +367,9 @@ washington %>%
 
 ## Armed
 
-Next, we examine whether the victims were armed. Firearms are the most common form of armed victims. However, interestingly enough, we see that there are also a lot of unarmed victims that were shot as well. 
+Next, we examine whether the victims were armed. Firearms are the most common 
+form of armed victims. However, interestingly enough, we see that there are 
+also a lot of unarmed victims that were shot as well. 
 
 ```{r}
 washington %>%
@@ -323,7 +383,9 @@ washington %>%
 
 ## Classification
 
-Most of the victims that the police killed were killed by a gunshot. For those who are shot and tasered pale in comparison frequency wise. However, it seems like there are only two ways a victim died by police. 
+Most of the victims that the police killed were killed by a gunshot. For 
+those who are shot and tasered pale in comparison frequency wise. However, 
+it seems like there are only two ways a victim died by police. 
 
 ```{r}
 washington %>%
@@ -337,7 +399,9 @@ washington %>%
 
 ## State
 
-Looking at state, we see that with raw deaths, California takes the cake with over 150 police killings. Rounding out the top 5 we have California, Texas, Florida, Arizona, and Colorado 
+Looking at state, we see that with raw deaths, California takes the cake with 
+over 150 police killings. Rounding out the top 5 we have California, Texas, 
+Florida, Arizona, and Colorado.
 
 ```{r}
 washington %>%
@@ -352,7 +416,8 @@ washington %>%
 
 ## Normalized by Population State
 
-Once we normalize the number of people killed, we see that the state rankings are quite different. 
+Once we normalize the number of people killed, we see that the state rankings 
+are quite different. 
 
 We first wrangle the `state` data into a useable form. 
 
@@ -373,9 +438,13 @@ population <- population[9:59, ] %>%
   select(-state)
 ```
 
-We filter out DC since we don't have a population estimate for DC. Rounding out the top five, we have Oklahoma, Arizona, Colorado, Louisiana, and California. 
+We filter out DC since we don't have a population estimate for DC. Rounding 
+out the top five, we have Oklahoma, Arizona, Colorado, Louisiana, and 
+California. 
 
-A potential route to go here is to see if the ranking of the states is statistically significant from the ranking of the states by proportion of Black populations. 
+A potential route to go here is to see if the ranking of the states is 
+statistically significant from the ranking of the states by proportion of 
+Black populations. 
 
 ```{r}
 washington %>%
@@ -393,7 +462,12 @@ washington %>%
 
 ## Month
 
-Lastly, we look at the time of the killings. We use the month to track the number of killings across the year. We see that this trend is slightly different from the one we obtained with the Guardian data set. We see the peak in `The Guardian` data set is in March, but this one has the peak in around February. The largest dip ends in June, which matches the other data set, has a local peak in August, and drifts off for the rest of the year. 
+Lastly, we look at the time of the killings. We use the month to track the 
+number of killings across the year. We see that this trend is slightly 
+different from the one we obtained with the Guardian data set. We see the peak 
+in `The Guardian` data set is in March, but this one has the peak in around 
+February. The largest dip ends in June, which matches the other data set, has 
+a local peak in August, and drifts off for the rest of the year. 
 
 ```{r}
 washington %>%
@@ -414,11 +488,16 @@ We might want to look at February deaths in this data set a little more closely.
 
 # Next Steps 
 
-Next steps would be to proceed to join the two data sets together to see if there are any observations that agree. Then we can confirm those observations and carefully vet through the observations with discrepancies to make our data set. 
+Next steps would be to proceed to join the two data sets together to see if 
+there are any observations that agree. Then we can confirm those observations 
+and carefully vet through the observations with discrepancies to make our 
+data set. 
 
 ## Writing Out Data
 
-Finally, we can write out our edited data to a new file so that we can load it in quickly for our next study. Since we got rid of the null values, we can output the new data into `washington_police.csv`.
+Finally, we can write out our edited data to a new file so that we can load 
+it in quickly for our next study. Since we got rid of the null values, we can 
+output the new data into `washington_police.csv`.
 
 ```{r}
 write.csv(x = washington, file = file_out)

@@ -16,9 +16,16 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 # Introduction
 
-The goal of this study is to pre-process our data and remove any errors. After we vet the data (removing rows, fixing errors, inputing missing values), we can begin our analysis. We first look at some quick distributions of our variables to understand the spread of our data before we start performing tests and answering our research questions. 
+The goal of this study is to pre-process our `The Counted` data and remove any 
+errors. After we vet the data (doing a quick sanity check), we can begin our 
+analysis. We first look at some quick distributions of our variables 
+to understand the spread of our data before we start performing tests and 
+answering our research questions. We also try to combine some factors of
+our categorical data into more interpretable buckets (matching Census
+buckets).
 
-We will first load in our libraries and our data. We obtain our gender and population data from the census: https://www.census.gov/popest/data/index.html
+We will first load in our libraries and our data. We obtain our gender and 
+population data from the census: https://www.census.gov/popest/data/index.html
 
 In the data, we have:
 
@@ -42,13 +49,13 @@ library(datasets)
 
 # Parameters
 file_out <- "data/guardian_police.csv"
-police_file <- "data/counted_2015.csv"
+counted_file <- "data/counted_2015.csv"
 gender_file <- "data/gender.csv"
 population_file <- "data/population.csv"
 race_file <- "data/ethnicity.csv"
 
 # Reading in data
-police_killings <- read_csv(police_file)
+counted <- read_csv(counted_file)
 gender <- read_csv(gender_file, col_names = TRUE)
 population <- read_csv(population_file, col_names = TRUE)
 ethnicity <- read_csv(race_file, col_names = FALSE)
@@ -56,74 +63,91 @@ ethnicity <- read_csv(race_file, col_names = FALSE)
 
 # Understanding the Data
 
-We will first take a look at `The Guardian`'s police killings dataset by itself before we join with census data. We want to understand the missing values as well as the size of the data. 
+We will first take a look at `The Guardian`'s police killings dataset by itself 
+before we join with census data. We want to understand the missing values as 
+well as the size of the data. 
 
 The dataset has 1,145 observations and 14 variables. 
 
 ```{r}
-dim(police_killings)
+dim(counted)
 ```
 
-Looking at the summary, we see at the `uid` column doesn't quite match up with the number of observations we have. Name is a factor (which makes sense), but so is age, which is due to the fact that some ages are unknown.
+Looking at the summary, we see at the `uid` column doesn't quite match up with 
+the number of observations we have. Name is a factor (which makes sense), but 
+so is age, which is due to the fact that some ages are unknown.
 
 We also see that the data is only from the year 2015, which is what we wanted.
 
 ```{r}
-summary(police_killings)
+summary(counted)
 ```
 
-We first introduce null values to the known ages and then convert the rest of the ages to a number.
+We first introduce null values to the known ages and then convert the rest of 
+the ages to a number.
 
 ```{r}
-police_killings <- police_killings %>%
+counted <- counted %>%
   mutate(age = ifelse(age == "Unknown", NA, as.numeric(age)))
 ```
 
-Next, we try to understand what the other columns are. The `armed` column describes whether or not the deceased was armed during police confrontation. There are many factors to this variable including `No`, `Disputed`, and `Firearm`. So the predictor also lists what type of "armed" item they had. We have an unknown variable as well. We might want to replace this later. 
+Next, we try to understand what the other columns are. The `armed` column 
+describes whether or not the deceased was armed during police confrontation. 
+There are many factors to this variable including `No`, `Disputed`, and 
+`Firearm`. So the predictor also lists what type of "armed" item they had. 
+We have an unknown variable as well. We might want to replace this later. 
 
 ```{r}
-levels(factor(police_killings$armed))
+levels(factor(counted$armed))
 ```
 
-`Classification` denotes how the victim died. These include gunshot, death in custody (though not specified how), and tasering. We have 5 levels here. No unknowns.
+`Classification` denotes how the victim died. These include gunshot, death 
+in custody (though not specified how), and tasering. We have 5 levels here. No unknowns.
 
 ```{r}
-levels(factor(police_killings$classification))
+levels(factor(counted$classification))
 ```
 
 ## Filtering Gender
 
-Gender comes in three categories: male, female, and non-conforming. We see that most of the killed are men, but there is only 1 non-conforming victim. We will remove this victim due to its small sample size and its inability to have any concrete analysis done on the specific group.
+Gender comes in three categories: male, female, and non-conforming. We see that 
+most of the killed are men, but there is only 1 non-conforming victim. We will 
+remove this victim due to its small sample size and its inability to have any 
+concrete analysis done on the specific group.
 
 ```{r}
-table(police_killings$gender)
+table(counted$gender)
 ```
 
 We will just quickly filter that out. 
 
 ```{r}
-police_killings <- police_killings %>%
+counted <- counted %>%
   filter(!(gender == "Non-conforming"))
 ```
 
 ## Null Values
 
-We also want to explore null values in the data set and perhaps determine if there are any patterns. First we set all unknown values to null, since the null isn't already included in the data set.
+We also want to explore null values in the data set and perhaps determine if 
+there are any patterns. First we set all unknown values to null, since the 
+null isn't already included in the data set.
 
 ```{r}
-police_killings[police_killings == "Unknown"] <- NA
+counted[counted == "Unknown"] <- NA
 ```
 
-We see that there are 92 total null values in the data. We know that 4 of these came from age. 
+We see that there are 92 total null values in the data. We know that 4 of these 
+came from age. 
 
 ```{r}
-sum(is.na(police_killings))
+sum(is.na(counted))
 ```
 
-Since the number of null values in the data set is less than 10% of the data, we decided to remove these rows.
+Since the number of null values in the data set is less than 10% of the data, 
+we decided to remove these rows.
 
 ```{r}
-police_killings <- police_killings %>%
+counted <- counted %>%
   na.omit()
 ```
 
@@ -131,16 +155,20 @@ We now end up with 1,060 rows with 14 columns.
 
 # Descriptive Statistics
 
-In this section, we hope to explore the distribution of some variables by visualizing them using plots.
+In this section, we hope to explore the distribution of some variables by 
+visualizing them using plots.
 
-We obtain our census data for normalization from `https://www.census.gov/` and our ethnicity data from `http://kff.org/other/state-indicator/distribution-by-raceethnicity/`.
+We obtain our census data for normalization from `https://www.census.gov/` and 
+our ethnicity data from `http://kff.org/other/state-indicator/distribution-by-raceethnicity/`.
 
 ## Age
 
-First, we look at age. We make a simple histogram and we see that the distribution of ages is somewhat right-skewed. We have a couple of minors killed by police and some elderly. Most police killing victims are middle aged. 
+First, we look at age. We make a simple histogram and we see that the 
+distribution of ages is somewhat right-skewed. We have a couple of minors 
+killed by police and some elderly. Most police killing victims are middle aged. 
 
 ```{r}
-police_killings %>%
+counted %>%
   ggplot() +
   geom_histogram(mapping = aes(x = age), binwidth = 5) +
   labs(x = "Age", y = "Count")
@@ -148,10 +176,11 @@ police_killings %>%
 
 ## Gender
 
-Before normalization, we see that there is an extreme gender disparity in those killed by the police. Men are overwhelming killed more so than women. 
+Before normalization, we see that there is an extreme gender disparity in 
+those killed by the police. Men are overwhelming killed more so than women. 
 
 ```{r}
-police_killings %>%
+counted %>%
   ggplot() +
   geom_bar(mapping = aes(x = gender)) +
   labs(x = "Gender", y = "Count")
@@ -159,9 +188,12 @@ police_killings %>%
 
 ## Normalized Gender
 
-Even with we normalize for gender (which is a near 50-50 split), we see the same gender disparity in people killed by the police. 
+Even with we normalize for gender (which is a near 50-50 split), we see the 
+same gender disparity in people killed by the police. 
 
-In order to see this visually, we need to wrangle some data and transform the census gender data for 2015. Note that this graph may not be completely necessary. 
+In order to see this visually, we need to wrangle some data and transform the 
+census gender data for 2015. Note that this graph may not be completely 
+necessary. 
 
 ```{r}
 population_vars <- c("total_pop", "male_pop", "female_pop")
@@ -176,7 +208,10 @@ gender <- gender[2:nrow(gender), 3:6] %>%
          male_pct = male_pop/total_pop)
 ```
 
-We have a line indicating if women or men were killed equally by the police. This represents the ratio of the sample proportion of females and males killed by the police over the actual proportion of females and males in the United States. 
+We have a line indicating if women or men were killed equally by the police. 
+This represents the ratio of the sample proportion of females and males killed 
+by the police over the actual proportion of females and males in the United 
+States. 
 
 ```{r}
 gender_norm <- gender %>% 
@@ -186,10 +221,10 @@ gender_norm <- gender %>%
   rename(gender = gender_pct) %>%
   mutate(gender = ifelse(gender == "female_pct", "Female", "Male"))
   
-police_killings %>%
+counted %>%
   count(gender) %>%
   left_join(gender_norm, by = c("gender" = "gender")) %>%
-  mutate(prop = n/nrow(police_killings),
+  mutate(prop = n/nrow(counted),
          count = prop/pct_pop) %>%
   ggplot() +
   geom_bar(mapping = aes(x = gender, y = count), stat = "identity") +
@@ -199,17 +234,20 @@ police_killings %>%
 
 ## Ethnicity
 
-In order to conform to census data, we will classify `Arab-American` victims with the `Other` victims. 
+In order to conform to census data, we will classify `Arab-American` victims 
+with the `Other` victims. 
+
 ```{r}
-police_killings <- police_killings %>%
+counted <- counted %>%
   mutate(raceethnicity = ifelse(raceethnicity == "Arab-American", 
                                 "Other", raceethnicity))
 ```
 
-Going off of raw counts, we see that there are more white and black victims than the rest of the ethnicities combined. 
+Going off of raw counts, we see that there are more white and black victims 
+than the rest of the ethnicities combined. 
 
 ```{r}
-police_killings %>%
+counted %>%
   count(raceethnicity) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(raceethnicity, -n), y = n), 
@@ -220,7 +258,10 @@ police_killings %>%
 
 ## Normalized Ethnicity
 
-Normalizing for the ethnic breakdown in the population, we get a result that is quite different. We first wrangle the ethnicity data so that we have nicer race names and the like. We also combine Asian and Pacific Islander in our ethnicity data so that it matches the race and ethinicites we have in our `police_killings` data.
+Normalizing for the ethnic breakdown in the population, we get a result that 
+is quite different. We first wrangle the ethnicity data so that we have nicer 
+race names and the like. We also combine Asian and Pacific Islander in our 
+ethnicity data so that it matches the race and ethinicites we have in our `police_killings` data.
 
 ```{r}
 total_pop <- ethnicity[3, 2] %>% as.numeric()
@@ -241,18 +282,22 @@ ethnicity <- ethnicity %>%
   summarise(pop_pct = sum(pct)/100)
 ```
 
-We also have no census data for `Arab-American`, so we will group that in with other. 
+We also have no census data for `Arab-American`, so we will group that in with 
+other. 
 
 ```{r}
-police_killings <- police_killings %>%
+counted <- counted %>%
   mutate(raceethnicity = ifelse(raceethnicity == "Arab-American", 
                                 "Other", raceethnicity))
 ```
 
-After normalizing for ethnicity, we see that the proportion of black victims killed is almost twice as if they were to randomly sample people off the street. Hispanic and Native American proportions were very similar to their true proportion in the United States. We see that White and Asian victims are less likely to be killed. 
+After normalizing for ethnicity, we see that the proportion of black victims 
+killed is almost twice as if they were to randomly sample people off the street. Hispanic and Native American proportions were very similar to their true 
+proportion in the United States. We see that White and Asian victims are less 
+likely to be killed. 
 
 ```{r}
-police_killings %>%
+counted %>%
   count(raceethnicity) %>%
   left_join(ethnicity, by = c("raceethnicity" = "raceethnicity")) %>%
   mutate(pop_pct = pop_pct*total_pop,
@@ -267,10 +312,12 @@ police_killings %>%
 
 ## Armed
 
-Next, we examine whether the victims were armed. Firearms are the most common form of armed victims. However, interestingly enough, we see that there are also a lot of unarmed victims that were shot as well. 
+Next, we examine whether the victims were armed. Firearms are the most common 
+form of armed victims. However, interestingly enough, we see that there are 
+also a lot of unarmed victims that were shot as well. 
 
 ```{r}
-police_killings %>%
+counted %>%
   count(armed) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(armed, -n), y = n), 
@@ -281,10 +328,11 @@ police_killings %>%
 
 ## Classification
 
-Most of the victims that the police killed were killed by a gunshot. Tasering, death in custody, and other causes are a lot less likely.
+Most of the victims that the police killed were killed by a gunshot. Tasering, 
+death in custody, and other causes are a lot less likely.
 
 ```{r}
-police_killings %>%
+counted %>%
   count(classification) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(classification, -n), y = n), 
@@ -295,9 +343,12 @@ police_killings %>%
 
 ## State
 
-Looking at state, we see that with raw deaths, California takes the cake with over 150 police killings. Rounding out the top 5 we have California, Texas, Florida, Arizona, and Georgia. 
+Looking at state, we see that with raw deaths, California takes the cake with 
+over 150 police killings. Rounding out the top 5 we have California, Texas, 
+Florida, Arizona, and Georgia. 
+
 ```{r}
-police_killings %>%
+counted %>%
   count(state) %>%
   top_n(10) %>%
   ggplot() +
@@ -309,7 +360,8 @@ police_killings %>%
 
 ## Normalized by Population State
 
-Once we normalize the number of people killed, we see that the state rankings are quite different. 
+Once we normalize the number of people killed, we see that the state rankings 
+are quite different. 
 
 We first wrangle the `state` data into a useable form. 
 
@@ -330,12 +382,16 @@ population <- population[9:59, ] %>%
   select(-state)
 ```
 
-We filter out DC since we don't have a population estimate for DC. Rounding out the top five, we have Oklahoma, Arizona, Colorado, Louisiana, and California. 
+We filter out DC since we don't have a population estimate for DC. Rounding 
+out the top five, we have Oklahoma, Arizona, Colorado, Louisiana, and 
+California. 
 
-A potential route to go here is to see if the ranking of the states is statistically significant from the ranking of the states by proportion of Black populations. 
+A potential route to go here is to see if the ranking of the states is 
+statistically significant from the ranking of the states by proportion of 
+Black populations. 
 
 ```{r}
-police_killings %>%
+counted %>%
   count(state) %>%
   top_n(10) %>%
   left_join(population, by = c("state" = "state_abb")) %>%
@@ -350,10 +406,11 @@ police_killings %>%
 
 ## Month
 
-Lastly, we look at the time of the killings. We first order the factors (which are months) so that we can track the number of killings over time. 
+Lastly, we look at the time of the killings. We first order the factors (which 
+are months) so that we can track the number of killings over time. 
 
 ```{r}
-police_killings$month <- ordered(police_killings$month, 
+counted$month <- ordered(counted$month, 
                                  levels = c("January", "February",
                                             "March", "April", 
                                             "May", "June", 
@@ -362,10 +419,13 @@ police_killings$month <- ordered(police_killings$month,
                                             "December"))
 ```
 
-We see that there are the most killings in March. There seems to be a huge decline until June, which is the month with the lowest number of police killings. It locally peaks again in August before dipping for the year. We can test again if these cyclical patterns are statistically significant. 
+We see that there are the most killings in March. There seems to be a huge 
+decline until June, which is the month with the lowest number of police 
+killings. It locally peaks again in August before dipping for the year. We can 
+test again if these cyclical patterns are statistically significant. 
 
 ```{r}
-police_killings %>%
+counted %>%
   filter(!is.na(month)) %>%
   count(month) %>%
   ggplot() +
@@ -377,14 +437,19 @@ police_killings %>%
 
 # Next Steps 
 
-Next steps would be to proceed to perform the tests listed in our project proposal. We want to test the significances and the influences of different levels of each factors (in comparison to other factors). We see some potential with the geographic location data and the time series data. Hopefully, we can expand on these suggestions later.  
+Next steps would be to proceed to perform the tests listed in our project 
+proposal. We want to test the significances and the influences of different 
+levels of each factors (in comparison to other factors). We see some potential 
+with the geographic location data and the time series data. Hopefully, we can 
+expand on these suggestions later.  
 
 ## Date Conversion
 
-Lastly, we turn the three date features (day, month, year) into a single date so it is easier to analyze. 
+Lastly, we turn the three date features (day, month, year) into a single date 
+so it is easier to analyze. 
 
 ```{r}
-police_killings <- police_killings %>%
+counted <- counted %>%
   mutate(month = ifelse(month == "January", 1, month),
          month = ifelse(month == "February", 2, month),
          month = ifelse(month == "March", 3, month),
@@ -402,12 +467,14 @@ police_killings <- police_killings %>%
   select(-c(month, day, year))
 ```
 
-As an after thought, we also renamed the column `raceethnicity` to `race` so we can deal with shorter variable names. Yay. 
+As an after thought, we also renamed the column `raceethnicity` to `race` so 
+we can deal with shorter variable names. Yay. 
 
 ## Writing Out Data
 
-Finally, we can write out our edited data to a new file so that we can load it in quickly for our next study. 
+Finally, we can write out our edited data to a new file so that we can load 
+it in quickly for our next study. 
 
 ```{r}
-write.csv(x = police_killings, file = file_out)
+write.csv(x = counted, file = file_out)
 ```
