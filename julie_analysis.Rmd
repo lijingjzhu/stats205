@@ -1,0 +1,106 @@
+---
+title: 'STATS 205: Confidence Intervals'
+author: "Julie Zhu"
+date: "May 31, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Libraries
+library(ggplot2)
+library(purrr)
+library(readr)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(datasets)
+
+# Parameters
+file_in <- "data/police_killings.csv"
+```
+
+```{r}
+df <- read_csv(file_in)[-1]
+```
+
+# Mental Illness
+
+```{r}
+n <- nrow(df)
+alpha <- 0.05
+p_1 <- sum(df$signs_of_mental_illness == "True", na.rm = TRUE)/n
+p_2 <- sum(df$signs_of_mental_illness == "False", na.rm = TRUE)/n
+
+# Change the error according 2.26
+se <- sqrt((p_1 + p_2 - (p_1 - p_2)^2)/n)
+error <- qnorm(1-(alpha/2))
+lower_bound <- (p_1 - p_2) - error*se
+upper_bound <- (p_1 - p_2) + error*se
+conf_int <- c(lower_bound, upper_bound)
+conf_int
+```
+
+# Body Camera
+
+```{r}
+n <- nrow(df)
+alpha <- 0.05
+p_1 <- sum(df$body_camera == "True", na.rm = TRUE)/n
+p_2 <- sum(df$body_camera == "False", na.rm = TRUE)/n
+
+# Change the error according 2.26
+se <- sqrt((p_1 + p_2 - (p_1 - p_2)^2)/n)
+error <- qnorm(1-(alpha/2))
+lower_bound <- (p_1 - p_2) - error*se
+upper_bound <- (p_1 - p_2) + error*se
+conf_int <- c(lower_bound, upper_bound)
+conf_int
+```
+
+# Gender
+
+```{r}
+n <- nrow(df)
+alpha <- 0.05
+p_1 <- sum(df$gender == "Male", na.rm = TRUE)/n
+p_2 <- sum(df$gender == "Female", na.rm = TRUE)/n
+
+# Change the error according 2.26
+se <- sqrt((p_1 + p_2 - (p_1 - p_2)^2)/n)
+error <- qnorm(1-(alpha/2))
+lower_bound <- (p_1 - p_2) - error*se
+upper_bound <- (p_1 - p_2) + error*se
+conf_int <- c(lower_bound, upper_bound)
+conf_int
+```
+
+```{r}
+n <- 500
+p <- 269
+alpha <- 0.10
+B <- 10000
+actual_prop <- p/n
+
+voters <- c(rep(1, p), rep(0, n - p))
+
+boot_prop <- array(0, B)
+
+set.seed(8)
+for (i in seq_len(B)) {
+  boot_samp <- sample(x = voters, size = 500, replace = T)
+  boot_prop[i] <- sum(boot_samp)/n
+}
+
+samp_sd <- sd(voters)/sqrt(n)
+
+upper <- actual_prop + qnorm(1-alpha/2)*samp_sd
+lower <- actual_prop - qnorm(1-alpha/2)*samp_sd
+
+(boot_conf_90 <- c(lower, upper))
+```
+
