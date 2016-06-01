@@ -1,0 +1,23 @@
+---
+title: "Data Analysis"
+author: "Emily Alsentzer and Julie Zhu"
+date: "May 31, 2016"
+output: html_document
+---
+
+First, we will perform a chi squared test of homogenity on race 
+```{r setup, include=FALSE}
+police_killings <- read.csv("data/police_killings.csv")
+armed_v_race <- data.frame(as.character(police_killings$race),  as.character(police_killings$armed))
+contingency_table <- t(table(armed_v_race))
+chi_fit <- chisq.test(contingency_table)
+```
+
+
+```{r}
+library(plyr)
+race_summary <- count(police_killings$race)
+colnames(race_summary) <- c("Race", "Killings")
+kruskal.test(Killings ~ Race, data = race_summary) 
+```
+
