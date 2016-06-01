@@ -4,20 +4,58 @@ author: "Emily Alsentzer and Julie Zhu"
 date: "May 31, 2016"
 output: html_document
 ---
-
-First, we will perform a chi squared test of homogenity on race 
+GOAL #1
+First, we will perform a chi squared test of homogenity to see whether or not the distribution of race is the same for each type of "armed" status. Blacks make up 35% of all unarmed police killings, even though they make up 6% of the entire population.
 ```{r setup, include=FALSE}
 police_killings <- read.csv("data/police_killings.csv")
 armed_v_race <- data.frame(as.character(police_killings$race),  as.character(police_killings$armed))
 contingency_table <- t(table(armed_v_race))
-chi_fit <- chisq.test(contingency_table)
+chifit <- chisq.test(contingency_table)
+(chifit$residuals)^2
+
+unarmed <- contingency_table[4,]
+black_unarmed <- unlist(unname(unarmed[2]))/sum(unarmed)
+white_unarmed <- unlist(unname(unarmed[6]))/sum(unarmed)
 ```
 
+We can see that the largest contribution comes from not armed and armed with firearm. We remove and retest. 
+```{r}
+#remove armed= "No"
+ct2 <- contingency_table[-4,]
+chisq.test(ct2)
+```
 
+The result is still significant so we also remove firearm. 
+```{r}
+#remove armed= "Firearm"
+ct3 <- ct2[-2,]
+chisq.test(ct3)
+```
+Now the test no longer yields a significant result. 
+
+GOAL 2
+The goal is to see whether there is a difference in the distribution of races between killed population and normal population.
 ```{r}
 library(plyr)
-race_summary <- count(police_killings$race)
-colnames(race_summary) <- c("Race", "Killings")
-kruskal.test(Killings ~ Race, data = race_summary) 
+race_summary <- table(police_killings$race)
+true_pop <- total_race[,2]#/ sum(total_race[,2])*100000
+killed_rop <- race_summary#/sum(race_summary)*100000
+both_populations <- cbind(unlist(unname(true_prop)), unname(killed_prop))
+colnames(both_populations) <- c("true_prop", "killed_prop")
+both_populations_t <- t(both_populations)
+```
+
+Now we will perform a chi squared test of homogenity to see whether or not the distribution of race is the same for the killed population and normal population.
+```{r}
+chifit <- chisq.test(both_populations_t)
+(chifit$residuals)^2
+
+chifit2 <- chisq.test(both_populations)
+(chifit2$residuals)^2
+```
+
+```{r}
+
+
 ```
 
