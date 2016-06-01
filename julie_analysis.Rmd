@@ -22,10 +22,44 @@ library(datasets)
 
 # Parameters
 file_in <- "data/police_killings.csv"
+race_file <- "data/race_and_ethnicity.csv"
 ```
 
 ```{r}
 df <- read_csv(file_in)[-1]
+ethnicity <- read_csv(race_file)
+```
+
+```{r}
+total_pop <- ethnicity[2, 4] %>% as.numeric()
+ethnicity <- ethnicity[,c(3, seq(6, 26, by = 2))] 
+
+race_names <- c("state", "Total", "White", "Black", "Native American", "Asian", "Pacific Islander", "Other", "Other1", "Other2", "Other3", "Hispanic/Latino")
+colnames(ethnicity) <- race_names
+ethnicity <- ethnicity[-1,]
+county_race <- ethnicity %>%
+  dmap_at(race_names[2:length(race_names)], as.numeric) %>%
+  mutate(county = lapply(str_split(state, ","), '[[', 1) %>% unlist(),
+         state = lapply(str_split(state, ","), '[[', 2) %>% unlist(),
+         Other = Other + Other1 + Other2 + Other3,
+         `Asian/Pacific Islander` = Asian + `Pacific Islander`,
+         county = tolower(county),
+         state = trimws(state)) %>%
+  select(-c(Other1, Other2, Other3, Asian, `Pacific Islander`))
+
+total_race <- county_race %>%
+  group_by(state) %>%
+  summarise(White = sum(White),
+            Black = sum(Black),
+            `Native American` = sum(`Native American`),
+            `Asian/Pacific Islander` = sum(`Asian/Pacific Islander`),
+            Other = sum(Other),
+            `Hispanic/Latino` = sum(`Hispanic/Latino`))
+
+total_race <- total_race %>%
+  gather(race, pop, White:`Hispanic/Latino`) %>%
+  group_by(race) %>%
+  summarise(pop = sum(pop))
 ```
 
 # Mental Illness
@@ -47,11 +81,16 @@ conf_int
 
 # Body Camera
 
+Given that you have been killed, what's the likelihood had the police had a 
+body camera
+
 ```{r}
 n <- nrow(df)
 alpha <- 0.05
-p_1 <- sum(df$body_camera == "True", na.rm = TRUE)/n
-p_2 <- sum(df$body_camera == "False", na.rm = TRUE)/n
+true_camera <- sum(df$body_camera == "True", na.rm = TRUE)/n
+false_camera <- sum(df$body_camera == "False", na.rm = TRUE)/n
+p_1 <- true_camera
+p_2 <- false_camera
 
 # Change the error according 2.26
 se <- sqrt((p_1 + p_2 - (p_1 - p_2)^2)/n)
@@ -62,14 +101,16 @@ conf_int <- c(lower_bound, upper_bound)
 conf_int
 ```
 
-# Gender
+# Race Equality
 
 ```{r}
-n <- nrow(df)
+n <- sum(total_race$pop)
 alpha <- 0.05
-p_1 <- sum(df$gender == "Male", na.rm = TRUE)/n
-p_2 <- sum(df$gender == "Female", na.rm = TRUE)/n
+#p_1 <- sum(df$gender == "Male", na.rm = TRUE)/n
+#p_2 <- sum(df$gender == "Female", na.rm = TRUE)/n
 
+p_1 <- race_equal[1]
+p_2 <- race_equal[2]
 # Change the error according 2.26
 se <- sqrt((p_1 + p_2 - (p_1 - p_2)^2)/n)
 error <- qnorm(1-(alpha/2))
@@ -77,14 +118,20 @@ lower_bound <- (p_1 - p_2) - error*se
 upper_bound <- (p_1 - p_2) + error*se
 conf_int <- c(lower_bound, upper_bound)
 conf_int
+
+n_total <- total_race %>%
+  filter(race == "Black" | race == "White") %>%
+  .$pop
+
+prop.test(race_equal[1:2]*100000, n_total)
 ```
 
 ```{r}
-n <- 500
-p <- 269
+#n <- 500
+#p <- 269
 alpha <- 0.10
 B <- 10000
-actual_prop <- p/n
+actual_prop <- p_1/n
 
 voters <- c(rep(1, p), rep(0, n - p))
 
@@ -102,5 +149,219 @@ upper <- actual_prop + qnorm(1-alpha/2)*samp_sd
 lower <- actual_prop - qnorm(1-alpha/2)*samp_sd
 
 (boot_conf_90 <- c(lower, upper))
+```
+
+
+```{r}
+df_counts <- table(df$race) %>% as.vector
+
+race_equal <- data_frame(race = total_race$race, 
+           pop = total_race$pop,
+           count = df_counts) %>%
+  mutate(death_prop = count/pop) %>%
+  .$death_prop
+
+total_equal <- total_race %>%
+  .$pop
+
+  .$death_prop
+prop.test()
+N <- length(race_equal)
+n <- nrow(df)
+value <- c()
+critical.range <- c()
+i_val <- c()
+j_val <- c()
+
+## Compute critical values.
+for (i in 1:(N-1)) { 
+  print (i)
+  for (j in (i+1):N) {
+    print (j)
+     value <- c(value, (abs(race_equal[i] - race_equal[j])))
+     critical.range <- c(critical.range, 
+                         sqrt(qchisq(.95, N - 1))
+                         *sqrt(race_equal[i]*
+                                 (1-race_equal[i])/n +
+                                 race_equal[j]*(1-race_equal[j])/n))
+     i_val <- c(i_val, i)
+     j_val <- c(j_val, j)
+    }
+   }
+
+round(cbind(value, critical.range, i_val, j_val), 10)
+```
+
+```{r}
+p_1 <- race_equal[1]
+p_2 <- race_equal[2]
+n_1 <- total_equal[1]
+n_2 <- total_equal[2]
+
+p_hat <- (n_1*p_1 + n_2*p_2)/(n_1 + n_2)
+z_score <- (p_1 - p_2)/(sqrt(p_hat *(1 - p_hat) * ((1/n_1) + (1/n_2))))
+qnorm(0.975)
+qnorm(0.025)
+```
+
+EVERYHING IS SIGNIFICANT
+
+```{r}
+yo <- data_frame(race = total_race$race, 
+           pop = total_race$pop,
+           count = df_counts) %>%
+  mutate(data_total = nrow(df),
+         total = sum(total_race$pop),
+         sample_prop = count/data_total,
+         total_prop = pop/total) 
+
+t.test(yo$sample_prop, yo$total_prop)
+
+prop.test(yo$sample_prop*nrow(df), rep(nrow(df), 6), p = yo$total_prop, correct = FALSE)
+
+# Ethnicity
+binom.test(yo$sample_prop[1]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[1],
+           alternative = "less")
+prop.test(yo$sample_prop[1]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[1])
+
+binom.test(yo$sample_prop[2]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[2],
+           alternative = "greater")
+prop.test(yo$sample_prop[2]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[2])
+
+binom.test(yo$sample_prop[3]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[3])
+prop.test(yo$sample_prop[3]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[3])
+
+binom.test(yo$sample_prop[4]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[4],
+           alternative = "greater")
+
+binom.test(yo$sample_prop[5]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[5],
+           alternative = "less")
+
+binom.test(yo$sample_prop[6]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[6],
+           alternative = "less")
+```
+
+
+```{r}
+sample_prop <- yo$sample_prop 
+total_prop <- yo$total_prop
+
+names(sample_prop) <- c("A", "B", "H", "N", "O", "W")
+names(total_prop) <- c("A", "B", "H", "N", "O", "W")
+
+hey <- as.matrix(rbind(sample_prop, total_prop))
+
+assoc(hey)
+```
+
+```{r}
+mosaic(hey, shade = TRUE, legend = TRUE)
+```
+
+# We can use for something else
+
+```{r}
+julie <- table(df$armed, df$race) %>% as.matrix()
+mosaic(julie, shade = TRUE, legend = TRUE)
+
+fit <- ca(julie)
+
+julie <- table(df$classification, df$race)
+mosaic(julie, shade = TRUE, legend = TRUE)
+fit <- ca(julie)
+
+
+summary(fit)
+```
+
+```{r}
+plot(fit)
+```
+
+```{r}
+plot(fit, dim = c(1, 2), mass = c(TRUE, TRUE), 
+     contrib = "absolute", map = "rowgreen", 
+     arrows = c(FALSE, TRUE))
+```
+
+# Only location of where they are shot, not where they are from
+
+```{r}
+#unemployment rate
+df %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = unemployment_rate))
+
+# Educational attainment
+df %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = educ_pct))
+
+# median income
+df %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = med_income))
+
+# percent of people below the povery line
+df %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = poverty_pct))
+```
+
+```{r}
+df %>%
+  mutate(black_pct = black_county_pop/total_county_pop,
+         white_pct = white_county_pop/total_county_pop,
+         asian_pct = asian_county_pop/total_county_pop,
+         hispanic_pct = hispanic_county_pop/total_county_pop) %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = black_pct))
+```
+
+```{r}
+df %>%
+  mutate(black_pct = black_county_pop/total_county_pop,
+         white_pct = white_county_pop/total_county_pop,
+         asian_pct = asian_county_pop/total_county_pop,
+         hispanic_pct = hispanic_county_pop/total_county_pop) %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = white_pct))
+```
+
+```{r}
+df %>%
+  mutate(black_pct = black_county_pop/total_county_pop,
+         white_pct = white_county_pop/total_county_pop,
+         asian_pct = asian_county_pop/total_county_pop,
+         hispanic_pct = hispanic_county_pop/total_county_pop) %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = asian_pct))
+```
+
+
+```{r}
+df %>%
+  mutate(black_pct = black_county_pop/total_county_pop,
+         white_pct = white_county_pop/total_county_pop,
+         asian_pct = asian_county_pop/total_county_pop,
+         hispanic_pct = hispanic_county_pop/total_county_pop) %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = hispanic_pct))
+```
+
+```{r}
+df %>%
+  mutate(black_pct = black_county_pop/total_county_pop,
+         white_pct = white_county_pop/total_county_pop,
+         asian_pct = asian_county_pop/total_county_pop,
+         hispanic_pct = hispanic_county_pop/total_county_pop,
+         native_pct = native_county_pop/total_county_pop) %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = native_pct))
+```
+
+```{r}
+yo %>%
+  mutate(prop_samp = count/pop)
 ```
 
