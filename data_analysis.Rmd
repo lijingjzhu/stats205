@@ -54,8 +54,103 @@ chifit2 <- chisq.test(both_populations)
 (chifit2$residuals)^2
 ```
 
+GOAL 3
+Map county data of killings
 ```{r}
+library(ggplot2)
+library(googleVis)
+map_data("county", region = ".", exact = FALSE)
+
+data <- data.frame(unlist(unname(table(police_killings$state_name))) , names(table(police_killings$state_name)))
+data <-data[,-1]
+colnames(data) <- c( "colorvar", "locationvar")
+gvisGeoChart(data)
+
+colors <- topo.colors(7)
+data$color_buckets <- as.numeric(cut(data$colorvar, c(0, 10, 20, 40, 80, 160, 320)))
+normalized <- data$colorvar - min(data$colorvar) / (max(data$colorvar)- min(data$colorvar))
+tmp <- map('state',plot=FALSE,namesonly=TRUE)
+split_names <- lapply(str_split(tmp, ":"), `[[`, 1) %>% unlist()
+tmp <- match(gsub('(:.*)','',tmp),tolower(data$locationvar))
+map('state',fill=TRUE, col=data$color_buckets[tmp])
+legend("topright", )
 
 
+map('state', fill=TRUE, col=)
+
+```
+
+GOAL 4
+Next we want to investigate what the socioeconomic status is between the areas where people of different races were killed.
+compare poverty, education, income, etc between areas where blacks vs whites were killed
+
+```{r}
+blacks_killed <- police_killings[which(police_killings$race == "Black"),]
+whites_killed <- police_killings[which(police_killings$race == "White"),]
+hispanics_killed <- police_killings[which(police_killings$race == "Hispanic/Latino"),]
+native_american_killed <- police_killings[which(police_killings$race == "Native American"),]
+
+
+census_test <- function(blacks, whites, race1, race2){
+    wilcox <- wilcox.test(blacks, whites)
+    t.test(blacks, whites) 
+    black_mean = mean(blacks[!is.na(blacks)])
+    white_mean =  mean(whites[!is.na(whites)])
+    census <-data.frame(factor(c(race1,  race2)), c(blacks, whites))
+    colnames(census) <- c("Race", "Indicator")
+
+    ggplot(census, aes(x=Indicator, fill=Race)) +
+        geom_histogram( alpha=.5, position="identity")
+
+    #2 = black; 6 = white
+    boxplot(Indicator~Race, data=census)
+    return (c(wilcox, black_mean, white_mean))
+}
+
+#INCOME
+bw_income <-census_test(blacks_killed$med_income, whites_killed$med_income, blacks_killed$race, whites_killed$race) #significant
+hw_income <- census_test(hispanics_killed$med_income, whites_killed$med_income, hispanics_killed$race, whites_killed$race) #significant
+nw_income <- census_test(native_american_killed$med_income, whites_killed$med_income, native_american_killed$race, whites_killed$race) #NOT significant
+
+#POVERTY
+bw_poverty <- census_test(blacks_killed$poverty_pct, whites_killed$poverty_pct, blacks_killed$race, whites_killed$race) # Not significant
+
+#EDUCATION
+bw_educ <- census_test(blacks_killed$educ_pct, whites_killed$educ_pct, blacks_killed$race, whites_killed$race) # Not significant
+
+#UNEMPLOYMENT
+bw_unemployment <- census_test(blacks_killed$unemployment_rate, whites_killed$unemployment_rate, blacks_killed$race, whites_killed$race) # not significant
+
+
+p_values <- c(bw_income$p.value, hw_income$p.value, nw_income$p.value, bw_poverty$p.value, bw_educ$p.value, bw_unemployment$p.value)
+p.adjust(p_values, method = "holm", n = length(p_values)) # holm method
+p.adjust(p_values, method = "fdr", n = length(p_values)) #false discovery rate
+p.adjust(p_values, method = "bonferroni", n = length(p_values)) #bonferroni
+
+
+```
+
+Now we will compare the values for the killed population to the national averages.
+```{r}
+poverty_dataset <- read_csv(poverty_file, col_names = TRUE, skip = 5)
+poverty_dataset <- poverty[,c(3, 4, 8, 23)] 
+colnames(poverty_dataset) <- c("state", "county", "poverty_pct", "med_income")
+wilcox <- wilcox.test(poverty_dataset$med_income, police_killings$med_income)
+wilcox <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
+
+boxplot(cbind(poverty_dataset$med_income, blacks_killed$med_income, whites_killed$med_income))
+
+
+unemployment <- read_csv(unemployment_file, col_name = TRUE)
+unemployment <- unemployment[-1, c(3, 10)]
+colnames(unemployment) <- c("county", "unemployment_rate")
+wilcox <- wilcox.test(as.numeric(unemployment$unemployment_rate), police_killings$unemployment_rate)
+boxplot(cbind(as.numeric(unemployment$unemployment_rate), police_killings$unemployment_rate))
+boxplot(cbind(as.numeric(unemployment$unemployment_rate), blacks_killed$unemployment_rate, whites_killed$unemployment_rate))
+
+
+education <- read_csv(education_file, col_names = TRUE, skip = 1)
+education <- education[,6:8]
+colnames(education) <- c("state", "county", "educ_pct")
 ```
 
