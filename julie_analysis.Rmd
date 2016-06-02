@@ -25,6 +25,8 @@ file_in <- "data/police_killings.csv"
 race_file <- "clean_data/county_race.csv"
 ```
 
+We first read in the files. 
+
 ```{r}
 df <- read_csv(file_in)
 ethnicity <- read_csv(race_file)
@@ -95,32 +97,6 @@ prop.test(race_equal[1:2]*100000, n_total)
 ```
 
 ```{r}
-#n <- 500
-#p <- 269
-alpha <- 0.10
-B <- 10000
-actual_prop <- p_1/n
-
-voters <- c(rep(1, p), rep(0, n - p))
-
-boot_prop <- array(0, B)
-
-set.seed(8)
-for (i in seq_len(B)) {
-  boot_samp <- sample(x = voters, size = 500, replace = T)
-  boot_prop[i] <- sum(boot_samp)/n
-}
-
-samp_sd <- sd(voters)/sqrt(n)
-
-upper <- actual_prop + qnorm(1-alpha/2)*samp_sd
-lower <- actual_prop - qnorm(1-alpha/2)*samp_sd
-
-(boot_conf_90 <- c(lower, upper))
-```
-
-
-```{r}
 df_counts <- table(df$race) %>% as.vector
 
 race_equal <- data_frame(race = total_race$race, 
@@ -141,7 +117,7 @@ critical.range <- c()
 i_val <- c()
 j_val <- c()
 
-## Compute critical values.
+## Compute critical values for Mascaillo Procedure
 for (i in 1:(N-1)) { 
   print (i)
   for (j in (i+1):N) {
@@ -188,8 +164,11 @@ t.test(yo$sample_prop, yo$total_prop)
 prop.test(yo$sample_prop*nrow(df), rep(nrow(df), 6), p = yo$total_prop, correct = FALSE)
 
 # Ethnicity
-binom.test(yo$sample_prop[1]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[1],
+
+binom.test(x = yo$sample_prop[1], n = rep(nrow(df), 1), 
+           p = yo$total_prop[1], 
            alternative = "less")
+
 prop.test(yo$sample_prop[1]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[1])
 
 binom.test(yo$sample_prop[2]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[2],
@@ -210,14 +189,23 @@ binom.test(yo$sample_prop[6]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[6],
 ```
 
 
+# Don't use the plot
+# Doesn't make sense
+
 ```{r}
 sample_prop <- yo$sample_prop 
 total_prop <- yo$total_prop
 
+data_frame(race = yo$race, sample = sample_prop, total = total_prop) %>%
+  gather(location, prop, sample:total)  %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = race, y = prop), color = "location",
+           stat = "identity", position = "dodge")
+
 names(sample_prop) <- c("A", "B", "H", "N", "O", "W")
 names(total_prop) <- c("A", "B", "H", "N", "O", "W")
 
-hey <- as.matrix(rbind(sample_prop, total_prop))
+hey <- as.matrix(rbind(yo$count, yo$pop))
 
 assoc(hey)
 ```
@@ -328,11 +316,6 @@ df %>%
 ```
 
 # More data cleaning
-
-```{r}
-df <- df %>%
-  distinct(race, age, date, gender, state, county)
-```
 
 ```{r}
 sum(is.na(df$classification))
