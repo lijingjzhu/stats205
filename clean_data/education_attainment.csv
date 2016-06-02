@@ -1,0 +1,3194 @@
+state,county,educ_pct
+alabama,alabama,83.7
+alabama,autauga county,86.2
+alabama,baldwin county,89
+alabama,barbour county,74.6
+alabama,bibb county,77.9
+alabama,blount county,78.1
+alabama,bullock county,65.5
+alabama,butler county,76.6
+alabama,calhoun county,80.1
+alabama,chambers county,77.5
+alabama,cherokee county,79.5
+alabama,chilton county,77.5
+alabama,choctaw county,74.1
+alabama,clarke county,80.1
+alabama,clay county,74.9
+alabama,cleburne county,75.3
+alabama,coffee county,83.1
+alabama,colbert county,83.6
+alabama,conecuh county,76
+alabama,coosa county,75.9
+alabama,covington county,80
+alabama,crenshaw county,76.9
+alabama,cullman county,81.5
+alabama,dale county,84.7
+alabama,dallas county,77.7
+alabama,dekalb county,73.1
+alabama,elmore county,87.2
+alabama,escambia county,78.6
+alabama,etowah county,82.1
+alabama,fayette county,76.1
+alabama,franklin county,74.4
+alabama,geneva county,78.1
+alabama,greene county,75.1
+alabama,hale county,79.4
+alabama,henry county,79.5
+alabama,houston county,84.3
+alabama,jackson county,75.3
+alabama,jefferson county,87.7
+alabama,lamar county,77.9
+alabama,lauderdale county,84
+alabama,lawrence county,78.1
+alabama,lee county,87.5
+alabama,limestone county,82.6
+alabama,lowndes county,72.7
+alabama,macon county,81.3
+alabama,madison county,90.1
+alabama,marengo county,84.3
+alabama,marion county,74.9
+alabama,marshall county,77.1
+alabama,mobile county,84.9
+alabama,monroe county,78.6
+alabama,montgomery county,85
+alabama,morgan county,81.9
+alabama,perry county,69.6
+alabama,pickens county,78.6
+alabama,pike county,80
+alabama,randolph county,74.5
+alabama,russell county,81.3
+alabama,st  clair county,82.4
+alabama,shelby county,91.3
+alabama,sumter county,77.1
+alabama,talladega county,79.6
+alabama,tallapoosa county,80.3
+alabama,tuscaloosa county,87
+alabama,walker county,77.1
+alabama,washington county,82
+alabama,wilcox county,78.6
+alabama,winston county,73.8
+alaska,alaska,91.8
+alaska,aleutians east borough,79.5
+alaska,aleutians west census area,85.5
+alaska,anchorage municipality,92.5
+alaska,bethel census area,80.2
+alaska,bristol bay borough,91.2
+alaska,denali borough,90.9
+alaska,dillingham census area,84.4
+alaska,fairbanks north star borough,93.4
+alaska,haines borough,95.7
+alaska,hoonah angoon census area,89.9
+alaska,juneau city and borough,94.6
+alaska,kenai peninsula borough,93.3
+alaska,ketchikan gateway borough,92.8
+alaska,kodiak island borough,91
+alaska,lake and peninsula borough,85.1
+alaska,matanuska susitna borough,92.5
+alaska,nome census area,84.7
+alaska,north slope borough,87.1
+alaska,northwest arctic borough,79.3
+alaska,petersburg borough,95.4
+alaska,prince of wales hyder census area,91.1
+alaska,sitka city and borough,92
+alaska,skagway municipality,96.7
+alaska,southeast fairbanks census area,91.9
+alaska,valdez cordova census area,91.5
+alaska,wade hampton census area,76.8
+alaska,wrangell city and borough,89.2
+alaska,yakutat city and borough,91.8
+alaska,yukon koyukuk census area,81.5
+arizona,arizona,85.9
+arizona,apache county,75.8
+arizona,cochise county,86.3
+arizona,coconino county,87.8
+arizona,gila county,83.6
+arizona,graham county,85.2
+arizona,greenlee county,85.1
+arizona,la paz county,76.9
+arizona,maricopa county,86.6
+arizona,mohave county,83.9
+arizona,navajo county,81
+arizona,pima county,87.5
+arizona,pinal county,84.9
+arizona,santa cruz county,73.1
+arizona,yavapai county,89.9
+arizona,yuma county,71.7
+arkansas,arkansas,84.3
+arkansas,arkansas county,83.2
+arkansas,ashley county,84.8
+arkansas,baxter county,87
+arkansas,benton county,86.4
+arkansas,boone county,84.9
+arkansas,bradley county,79.4
+arkansas,calhoun county,81.9
+arkansas,carroll county,83.4
+arkansas,chicot county,76.9
+arkansas,clark county,85.4
+arkansas,clay county,77.2
+arkansas,cleburne county,84.6
+arkansas,cleveland county,84.9
+arkansas,columbia county,84
+arkansas,conway county,85.1
+arkansas,craighead county,86.5
+arkansas,crawford county,84.5
+arkansas,crittenden county,80.5
+arkansas,cross county,78.5
+arkansas,dallas county,83.9
+arkansas,desha county,77.7
+arkansas,drew county,82.9
+arkansas,faulkner county,89.7
+arkansas,franklin county,83.2
+arkansas,fulton county,84.5
+arkansas,garland county,86.9
+arkansas,grant county,85.7
+arkansas,greene county,83.8
+arkansas,hempstead county,80.4
+arkansas,hot spring county,84.4
+arkansas,howard county,77.6
+arkansas,independence county,82
+arkansas,izard county,81.3
+arkansas,jackson county,76.9
+arkansas,jefferson county,84.3
+arkansas,johnson county,78.3
+arkansas,lafayette county,77.7
+arkansas,lawrence county,81.1
+arkansas,lee county,68.3
+arkansas,lincoln county,75
+arkansas,little river county,85.1
+arkansas,logan county,82
+arkansas,lonoke county,87.2
+arkansas,madison county,76.7
+arkansas,marion county,84.6
+arkansas,miller county,84.6
+arkansas,mississippi county,78.6
+arkansas,monroe county,75.9
+arkansas,montgomery county,81.7
+arkansas,nevada county,82
+arkansas,newton county,80.9
+arkansas,ouachita county,85.5
+arkansas,perry county,83.2
+arkansas,phillips county,74.8
+arkansas,pike county,80.3
+arkansas,poinsett county,75.5
+arkansas,polk county,85.3
+arkansas,pope county,82.8
+arkansas,prairie county,79.3
+arkansas,pulaski county,89.8
+arkansas,randolph county,81.6
+arkansas,st  francis county,77.3
+arkansas,saline county,88.8
+arkansas,scott county,75.8
+arkansas,searcy county,79.3
+arkansas,sebastian county,82.4
+arkansas,sevier county,68
+arkansas,sharp county,81.5
+arkansas,stone county,80
+arkansas,union county,82.9
+arkansas,van buren county,81.3
+arkansas,washington county,82.9
+arkansas,white county,82.8
+arkansas,woodruff county,70.5
+arkansas,yell county,74.8
+california,california,81.5
+california,alameda county,86.7
+california,alpine county,91.4
+california,amador county,88.4
+california,butte county,88
+california,calaveras county,92.5
+california,colusa county,68.7
+california,contra costa county,88.9
+california,del norte county,82
+california,el dorado county,92.6
+california,fresno county,73.2
+california,glenn county,75.3
+california,humboldt county,90.3
+california,imperial county,65.2
+california,inyo county,88.2
+california,kern county,73
+california,kings county,70.9
+california,lake county,84.8
+california,lassen county,79.4
+california,los angeles county,76.8
+california,madera county,69.5
+california,marin county,92.5
+california,mariposa county,89
+california,mendocino county,85.9
+california,merced county,68
+california,modoc county,86.6
+california,mono county,84.3
+california,monterey county,71.2
+california,napa county,82.8
+california,nevada county,94.3
+california,orange county,84
+california,placer county,94
+california,plumas county,89.8
+california,riverside county,79.8
+california,sacramento county,86.2
+california,san benito county,77.9
+california,san bernardino county,78.3
+california,san diego county,85.8
+california,san francisco county,86.7
+california,san joaquin county,77.6
+california,san luis obispo county,89.6
+california,san mateo county,88.5
+california,santa barbara county,79.3
+california,santa clara county,86.8
+california,santa cruz county,85.5
+california,shasta county,88.7
+california,sierra county,90.1
+california,siskiyou county,88.8
+california,solano county,87.5
+california,sonoma county,86.8
+california,stanislaus county,77.2
+california,sutter county,78.4
+california,tehama county,82.1
+california,trinity county,90.7
+california,tulare county,68
+california,tuolumne county,89.6
+california,ventura county,83
+california,yolo county,85
+california,yuba county,79.6
+colorado,colorado,90.4
+colorado,adams county,81.8
+colorado,alamosa county,84.6
+colorado,arapahoe county,91.8
+colorado,archuleta county,92.3
+colorado,baca county,85.5
+colorado,bent county,78.4
+colorado,boulder county,94
+colorado,broomfield county,94.8
+colorado,chaffee county,90.5
+colorado,cheyenne county,88.2
+colorado,clear creek county,96
+colorado,conejos county,84
+colorado,costilla county,75.5
+colorado,crowley county,75.5
+colorado,custer county,95.6
+colorado,delta county,88
+colorado,denver county,85.6
+colorado,dolores county,88.2
+colorado,douglas county,97.4
+colorado,eagle county,89.9
+colorado,elbert county,95.8
+colorado,el paso county,93.5
+colorado,fremont county,84.3
+colorado,garfield county,85.3
+colorado,gilpin county,94.6
+colorado,grand county,95
+colorado,gunnison county,94.5
+colorado,hinsdale county,94.9
+colorado,huerfano county,85.3
+colorado,jackson county,84.5
+colorado,jefferson county,93.8
+colorado,kiowa county,91.2
+colorado,kit carson county,83.2
+colorado,lake county,92.6
+colorado,la plata county,94.3
+colorado,larimer county,95.1
+colorado,las animas county,85.7
+colorado,lincoln county,80.1
+colorado,logan county,87.6
+colorado,mesa county,89.7
+colorado,mineral county,96.5
+colorado,moffat county,89.1
+colorado,montezuma county,90.1
+colorado,montrose county,86.9
+colorado,morgan county,79.2
+colorado,otero county,82.5
+colorado,ouray county,98.1
+colorado,park county,95.8
+colorado,phillips county,83.8
+colorado,pitkin county,94.8
+colorado,prowers county,80.3
+colorado,pueblo county,87.8
+colorado,rio blanco county,91.2
+colorado,rio grande county,83.8
+colorado,routt county,96.5
+colorado,saguache county,78.5
+colorado,san juan county,94.4
+colorado,san miguel county,95.3
+colorado,sedgwick county,87.9
+colorado,summit county,94.6
+colorado,teller county,93.1
+colorado,washington county,90.5
+colorado,weld county,86.5
+colorado,yuma county,88.9
+connecticut,connecticut,89.5
+connecticut,fairfield county,89.2
+connecticut,hartford county,88.6
+connecticut,litchfield county,91.3
+connecticut,middlesex county,93.8
+connecticut,new haven county,88.9
+connecticut,new london county,90.9
+connecticut,tolland county,93.2
+connecticut,windham county,88
+delaware,delaware,88
+delaware,kent county,86
+delaware,new castle county,89.8
+delaware,sussex county,85.3
+district of columbia,district of columbia,88.9
+district of columbia,district of columbia,88.9
+florida,florida,86.5
+florida,alachua county,91.8
+florida,baker county,80.4
+florida,bay county,87.6
+florida,bradford county,76.1
+florida,brevard county,90.5
+florida,broward county,87.9
+florida,calhoun county,73.3
+florida,charlotte county,89.1
+florida,citrus county,86.8
+florida,clay county,90
+florida,collier county,85.7
+florida,columbia county,84.4
+florida,desoto county,70.6
+florida,dixie county,79.1
+florida,duval county,88.4
+florida,escambia county,88.5
+florida,flagler county,89.8
+florida,franklin county,78.4
+florida,gadsden county,77
+florida,gilchrist county,80.7
+florida,glades county,76
+florida,gulf county,79.6
+florida,hamilton county,76.2
+florida,hardee county,65.3
+florida,hendry county,65.7
+florida,hernando county,86.6
+florida,highlands county,81.6
+florida,hillsborough county,87.1
+florida,holmes county,75.7
+florida,indian river county,87.2
+florida,jackson county,78.8
+florida,jefferson county,80.1
+florida,lafayette county,75.6
+florida,lake county,86.9
+florida,lee county,86.9
+florida,leon county,92.1
+florida,levy county,80.8
+florida,liberty county,75
+florida,madison county,79.4
+florida,manatee county,87.7
+florida,marion county,85.3
+florida,martin county,89
+florida,miami dade county,79.5
+florida,monroe county,90.4
+florida,nassau county,89.5
+florida,okaloosa county,91
+florida,okeechobee county,68.7
+florida,orange county,87.3
+florida,osceola county,84.2
+florida,palm beach county,87.7
+florida,pasco county,87.5
+florida,pinellas county,89.4
+florida,polk county,83.1
+florida,putnam county,77.3
+florida,st  johns county,93.8
+florida,st  lucie county,85.6
+florida,santa rosa county,90.2
+florida,sarasota county,92.2
+florida,seminole county,92.2
+florida,sumter county,88.7
+florida,suwannee county,78.4
+florida,taylor county,74.5
+florida,union county,74.8
+florida,volusia county,88.1
+florida,wakulla county,87.5
+florida,walton county,84.8
+florida,washington county,80.4
+georgia,georgia,85
+georgia,appling county,75.6
+georgia,atkinson county,67.1
+georgia,bacon county,74.2
+georgia,baker county,79.6
+georgia,baldwin county,82.5
+georgia,banks county,77.6
+georgia,barrow county,82.3
+georgia,bartow county,81.3
+georgia,ben hill county,78.7
+georgia,berrien county,79.4
+georgia,bibb county,82.7
+georgia,bleckley county,81.7
+georgia,brantley county,77.1
+georgia,brooks county,77.2
+georgia,bryan county,89.2
+georgia,bulloch county,86.3
+georgia,burke county,77.2
+georgia,butts county,75.3
+georgia,calhoun county,68.3
+georgia,camden county,91.1
+georgia,candler county,76.7
+georgia,carroll county,80.1
+georgia,catoosa county,83.4
+georgia,charlton county,75.6
+georgia,chatham county,88.7
+georgia,chattahoochee county,93
+georgia,chattooga county,68.1
+georgia,cherokee county,88.9
+georgia,clarke county,85.5
+georgia,clay county,80
+georgia,clayton county,81.8
+georgia,clinch county,74.6
+georgia,cobb county,91
+georgia,coffee county,77.1
+georgia,colquitt county,71.4
+georgia,columbia county,91.1
+georgia,cook county,75
+georgia,coweta county,88.3
+georgia,crawford county,79.1
+georgia,crisp county,77.8
+georgia,dade county,80.3
+georgia,dawson county,85.1
+georgia,decatur county,78.9
+georgia,dekalb county,88.4
+georgia,dodge county,79.6
+georgia,dooly county,73.5
+georgia,dougherty county,79.8
+georgia,douglas county,87.7
+georgia,early county,79.8
+georgia,echols county,73
+georgia,effingham county,85.7
+georgia,elbert county,78.1
+georgia,emanuel county,77.3
+georgia,evans county,75
+georgia,fannin county,79.9
+georgia,fayette county,93.7
+georgia,floyd county,77.9
+georgia,forsyth county,91.6
+georgia,franklin county,72
+georgia,fulton county,90.7
+georgia,gilmer county,77.5
+georgia,glascock county,82.5
+georgia,glynn county,86.6
+georgia,gordon county,73.7
+georgia,grady county,73
+georgia,greene county,79.4
+georgia,gwinnett county,87.3
+georgia,habersham county,78
+georgia,hall county,78.5
+georgia,hancock county,72.4
+georgia,haralson county,76.4
+georgia,harris county,89.5
+georgia,hart county,80.8
+georgia,heard county,75.6
+georgia,henry county,89.6
+georgia,houston county,89
+georgia,irwin county,81.7
+georgia,jackson county,81.5
+georgia,jasper county,80
+georgia,jeff davis county,79
+georgia,jefferson county,71.8
+georgia,jenkins county,73.1
+georgia,johnson county,76
+georgia,jones county,87.6
+georgia,lamar county,83.6
+georgia,lanier county,78
+georgia,laurens county,80.8
+georgia,lee county,85.6
+georgia,liberty county,90.2
+georgia,lincoln county,82.3
+georgia,long county,84.3
+georgia,lowndes county,83.7
+georgia,lumpkin county,86
+georgia,mcduffie county,74.1
+georgia,mcintosh county,78.6
+georgia,macon county,70.2
+georgia,madison county,80.4
+georgia,marion county,76
+georgia,meriwether county,72
+georgia,miller county,78
+georgia,mitchell county,73.2
+georgia,monroe county,80.3
+georgia,montgomery county,82.2
+georgia,morgan county,81.8
+georgia,murray county,68.8
+georgia,muscogee county,85.5
+georgia,newton county,83.6
+georgia,oconee county,92.4
+georgia,oglethorpe county,81.9
+georgia,paulding county,89
+georgia,peach county,84.4
+georgia,pickens county,82.5
+georgia,pierce county,79.6
+georgia,pike county,85.7
+georgia,polk county,75.2
+georgia,pulaski county,76.8
+georgia,putnam county,84.7
+georgia,quitman county,75.1
+georgia,rabun county,86
+georgia,randolph county,72.7
+georgia,richmond county,83.7
+georgia,rockdale county,85.8
+georgia,schley county,74.1
+georgia,screven county,81
+georgia,seminole county,81.4
+georgia,spalding county,77.3
+georgia,stephens county,82.1
+georgia,stewart county,61.9
+georgia,sumter county,76.7
+georgia,talbot county,76.7
+georgia,taliaferro county,66.3
+georgia,tattnall county,74.8
+georgia,taylor county,74.6
+georgia,telfair county,74.3
+georgia,terrell county,68.4
+georgia,thomas county,80.6
+georgia,tift county,78.5
+georgia,toombs county,80
+georgia,towns county,88.7
+georgia,treutlen county,76.9
+georgia,troup county,83.5
+georgia,turner county,73.9
+georgia,twiggs county,68.8
+georgia,union county,85.8
+georgia,upson county,76.5
+georgia,walker county,79.6
+georgia,walton county,84.3
+georgia,ware county,81.4
+georgia,warren county,70.4
+georgia,washington county,76.1
+georgia,wayne county,81.5
+georgia,webster county,77.2
+georgia,wheeler county,73.1
+georgia,white county,85.9
+georgia,whitfield county,68.5
+georgia,wilcox county,76.1
+georgia,wilkes county,77.8
+georgia,wilkinson county,80.4
+georgia,worth county,74.2
+hawaii,hawaii,90.7
+hawaii,hawaii county,91
+hawaii,honolulu county,90.7
+hawaii,kalawao county,82.1
+hawaii,kauai county,91
+hawaii,maui county,90.6
+idaho,idaho,89.1
+idaho,ada county,93.8
+idaho,adams county,92.2
+idaho,bannock county,91.6
+idaho,bear lake county,92.7
+idaho,benewah county,86
+idaho,bingham county,84.4
+idaho,blaine county,90.2
+idaho,boise county,91.1
+idaho,bonner county,91.6
+idaho,bonneville county,91
+idaho,boundary county,88
+idaho,butte county,90
+idaho,camas county,83.7
+idaho,canyon county,82.9
+idaho,caribou county,88.8
+idaho,cassia county,78.8
+idaho,clark county,78
+idaho,clearwater county,85.7
+idaho,custer county,89.9
+idaho,elmore county,85.1
+idaho,franklin county,90.7
+idaho,fremont county,88.5
+idaho,gem county,86.5
+idaho,gooding county,77
+idaho,idaho county,89.8
+idaho,jefferson county,89.7
+idaho,jerome county,70.6
+idaho,kootenai county,92.1
+idaho,latah county,95.8
+idaho,lemhi county,92.2
+idaho,lewis county,88.5
+idaho,lincoln county,76.9
+idaho,madison county,95.1
+idaho,minidoka county,75.9
+idaho,nez perce county,90.5
+idaho,oneida county,94.1
+idaho,owyhee county,74.3
+idaho,payette county,85.4
+idaho,power county,79.9
+idaho,shoshone county,84.8
+idaho,teton county,88.3
+idaho,twin falls county,84.8
+idaho,valley county,92.9
+idaho,washington county,82.2
+illinois,illinois,87.6
+illinois,adams county,90.2
+illinois,alexander county,74.1
+illinois,bond county,86.3
+illinois,boone county,86.4
+illinois,brown county,81.6
+illinois,bureau county,90.2
+illinois,calhoun county,89.5
+illinois,carroll county,89.5
+illinois,cass county,85
+illinois,champaign county,93.6
+illinois,christian county,88.2
+illinois,clark county,89.7
+illinois,clay county,87.3
+illinois,clinton county,89.1
+illinois,coles county,89.5
+illinois,cook county,84.8
+illinois,crawford county,89
+illinois,cumberland county,87.7
+illinois,dekalb county,91.7
+illinois,de witt county,92.8
+illinois,douglas county,83.7
+illinois,dupage county,92.3
+illinois,edgar county,86.9
+illinois,edwards county,87.5
+illinois,effingham county,91.3
+illinois,fayette county,84
+illinois,ford county,88.6
+illinois,franklin county,86.4
+illinois,fulton county,87.5
+illinois,gallatin county,81.9
+illinois,greene county,87.1
+illinois,grundy county,92
+illinois,hamilton county,86.8
+illinois,hancock county,90.9
+illinois,hardin county,81.8
+illinois,henderson county,89.5
+illinois,henry county,89.1
+illinois,iroquois county,88.1
+illinois,jackson county,90.6
+illinois,jasper county,90.8
+illinois,jefferson county,86.1
+illinois,jersey county,90.8
+illinois,jo daviess county,91.7
+illinois,johnson county,83.7
+illinois,kane county,83
+illinois,kankakee county,86.8
+illinois,kendall county,92.9
+illinois,knox county,86.9
+illinois,lake county,89.2
+illinois,lasalle county,88.6
+illinois,lawrence county,77.4
+illinois,lee county,88.1
+illinois,livingston county,86.6
+illinois,logan county,86.6
+illinois,mcdonough county,92
+illinois,mchenry county,92.2
+illinois,mclean county,94.7
+illinois,macon county,88.7
+illinois,macoupin county,88.9
+illinois,madison county,91.4
+illinois,marion county,86.9
+illinois,marshall county,91.3
+illinois,mason county,86.5
+illinois,massac county,82.8
+illinois,menard county,92.4
+illinois,mercer county,90.4
+illinois,monroe county,93.5
+illinois,montgomery county,85.3
+illinois,morgan county,89.4
+illinois,moultrie county,84.6
+illinois,ogle county,89
+illinois,peoria county,90.1
+illinois,perry county,85
+illinois,piatt county,93.5
+illinois,pike county,87.4
+illinois,pope county,86.4
+illinois,pulaski county,81.1
+illinois,putnam county,89.5
+illinois,randolph county,83.7
+illinois,richland county,89.7
+illinois,rock island county,87.8
+illinois,st  clair county,89.7
+illinois,saline county,85.4
+illinois,sangamon county,92.5
+illinois,schuyler county,87.4
+illinois,scott county,89
+illinois,shelby county,90.3
+illinois,stark county,87.7
+illinois,stephenson county,90
+illinois,tazewell county,92.5
+illinois,union county,84.5
+illinois,vermilion county,86.3
+illinois,wabash county,89.9
+illinois,warren county,88.5
+illinois,washington county,90.9
+illinois,wayne county,86.3
+illinois,white county,86.6
+illinois,whiteside county,87.7
+illinois,will county,90.5
+illinois,williamson county,88.8
+illinois,winnebago county,86.6
+illinois,woodford county,93.5
+indiana,indiana,87.6
+indiana,adams county,83.8
+indiana,allen county,89.3
+indiana,bartholomew county,89.7
+indiana,benton county,88.7
+indiana,blackford county,86.5
+indiana,boone county,93.7
+indiana,brown county,87.7
+indiana,carroll county,87.5
+indiana,cass county,82.2
+indiana,clark county,87
+indiana,clay county,86.8
+indiana,clinton county,85.7
+indiana,crawford county,82.3
+indiana,daviess county,77.6
+indiana,dearborn county,89.6
+indiana,decatur county,88.8
+indiana,dekalb county,88.8
+indiana,delaware county,88
+indiana,dubois county,86.6
+indiana,elkhart county,80.8
+indiana,fayette county,80.1
+indiana,floyd county,88.4
+indiana,fountain county,86.8
+indiana,franklin county,85.8
+indiana,fulton county,84.9
+indiana,gibson county,90
+indiana,grant county,85.5
+indiana,greene county,84.5
+indiana,hamilton county,96.2
+indiana,hancock county,93.6
+indiana,harrison county,88.5
+indiana,hendricks county,93.6
+indiana,henry county,86.3
+indiana,howard county,88.7
+indiana,huntington county,88.9
+indiana,jackson county,87.1
+indiana,jasper county,87.9
+indiana,jay county,84.2
+indiana,jefferson county,85
+indiana,jennings county,84.8
+indiana,johnson county,91.7
+indiana,knox county,87.3
+indiana,kosciusko county,85.1
+indiana,lagrange county,63.1
+indiana,lake county,87
+indiana,laporte county,86.8
+indiana,lawrence county,85
+indiana,madison county,87.1
+indiana,marion county,84.9
+indiana,marshall county,85.1
+indiana,martin county,82
+indiana,miami county,84.4
+indiana,monroe county,92.2
+indiana,montgomery county,88.6
+indiana,morgan county,88.1
+indiana,newton county,85.8
+indiana,noble county,84
+indiana,ohio county,85.8
+indiana,orange county,82
+indiana,owen county,83.1
+indiana,parke county,84.7
+indiana,perry county,84.5
+indiana,pike county,87.3
+indiana,porter county,91.6
+indiana,posey county,92.7
+indiana,pulaski county,84.8
+indiana,putnam county,87.4
+indiana,randolph county,84.8
+indiana,ripley county,87.1
+indiana,rush county,85.8
+indiana,st  joseph county,88.4
+indiana,scott county,80.6
+indiana,shelby county,86.5
+indiana,spencer county,87.4
+indiana,starke county,82.5
+indiana,steuben county,89
+indiana,sullivan county,85.6
+indiana,switzerland county,82.4
+indiana,tippecanoe county,90.8
+indiana,tipton county,87.9
+indiana,union county,87.4
+indiana,vanderburgh county,89.6
+indiana,vermillion county,88.7
+indiana,vigo county,86.9
+indiana,wabash county,88
+indiana,warren county,86.3
+indiana,warrick county,93
+indiana,washington county,80.9
+indiana,wayne county,84.2
+indiana,wells county,89.6
+indiana,white county,88.8
+indiana,whitley county,91.1
+iowa,iowa,91.3
+iowa,adair county,91.8
+iowa,adams county,90.5
+iowa,allamakee county,88.3
+iowa,appanoose county,87.6
+iowa,audubon county,91.1
+iowa,benton county,92.1
+iowa,black hawk county,89.7
+iowa,boone county,93.9
+iowa,bremer county,94.3
+iowa,buchanan county,91.7
+iowa,buena vista county,78.9
+iowa,butler county,91.5
+iowa,calhoun county,90.5
+iowa,carroll county,91.6
+iowa,cass county,92.5
+iowa,cedar county,92.1
+iowa,cerro gordo county,93
+iowa,cherokee county,91.5
+iowa,chickasaw county,89.3
+iowa,clarke county,87.7
+iowa,clay county,93.6
+iowa,clayton county,91.8
+iowa,clinton county,90.6
+iowa,crawford county,78.1
+iowa,dallas county,94.4
+iowa,davis county,86.3
+iowa,decatur county,86.3
+iowa,delaware county,90
+iowa,des moines county,90.7
+iowa,dickinson county,95
+iowa,dubuque county,91.9
+iowa,emmet county,88.4
+iowa,fayette county,89.5
+iowa,floyd county,89.5
+iowa,franklin county,85.7
+iowa,fremont county,92.3
+iowa,greene county,90.6
+iowa,grundy county,94.2
+iowa,guthrie county,92.2
+iowa,hamilton county,90.8
+iowa,hancock county,92.3
+iowa,hardin county,90.7
+iowa,harrison county,91.3
+iowa,henry county,91.3
+iowa,howard county,87.6
+iowa,humboldt county,91.6
+iowa,ida county,90
+iowa,iowa county,93
+iowa,jackson county,90.4
+iowa,jasper county,91.4
+iowa,jefferson county,94.7
+iowa,johnson county,94.8
+iowa,jones county,91.4
+iowa,keokuk county,90.5
+iowa,kossuth county,93.4
+iowa,lee county,91
+iowa,linn county,94.1
+iowa,louisa county,83.1
+iowa,lucas county,90.6
+iowa,lyon county,90.6
+iowa,madison county,94.4
+iowa,mahaska county,90.8
+iowa,marion county,92.8
+iowa,marshall county,84.7
+iowa,mills county,93.7
+iowa,mitchell county,90.6
+iowa,monona county,91.1
+iowa,monroe county,88.2
+iowa,montgomery county,87.9
+iowa,muscatine county,85.1
+iowa,o brien county,91.4
+iowa,osceola county,87.2
+iowa,page county,88.7
+iowa,palo alto county,91.9
+iowa,plymouth county,92.3
+iowa,pocahontas county,92.9
+iowa,polk county,91.9
+iowa,pottawattamie county,89.6
+iowa,poweshiek county,92
+iowa,ringgold county,88
+iowa,sac county,91.7
+iowa,scott county,92.6
+iowa,shelby county,91.6
+iowa,sioux county,88.6
+iowa,story county,95.8
+iowa,tama county,90.4
+iowa,taylor county,90.9
+iowa,union county,91.2
+iowa,van buren county,88.6
+iowa,wapello county,84
+iowa,warren county,95.8
+iowa,washington county,90.1
+iowa,wayne county,89.4
+iowa,webster county,90.4
+iowa,winnebago county,92.6
+iowa,winneshiek county,93.7
+iowa,woodbury county,85.4
+iowa,worth county,91.7
+iowa,wright county,89.8
+kansas,kansas,90
+kansas,allen county,89.7
+kansas,anderson county,88.5
+kansas,atchison county,91.8
+kansas,barber county,92.1
+kansas,barton county,85.8
+kansas,bourbon county,88.1
+kansas,brown county,91.9
+kansas,butler county,93
+kansas,chase county,91.6
+kansas,chautauqua county,87.7
+kansas,cherokee county,86.6
+kansas,cheyenne county,90.5
+kansas,clark county,93.2
+kansas,clay county,96.1
+kansas,cloud county,90.8
+kansas,coffey county,92
+kansas,comanche county,92.3
+kansas,cowley county,88.8
+kansas,crawford county,89.8
+kansas,decatur county,89.9
+kansas,dickinson county,90.1
+kansas,doniphan county,90.6
+kansas,douglas county,94.6
+kansas,edwards county,84.5
+kansas,elk county,89.1
+kansas,ellis county,93.2
+kansas,ellsworth county,89.2
+kansas,finney county,71.1
+kansas,ford county,68.7
+kansas,franklin county,91.7
+kansas,geary county,91.1
+kansas,gove county,94.5
+kansas,graham county,93.4
+kansas,grant county,70.7
+kansas,gray county,75.6
+kansas,greeley county,89.2
+kansas,greenwood county,89.8
+kansas,hamilton county,77.5
+kansas,harper county,89
+kansas,harvey county,89.6
+kansas,haskell county,70.8
+kansas,hodgeman county,89.8
+kansas,jackson county,94.1
+kansas,jefferson county,93.1
+kansas,jewell county,92.8
+kansas,johnson county,95.7
+kansas,kearny county,81.1
+kansas,kingman county,89.3
+kansas,kiowa county,91.5
+kansas,labette county,88.3
+kansas,lane county,93
+kansas,leavenworth county,91.8
+kansas,lincoln county,91.7
+kansas,linn county,89
+kansas,logan county,93
+kansas,lyon county,87.1
+kansas,mcpherson county,88.9
+kansas,marion county,88.8
+kansas,marshall county,92.3
+kansas,meade county,87.5
+kansas,miami county,93.8
+kansas,mitchell county,94.6
+kansas,montgomery county,88.6
+kansas,morris county,89.6
+kansas,morton county,86
+kansas,nemaha county,90.6
+kansas,neosho county,91.9
+kansas,ness county,91.6
+kansas,norton county,86.1
+kansas,osage county,90.6
+kansas,osborne county,89.5
+kansas,ottawa county,92.7
+kansas,pawnee county,88.1
+kansas,phillips county,91.8
+kansas,pottawatomie county,95.9
+kansas,pratt county,89
+kansas,rawlins county,92.6
+kansas,reno county,88.4
+kansas,republic county,93.6
+kansas,rice county,89
+kansas,riley county,95.2
+kansas,rooks county,92.2
+kansas,rush county,89.9
+kansas,russell county,91.2
+kansas,saline county,89.2
+kansas,scott county,83.8
+kansas,sedgwick county,88.6
+kansas,seward county,65.2
+kansas,shawnee county,90.6
+kansas,sheridan county,90.3
+kansas,sherman county,87.7
+kansas,smith county,90
+kansas,stafford county,88.2
+kansas,stanton county,80
+kansas,stevens county,83.3
+kansas,sumner county,91.7
+kansas,thomas county,92.8
+kansas,trego county,91
+kansas,wabaunsee county,95.6
+kansas,wallace county,90.1
+kansas,washington county,89.8
+kansas,wichita county,79.9
+kansas,wilson county,82.6
+kansas,woodson county,89
+kansas,wyandotte county,78.4
+kentucky,kentucky,83.5
+kentucky,adair county,74
+kentucky,allen county,76.6
+kentucky,anderson county,87.4
+kentucky,ballard county,83.8
+kentucky,barren county,79.7
+kentucky,bath county,75.5
+kentucky,bell county,68.5
+kentucky,boone county,91.9
+kentucky,bourbon county,83.2
+kentucky,boyd county,87.8
+kentucky,boyle county,85.6
+kentucky,bracken county,82.7
+kentucky,breathitt county,67.5
+kentucky,breckinridge county,77.4
+kentucky,bullitt county,85.9
+kentucky,butler county,75.6
+kentucky,caldwell county,87.8
+kentucky,calloway county,86.8
+kentucky,campbell county,89.2
+kentucky,carlisle county,81.8
+kentucky,carroll county,74.4
+kentucky,carter county,78
+kentucky,casey county,70.4
+kentucky,christian county,85.7
+kentucky,clark county,83.5
+kentucky,clay county,64.3
+kentucky,clinton county,67.7
+kentucky,crittenden county,79.2
+kentucky,cumberland county,72.8
+kentucky,daviess county,87.9
+kentucky,edmonson county,79.8
+kentucky,elliott county,73.6
+kentucky,estill county,74
+kentucky,fayette county,89.2
+kentucky,fleming county,76.6
+kentucky,floyd county,73.9
+kentucky,franklin county,86.4
+kentucky,fulton county,75.5
+kentucky,gallatin county,77.8
+kentucky,garrard county,80.7
+kentucky,grant county,81.8
+kentucky,graves county,80.9
+kentucky,grayson county,75.1
+kentucky,green county,77.5
+kentucky,greenup county,82.9
+kentucky,hancock county,87.1
+kentucky,hardin county,89
+kentucky,harlan county,70.5
+kentucky,harrison county,81
+kentucky,hart county,72.6
+kentucky,henderson county,85.2
+kentucky,henry county,80.1
+kentucky,hickman county,82.2
+kentucky,hopkins county,83.7
+kentucky,jackson county,70.2
+kentucky,jefferson county,88.2
+kentucky,jessamine county,84.6
+kentucky,johnson county,75.5
+kentucky,kenton county,88.7
+kentucky,knott county,68.9
+kentucky,knox county,68.9
+kentucky,larue county,81
+kentucky,laurel county,74.3
+kentucky,lawrence county,76.9
+kentucky,lee county,71.5
+kentucky,leslie county,64.5
+kentucky,letcher county,75.2
+kentucky,lewis county,73.6
+kentucky,lincoln county,79.1
+kentucky,livingston county,82.1
+kentucky,logan county,77.2
+kentucky,lyon county,85.8
+kentucky,mccracken county,87.2
+kentucky,mccreary county,70.3
+kentucky,mclean county,80.7
+kentucky,madison county,85.6
+kentucky,magoffin county,67.9
+kentucky,marion county,81.5
+kentucky,marshall county,86.1
+kentucky,martin county,72.7
+kentucky,mason county,81.1
+kentucky,meade county,86.3
+kentucky,menifee county,71.4
+kentucky,mercer county,83.8
+kentucky,metcalfe county,73.7
+kentucky,monroe county,75.6
+kentucky,montgomery county,80.3
+kentucky,morgan county,71.7
+kentucky,muhlenberg county,77.5
+kentucky,nelson county,86.6
+kentucky,nicholas county,80.8
+kentucky,ohio county,77.4
+kentucky,oldham county,91.9
+kentucky,owen county,85.7
+kentucky,owsley county,63.2
+kentucky,pendleton county,83.6
+kentucky,perry county,70
+kentucky,pike county,71.7
+kentucky,powell county,73.6
+kentucky,pulaski county,80.1
+kentucky,robertson county,71.2
+kentucky,rockcastle county,76.9
+kentucky,rowan county,80.1
+kentucky,russell county,72.3
+kentucky,scott county,87.9
+kentucky,shelby county,85.2
+kentucky,simpson county,84.7
+kentucky,spencer county,88.2
+kentucky,taylor county,81.6
+kentucky,todd county,77.7
+kentucky,trigg county,82.8
+kentucky,trimble county,84.8
+kentucky,union county,82.8
+kentucky,warren county,86.9
+kentucky,washington county,81.9
+kentucky,wayne county,67.6
+kentucky,webster county,77.8
+kentucky,whitley county,74.6
+kentucky,wolfe county,64
+kentucky,woodford county,88.3
+louisiana,louisiana,82.8
+louisiana,acadia parish,72.5
+louisiana,allen parish,77.6
+louisiana,ascension parish,88.7
+louisiana,assumption parish,72
+louisiana,avoyelles parish,70.7
+louisiana,beauregard parish,84.1
+louisiana,bienville parish,79.7
+louisiana,bossier parish,87.8
+louisiana,caddo parish,85.7
+louisiana,calcasieu parish,85.1
+louisiana,caldwell parish,73.3
+louisiana,cameron parish,81.7
+louisiana,catahoula parish,72.8
+louisiana,claiborne parish,76.3
+louisiana,concordia parish,75.3
+louisiana,de soto parish,79.3
+louisiana,east baton rouge parish,88.8
+louisiana,east carroll parish,67.7
+louisiana,east feliciana parish,81.4
+louisiana,evangeline parish,68.2
+louisiana,franklin parish,72.7
+louisiana,grant parish,78.4
+louisiana,iberia parish,77
+louisiana,iberville parish,76.7
+louisiana,jackson parish,81.4
+louisiana,jefferson parish,84
+louisiana,jefferson davis parish,78.9
+louisiana,lafayette parish,85.7
+louisiana,lafourche parish,74.2
+louisiana,lasalle parish,79.6
+louisiana,lincoln parish,85
+louisiana,livingston parish,84
+louisiana,madison parish,74
+louisiana,morehouse parish,77
+louisiana,natchitoches parish,81.2
+louisiana,orleans parish,84.8
+louisiana,ouachita parish,84.2
+louisiana,plaquemines parish,79.7
+louisiana,pointe coupee parish,81.6
+louisiana,rapides parish,83.4
+louisiana,red river parish,75.9
+louisiana,richland parish,78.8
+louisiana,sabine parish,81.6
+louisiana,st  bernard parish,81.9
+louisiana,st  charles parish,86.6
+louisiana,st  helena parish,81.9
+louisiana,st  james parish,83.8
+louisiana,st  john the baptist parish,81
+louisiana,st  landry parish,76.7
+louisiana,st  martin parish,77.2
+louisiana,st  mary parish,73.7
+louisiana,st  tammany parish,88.2
+louisiana,tangipahoa parish,80.1
+louisiana,tensas parish,76.1
+louisiana,terrebonne parish,75.6
+louisiana,union parish,82.6
+louisiana,vermilion parish,76.3
+louisiana,vernon parish,87.2
+louisiana,washington parish,76.2
+louisiana,webster parish,79
+louisiana,west baton rouge parish,84.3
+louisiana,west carroll parish,72
+louisiana,west feliciana parish,75.9
+louisiana,winn parish,76.7
+maine,maine,91.3
+maine,androscoggin county,88.6
+maine,aroostook county,86.3
+maine,cumberland county,93.8
+maine,franklin county,91.9
+maine,hancock county,93.4
+maine,kennebec county,90.9
+maine,knox county,93.3
+maine,lincoln county,92.7
+maine,oxford county,89.9
+maine,penobscot county,90.7
+maine,piscataquis county,89
+maine,sagadahoc county,93.9
+maine,somerset county,87.4
+maine,waldo county,91.9
+maine,washington county,87.5
+maine,york county,92
+maryland,maryland,89
+maryland,allegany county,87.4
+maryland,anne arundel county,91.1
+maryland,baltimore county,90.2
+maryland,calvert county,92.5
+maryland,caroline county,83.1
+maryland,carroll county,92.3
+maryland,cecil county,87.4
+maryland,charles county,91.6
+maryland,dorchester county,82.4
+maryland,frederick county,91.7
+maryland,garrett county,87.1
+maryland,harford county,92.9
+maryland,howard county,95.2
+maryland,kent county,86.6
+maryland,montgomery county,91.3
+maryland,prince george s county,85.6
+maryland,queen anne s county,91.8
+maryland,st  mary s county,91
+maryland,somerset county,79
+maryland,talbot county,88.3
+maryland,washington county,86.1
+maryland,wicomico county,87
+maryland,worcester county,89.3
+maryland,baltimore city,80.9
+massachusetts,massachusetts,89.5
+massachusetts,barnstable county,95
+massachusetts,berkshire county,90.6
+massachusetts,bristol county,82.2
+massachusetts,dukes county,93.4
+massachusetts,essex county,89.2
+massachusetts,franklin county,91.9
+massachusetts,hampden county,84.1
+massachusetts,hampshire county,93.6
+massachusetts,middlesex county,92.1
+massachusetts,nantucket county,94.3
+massachusetts,norfolk county,93.7
+massachusetts,plymouth county,92.1
+massachusetts,suffolk county,84
+massachusetts,worcester county,89.6
+michigan,michigan,89.3
+michigan,alcona county,87.5
+michigan,alger county,89.2
+michigan,allegan county,90
+michigan,alpena county,88.9
+michigan,antrim county,90.8
+michigan,arenac county,84.9
+michigan,baraga county,80.2
+michigan,barry county,91.4
+michigan,bay county,89
+michigan,benzie county,90.8
+michigan,berrien county,88.3
+michigan,branch county,87
+michigan,calhoun county,89.2
+michigan,cass county,87.9
+michigan,charlevoix county,91.3
+michigan,cheboygan county,88.4
+michigan,chippewa county,89.4
+michigan,clare county,84
+michigan,clinton county,93.4
+michigan,crawford county,85.8
+michigan,delta county,91.2
+michigan,dickinson county,93.1
+michigan,eaton county,93.2
+michigan,emmet county,94.2
+michigan,genesee county,89
+michigan,gladwin county,84.5
+michigan,gogebic county,92.3
+michigan,grand traverse county,93.4
+michigan,gratiot county,88.8
+michigan,hillsdale county,87.3
+michigan,houghton county,91.5
+michigan,huron county,87.5
+michigan,ingham county,91.3
+michigan,ionia county,88.3
+michigan,iosco county,87.1
+michigan,iron county,91
+michigan,isabella county,90.5
+michigan,jackson county,89.7
+michigan,kalamazoo county,92.7
+michigan,kalkaska county,86.2
+michigan,kent county,89.3
+michigan,keweenaw county,92.3
+michigan,lake county,82.3
+michigan,lapeer county,90.6
+michigan,leelanau county,94.5
+michigan,lenawee county,89.9
+michigan,livingston county,94.8
+michigan,luce county,86
+michigan,mackinac county,87.2
+michigan,macomb county,88.5
+michigan,manistee county,89.5
+michigan,marquette county,94.2
+michigan,mason county,90.7
+michigan,mecosta county,89.6
+michigan,menominee county,90.7
+michigan,midland county,92.8
+michigan,missaukee county,86.9
+michigan,monroe county,89.7
+michigan,montcalm county,87.1
+michigan,montmorency county,86.1
+michigan,muskegon county,88.4
+michigan,newaygo county,86
+michigan,oakland county,93
+michigan,oceana county,84.8
+michigan,ogemaw county,85.1
+michigan,ontonagon county,89.7
+michigan,osceola county,87.3
+michigan,oscoda county,82.8
+michigan,otsego county,91.8
+michigan,ottawa county,91.2
+michigan,presque isle county,87.3
+michigan,roscommon county,86
+michigan,saginaw county,87.9
+michigan,st  clair county,89.3
+michigan,st  joseph county,84.7
+michigan,sanilac county,88
+michigan,schoolcraft county,88.3
+michigan,shiawassee county,91.1
+michigan,tuscola county,88.2
+michigan,van buren county,86.5
+michigan,washtenaw county,94.3
+michigan,wayne county,84.4
+michigan,wexford county,88.8
+minnesota,minnesota,92.3
+minnesota,aitkin county,90.4
+minnesota,anoka county,93.4
+minnesota,becker county,90.5
+minnesota,beltrami county,90.1
+minnesota,benton county,91.6
+minnesota,big stone county,89.7
+minnesota,blue earth county,94.2
+minnesota,brown county,90.8
+minnesota,carlton county,93.2
+minnesota,carver county,95.5
+minnesota,cass county,91.2
+minnesota,chippewa county,88.3
+minnesota,chisago county,93.7
+minnesota,clay county,93.9
+minnesota,clearwater county,85.8
+minnesota,cook county,95.2
+minnesota,cottonwood county,88.6
+minnesota,crow wing county,92.6
+minnesota,dakota county,94.8
+minnesota,dodge county,93.5
+minnesota,douglas county,93.5
+minnesota,faribault county,90
+minnesota,fillmore county,90.2
+minnesota,freeborn county,87.8
+minnesota,goodhue county,92.2
+minnesota,grant county,91.7
+minnesota,hennepin county,92.7
+minnesota,houston county,92
+minnesota,hubbard county,92.2
+minnesota,isanti county,91.7
+minnesota,itasca county,92.5
+minnesota,jackson county,91.5
+minnesota,kanabec county,87.1
+minnesota,kandiyohi county,88.6
+minnesota,kittson county,90.1
+minnesota,koochiching county,89.1
+minnesota,lac qui parle county,91.7
+minnesota,lake county,94.3
+minnesota,lake of the woods county,91.5
+minnesota,le sueur county,90.3
+minnesota,lincoln county,91.7
+minnesota,lyon county,92.4
+minnesota,mcleod county,91.4
+minnesota,mahnomen county,84
+minnesota,marshall county,88.6
+minnesota,martin county,88.3
+minnesota,meeker county,91.1
+minnesota,mille lacs county,88.4
+minnesota,morrison county,89.2
+minnesota,mower county,87.4
+minnesota,murray county,89.6
+minnesota,nicollet county,93.5
+minnesota,nobles county,79
+minnesota,norman county,88.7
+minnesota,olmsted county,94
+minnesota,otter tail county,90.7
+minnesota,pennington county,90.1
+minnesota,pine county,88.6
+minnesota,pipestone county,85.5
+minnesota,polk county,89.6
+minnesota,pope county,92.6
+minnesota,ramsey county,89.9
+minnesota,red lake county,90.2
+minnesota,redwood county,88
+minnesota,renville county,88.9
+minnesota,rice county,89.5
+minnesota,rock county,90.1
+minnesota,roseau county,91.5
+minnesota,st  louis county,93
+minnesota,scott county,94.6
+minnesota,sherburne county,93.6
+minnesota,sibley county,89
+minnesota,stearns county,91.5
+minnesota,steele county,91.7
+minnesota,stevens county,91.2
+minnesota,swift county,88.8
+minnesota,todd county,86.7
+minnesota,traverse county,90.4
+minnesota,wabasha county,92.7
+minnesota,wadena county,88.6
+minnesota,waseca county,91.9
+minnesota,washington county,96
+minnesota,watonwan county,84.7
+minnesota,wilkin county,90.7
+minnesota,winona county,90.4
+minnesota,wright county,94.1
+minnesota,yellow medicine county,91.2
+mississippi,mississippi,81.9
+mississippi,adams county,79.5
+mississippi,alcorn county,78.6
+mississippi,amite county,74.7
+mississippi,attala county,76.1
+mississippi,benton county,72.9
+mississippi,bolivar county,74.7
+mississippi,calhoun county,69.9
+mississippi,carroll county,77.5
+mississippi,chickasaw county,72.8
+mississippi,choctaw county,80.7
+mississippi,claiborne county,77.7
+mississippi,clarke county,77.2
+mississippi,clay county,78.9
+mississippi,coahoma county,77.1
+mississippi,copiah county,79.4
+mississippi,covington county,77.7
+mississippi,desoto county,88.9
+mississippi,forrest county,83.8
+mississippi,franklin county,81.9
+mississippi,george county,82.2
+mississippi,greene county,74
+mississippi,grenada county,77.9
+mississippi,hancock county,85
+mississippi,harrison county,85.6
+mississippi,hinds county,85.4
+mississippi,holmes county,70.4
+mississippi,humphreys county,65.6
+mississippi,issaquena county,59.5
+mississippi,itawamba county,78.9
+mississippi,jackson county,87.6
+mississippi,jasper county,78
+mississippi,jefferson county,79.8
+mississippi,jefferson davis county,77.3
+mississippi,jones county,78.1
+mississippi,kemper county,77.9
+mississippi,lafayette county,87.3
+mississippi,lamar county,90.5
+mississippi,lauderdale county,85
+mississippi,lawrence county,81.4
+mississippi,leake county,74.8
+mississippi,lee county,83.5
+mississippi,leflore county,73.1
+mississippi,lincoln county,82.9
+mississippi,lowndes county,82.7
+mississippi,madison county,89.9
+mississippi,marion county,75.5
+mississippi,marshall county,75.1
+mississippi,monroe county,77.6
+mississippi,montgomery county,74
+mississippi,neshoba county,77.1
+mississippi,newton county,83.4
+mississippi,noxubee county,67.1
+mississippi,oktibbeha county,86.6
+mississippi,panola county,77.8
+mississippi,pearl river county,82.6
+mississippi,perry county,80.4
+mississippi,pike county,78.6
+mississippi,pontotoc county,78
+mississippi,prentiss county,74.3
+mississippi,quitman county,67
+mississippi,rankin county,89.2
+mississippi,scott county,71.7
+mississippi,sharkey county,77.9
+mississippi,simpson county,78.6
+mississippi,smith county,80.9
+mississippi,stone county,85
+mississippi,sunflower county,69.3
+mississippi,tallahatchie county,66.6
+mississippi,tate county,80.4
+mississippi,tippah county,74.7
+mississippi,tishomingo county,77.3
+mississippi,tunica county,75.8
+mississippi,union county,77
+mississippi,walthall county,77.7
+mississippi,warren county,85.1
+mississippi,washington county,76.2
+mississippi,wayne county,73.3
+mississippi,webster county,83.3
+mississippi,wilkinson county,72.6
+mississippi,winston county,77.6
+mississippi,yalobusha county,78.6
+mississippi,yazoo county,75.8
+missouri,missouri,88
+missouri,adair county,87.4
+missouri,andrew county,90.7
+missouri,atchison county,88.9
+missouri,audrain county,85
+missouri,barry county,81.6
+missouri,barton county,85.5
+missouri,bates county,84.1
+missouri,benton county,85
+missouri,bollinger county,80.1
+missouri,boone county,93.2
+missouri,buchanan county,86.8
+missouri,butler county,79.8
+missouri,caldwell county,87
+missouri,callaway county,86.7
+missouri,camden county,88.4
+missouri,cape girardeau county,88
+missouri,carroll county,86.9
+missouri,carter county,77.4
+missouri,cass county,92.2
+missouri,cedar county,82.9
+missouri,chariton county,83.4
+missouri,christian county,91.2
+missouri,clark county,85.5
+missouri,clay county,91.9
+missouri,clinton county,91.7
+missouri,cole county,90.5
+missouri,cooper county,87.7
+missouri,crawford county,78.2
+missouri,dade county,84.6
+missouri,dallas county,80.1
+missouri,daviess county,84.7
+missouri,dekalb county,84.9
+missouri,dent county,78.2
+missouri,douglas county,79.2
+missouri,dunklin county,71.9
+missouri,franklin county,86.9
+missouri,gasconade county,83.6
+missouri,gentry county,87.6
+missouri,greene county,90.4
+missouri,grundy county,85.5
+missouri,harrison county,84.5
+missouri,henry county,87
+missouri,hickory county,82.3
+missouri,holt county,90.2
+missouri,howard county,86.4
+missouri,howell county,83.4
+missouri,iron county,78.8
+missouri,jackson county,88.7
+missouri,jasper county,85.3
+missouri,jefferson county,87.6
+missouri,johnson county,91
+missouri,knox county,85.5
+missouri,laclede county,81.6
+missouri,lafayette county,87.2
+missouri,lawrence county,83.4
+missouri,lewis county,87.4
+missouri,lincoln county,84.9
+missouri,linn county,88
+missouri,livingston county,87
+missouri,mcdonald county,78.3
+missouri,macon county,87.1
+missouri,madison county,75.1
+missouri,maries county,83.3
+missouri,marion county,83.9
+missouri,mercer county,87.9
+missouri,miller county,84.3
+missouri,mississippi county,72.9
+missouri,moniteau county,82.3
+missouri,monroe county,89.3
+missouri,montgomery county,82
+missouri,morgan county,80.3
+missouri,new madrid county,75.7
+missouri,newton county,85.5
+missouri,nodaway county,91.8
+missouri,oregon county,80.9
+missouri,osage county,89.6
+missouri,ozark county,82.9
+missouri,pemiscot county,74.7
+missouri,perry county,85.3
+missouri,pettis county,82.6
+missouri,phelps county,87.4
+missouri,pike county,79.1
+missouri,platte county,94.7
+missouri,polk county,84.9
+missouri,pulaski county,89.4
+missouri,putnam county,86.3
+missouri,ralls county,88.4
+missouri,randolph county,85.4
+missouri,ray county,88.3
+missouri,reynolds county,75.2
+missouri,ripley county,74.7
+missouri,st  charles county,93.7
+missouri,st  clair county,81.9
+missouri,ste  genevieve county,84.5
+missouri,st  francois county,81.2
+missouri,st  louis county,92.6
+missouri,saline county,83.9
+missouri,schuyler county,85.4
+missouri,scotland county,77.1
+missouri,scott county,80.5
+missouri,shannon county,82
+missouri,shelby county,89.6
+missouri,stoddard county,79.7
+missouri,stone county,85.5
+missouri,sullivan county,82.6
+missouri,taney county,85.5
+missouri,texas county,81.8
+missouri,vernon county,86.2
+missouri,warren county,84.6
+missouri,washington county,73
+missouri,wayne county,75.7
+missouri,webster county,86
+missouri,worth county,89.2
+missouri,wright county,77.9
+missouri,st  louis city,83.2
+montana,montana,92.4
+montana,beaverhead county,93.6
+montana,big horn county,84.5
+montana,blaine county,87.8
+montana,broadwater county,91.4
+montana,carbon county,93.6
+montana,carter county,91.8
+montana,cascade county,91.2
+montana,chouteau county,91.4
+montana,custer county,90.3
+montana,daniels county,93.7
+montana,dawson county,90.7
+montana,deer lodge county,90.9
+montana,fallon county,93.1
+montana,fergus county,94.5
+montana,flathead county,93.6
+montana,gallatin county,96.4
+montana,garfield county,91.2
+montana,glacier county,84.3
+montana,golden valley county,89.5
+montana,granite county,88.6
+montana,hill county,92.2
+montana,jefferson county,94.8
+montana,judith basin county,93.8
+montana,lake county,90.7
+montana,lewis and clark county,94.3
+montana,liberty county,80.2
+montana,lincoln county,88.2
+montana,mccone county,93.3
+montana,madison county,94.5
+montana,meagher county,90.7
+montana,mineral county,90.1
+montana,missoula county,95
+montana,musselshell county,90.8
+montana,park county,95.4
+montana,petroleum county,96.6
+montana,phillips county,91.4
+montana,pondera county,88.3
+montana,powder river county,93.7
+montana,powell county,89.6
+montana,prairie county,87.5
+montana,ravalli county,91.3
+montana,richland county,91.6
+montana,roosevelt county,83.7
+montana,rosebud county,88
+montana,sanders county,88
+montana,sheridan county,90.7
+montana,silver bow county,91.3
+montana,stillwater county,92.2
+montana,sweet grass county,93.6
+montana,teton county,91.3
+montana,toole county,87.3
+montana,treasure county,89.2
+montana,valley county,91.7
+montana,wheatland county,81.4
+montana,wibaux county,83.5
+montana,yellowstone county,92.4
+nebraska,nebraska,90.5
+nebraska,adams county,90.9
+nebraska,antelope county,91.1
+nebraska,arthur county,93.8
+nebraska,banner county,92.4
+nebraska,blaine county,98.7
+nebraska,boone county,92.2
+nebraska,box butte county,91.5
+nebraska,boyd county,92.2
+nebraska,brown county,88.8
+nebraska,buffalo county,92.6
+nebraska,burt county,90.3
+nebraska,butler county,89.3
+nebraska,cass county,94.7
+nebraska,cedar county,93.1
+nebraska,chase county,89.9
+nebraska,cherry county,90.8
+nebraska,cheyenne county,94
+nebraska,clay county,87.7
+nebraska,colfax county,71.9
+nebraska,cuming county,88.6
+nebraska,custer county,92.2
+nebraska,dakota county,73.3
+nebraska,dawes county,94.1
+nebraska,dawson county,76.2
+nebraska,deuel county,91.6
+nebraska,dixon county,86.6
+nebraska,dodge county,88
+nebraska,douglas county,89.3
+nebraska,dundy county,93.3
+nebraska,fillmore county,92.9
+nebraska,franklin county,91.7
+nebraska,frontier county,94.3
+nebraska,furnas county,89.9
+nebraska,gage county,89.4
+nebraska,garden county,94.1
+nebraska,garfield county,94.7
+nebraska,gosper county,95.1
+nebraska,grant county,95.1
+nebraska,greeley county,92.1
+nebraska,hall county,83
+nebraska,hamilton county,94.4
+nebraska,harlan county,90.7
+nebraska,hayes county,88.2
+nebraska,hitchcock county,93.1
+nebraska,holt county,91.7
+nebraska,hooker county,94.2
+nebraska,howard county,91.9
+nebraska,jefferson county,89.5
+nebraska,johnson county,87.7
+nebraska,kearney county,91.2
+nebraska,keith county,92.3
+nebraska,keya paha county,92
+nebraska,kimball county,85.4
+nebraska,knox county,89.8
+nebraska,lancaster county,93.4
+nebraska,lincoln county,91.5
+nebraska,logan county,91.9
+nebraska,loup county,93.8
+nebraska,mcpherson county,95.7
+nebraska,madison county,88
+nebraska,merrick county,91.3
+nebraska,morrill county,87.3
+nebraska,nance county,88.3
+nebraska,nemaha county,93.5
+nebraska,nuckolls county,93.5
+nebraska,otoe county,91.6
+nebraska,pawnee county,88.1
+nebraska,perkins county,91.8
+nebraska,phelps county,94.2
+nebraska,pierce county,94.2
+nebraska,platte county,89
+nebraska,polk county,93.1
+nebraska,red willow county,93.5
+nebraska,richardson county,92
+nebraska,rock county,92.4
+nebraska,saline county,82.9
+nebraska,sarpy county,95.2
+nebraska,saunders county,93.1
+nebraska,scotts bluff county,87.4
+nebraska,seward county,92.3
+nebraska,sheridan county,88.8
+nebraska,sherman county,89.3
+nebraska,sioux county,91
+nebraska,stanton county,93
+nebraska,thayer county,91.4
+nebraska,thomas county,93.6
+nebraska,thurston county,87.1
+nebraska,valley county,93.1
+nebraska,washington county,96.2
+nebraska,wayne county,93.2
+nebraska,webster county,90.2
+nebraska,wheeler county,93.8
+nebraska,york county,93.5
+nevada,nevada,84.9
+nevada,churchill county,87.7
+nevada,clark county,84.2
+nevada,douglas county,93
+nevada,elko county,83.2
+nevada,esmeralda county,85.4
+nevada,eureka county,88.7
+nevada,humboldt county,83.5
+nevada,lander county,80.9
+nevada,lincoln county,87
+nevada,lyon county,84.3
+nevada,mineral county,86.3
+nevada,nye county,83.5
+nevada,pershing county,78.6
+nevada,storey county,92.8
+nevada,washoe county,86.8
+nevada,white pine county,85.1
+nevada,carson city,86.8
+new hampshire,new hampshire,92
+new hampshire,belknap county,91.2
+new hampshire,carroll county,93
+new hampshire,cheshire county,91.7
+new hampshire,coos county,86.6
+new hampshire,grafton county,91.3
+new hampshire,hillsborough county,90.9
+new hampshire,merrimack county,92.4
+new hampshire,rockingham county,94.5
+new hampshire,strafford county,91.8
+new hampshire,sullivan county,90.2
+new jersey,new jersey,88.4
+new jersey,atlantic county,84.7
+new jersey,bergen county,91.5
+new jersey,burlington county,92.4
+new jersey,camden county,87.6
+new jersey,cape may county,89.1
+new jersey,cumberland county,76.6
+new jersey,essex county,83.8
+new jersey,gloucester county,91.4
+new jersey,hudson county,82.5
+new jersey,hunterdon county,94.3
+new jersey,mercer county,87.3
+new jersey,middlesex county,88.8
+new jersey,monmouth county,92.6
+new jersey,morris county,93.6
+new jersey,ocean county,90.2
+new jersey,passaic county,82.5
+new jersey,salem county,85.8
+new jersey,somerset county,93.5
+new jersey,sussex county,93.5
+new jersey,union county,85.4
+new jersey,warren county,90.1
+new mexico,new mexico,84
+new mexico,bernalillo county,87.8
+new mexico,catron county,90.9
+new mexico,chaves county,78.1
+new mexico,cibola county,80.5
+new mexico,colfax county,86.9
+new mexico,curry county,82.1
+new mexico,de baca county,82.1
+new mexico,do�a ana county,78
+new mexico,eddy county,82
+new mexico,grant county,85.2
+new mexico,guadalupe county,75.2
+new mexico,harding county,89.2
+new mexico,hidalgo county,76.8
+new mexico,lea county,71.4
+new mexico,lincoln county,86.6
+new mexico,los alamos county,97.2
+new mexico,luna county,69.5
+new mexico,mckinley county,72.8
+new mexico,mora county,80.2
+new mexico,otero county,84.5
+new mexico,quay county,81.4
+new mexico,rio arriba county,79.2
+new mexico,roosevelt county,80.6
+new mexico,sandoval county,90.9
+new mexico,san juan county,82.4
+new mexico,san miguel county,82.3
+new mexico,santa fe county,87.6
+new mexico,sierra county,84.7
+new mexico,socorro county,77.8
+new mexico,taos county,86.6
+new mexico,torrance county,82.8
+new mexico,union county,80.3
+new mexico,valencia county,80.6
+new york,new york,85.4
+new york,albany county,92.5
+new york,allegany county,88.1
+new york,bronx county,70.2
+new york,broome county,89.5
+new york,cattaraugus county,88.2
+new york,cayuga county,87.1
+new york,chautauqua county,88
+new york,chemung county,89.4
+new york,chenango county,86.4
+new york,clinton county,85.3
+new york,columbia county,87.9
+new york,cortland county,90.1
+new york,delaware county,87.5
+new york,dutchess county,89.6
+new york,erie county,90.2
+new york,essex county,88
+new york,franklin county,84.8
+new york,fulton county,85.8
+new york,genesee county,90.8
+new york,greene county,86.9
+new york,hamilton county,89.9
+new york,herkimer county,88.9
+new york,jefferson county,88.8
+new york,kings county,78.9
+new york,lewis county,88.1
+new york,livingston county,88.9
+new york,madison county,90.4
+new york,monroe county,89.9
+new york,montgomery county,82.9
+new york,nassau county,90.3
+new york,new york county,86.3
+new york,niagara county,90.3
+new york,oneida county,87.5
+new york,onondaga county,90.1
+new york,ontario county,91.5
+new york,orange county,88.1
+new york,orleans county,85.8
+new york,oswego county,86.2
+new york,otsego county,89.4
+new york,putnam county,92.2
+new york,queens county,80.4
+new york,rensselaer county,90.7
+new york,richmond county,88.2
+new york,rockland county,87.3
+new york,st  lawrence county,87.1
+new york,saratoga county,93.8
+new york,schenectady county,90.3
+new york,schoharie county,88.1
+new york,schuyler county,88.7
+new york,seneca county,85.4
+new york,steuben county,88.8
+new york,suffolk county,89.8
+new york,sullivan county,84.8
+new york,tioga county,90.3
+new york,tompkins county,93.6
+new york,ulster county,89.1
+new york,warren county,90.7
+new york,washington county,87.9
+new york,wayne county,89.3
+new york,westchester county,87.6
+new york,wyoming county,86.8
+new york,yates county,86.3
+north carolina,north carolina,85.4
+north carolina,alamance county,82.6
+north carolina,alexander county,80.7
+north carolina,alleghany county,79.6
+north carolina,anson county,78.3
+north carolina,ashe county,80.7
+north carolina,avery county,80.9
+north carolina,beaufort county,81.4
+north carolina,bertie county,74.9
+north carolina,bladen county,77.4
+north carolina,brunswick county,86.4
+north carolina,buncombe county,90
+north carolina,burke county,77.5
+north carolina,cabarrus county,87.4
+north carolina,caldwell county,75.9
+north carolina,camden county,86.6
+north carolina,carteret county,88.6
+north carolina,caswell county,75.8
+north carolina,catawba county,82.7
+north carolina,chatham county,86.2
+north carolina,cherokee county,82.4
+north carolina,chowan county,82.9
+north carolina,clay county,87.9
+north carolina,cleveland county,82.3
+north carolina,columbus county,79.6
+north carolina,craven county,86.9
+north carolina,cumberland county,89.4
+north carolina,currituck county,84.7
+north carolina,dare county,91.4
+north carolina,davidson county,81.1
+north carolina,davie county,85.4
+north carolina,duplin county,71.4
+north carolina,durham county,87.4
+north carolina,edgecombe county,77.6
+north carolina,forsyth county,86.8
+north carolina,franklin county,81.7
+north carolina,gaston county,81.8
+north carolina,gates county,82.6
+north carolina,graham county,79.8
+north carolina,granville county,82
+north carolina,greene county,76.2
+north carolina,guilford county,88.2
+north carolina,halifax county,76.5
+north carolina,harnett county,84.7
+north carolina,haywood county,86.5
+north carolina,henderson county,88.4
+north carolina,hertford county,76.6
+north carolina,hoke county,84.3
+north carolina,hyde county,79.5
+north carolina,iredell county,86.9
+north carolina,jackson county,86.4
+north carolina,johnston county,83.9
+north carolina,jones county,83.8
+north carolina,lee county,81.5
+north carolina,lenoir county,80.8
+north carolina,lincoln county,82.9
+north carolina,mcdowell county,81.2
+north carolina,macon county,85.7
+north carolina,madison county,80.3
+north carolina,martin county,81.3
+north carolina,mecklenburg county,89
+north carolina,mitchell county,81.2
+north carolina,montgomery county,74.5
+north carolina,moore county,90
+north carolina,nash county,84
+north carolina,new hanover county,91.2
+north carolina,northampton county,74.5
+north carolina,onslow county,90.3
+north carolina,orange county,91.9
+north carolina,pamlico county,86.7
+north carolina,pasquotank county,84
+north carolina,pender county,85.9
+north carolina,perquimans county,83.9
+north carolina,person county,82.9
+north carolina,pitt county,86.9
+north carolina,polk county,88.4
+north carolina,randolph county,79.1
+north carolina,richmond county,80.6
+north carolina,robeson county,72.9
+north carolina,rockingham county,79.2
+north carolina,rowan county,81.9
+north carolina,rutherford county,81.4
+north carolina,sampson county,74.2
+north carolina,scotland county,77.8
+north carolina,stanly county,81.6
+north carolina,stokes county,80.5
+north carolina,surry county,76
+north carolina,swain county,81.7
+north carolina,transylvania county,88.8
+north carolina,tyrrell county,70.6
+north carolina,union county,88.7
+north carolina,vance county,77.5
+north carolina,wake county,91.9
+north carolina,warren county,77.3
+north carolina,washington county,77.8
+north carolina,watauga county,88.3
+north carolina,wayne county,82.2
+north carolina,wilkes county,74.3
+north carolina,wilson county,79.1
+north carolina,yadkin county,78.3
+north carolina,yancey county,83.3
+north dakota,north dakota,91.3
+north dakota,adams county,95.1
+north dakota,barnes county,89.7
+north dakota,benson county,82.8
+north dakota,billings county,90.7
+north dakota,bottineau county,88.7
+north dakota,bowman county,88.7
+north dakota,burke county,87.6
+north dakota,burleigh county,93.7
+north dakota,cass county,94.8
+north dakota,cavalier county,88.8
+north dakota,dickey county,87.1
+north dakota,divide county,90.2
+north dakota,dunn county,91.3
+north dakota,eddy county,86.6
+north dakota,emmons county,83.2
+north dakota,foster county,88.1
+north dakota,golden valley county,91.3
+north dakota,grand forks county,92.6
+north dakota,grant county,87.6
+north dakota,griggs county,87
+north dakota,hettinger county,87.4
+north dakota,kidder county,86.1
+north dakota,lamoure county,87.6
+north dakota,logan county,80.6
+north dakota,mchenry county,88.2
+north dakota,mcintosh county,76.4
+north dakota,mckenzie county,90.2
+north dakota,mclean county,90.1
+north dakota,mercer county,89.7
+north dakota,morton county,90.9
+north dakota,mountrail county,90.4
+north dakota,nelson county,90.3
+north dakota,oliver county,84.5
+north dakota,pembina county,88.7
+north dakota,pierce county,83.3
+north dakota,ramsey county,89.4
+north dakota,ransom county,89.7
+north dakota,renville county,92.4
+north dakota,richland county,91.9
+north dakota,rolette county,81.5
+north dakota,sargent county,90.2
+north dakota,sheridan county,86.8
+north dakota,sioux county,85.1
+north dakota,slope county,86.6
+north dakota,stark county,89.9
+north dakota,steele county,92.4
+north dakota,stutsman county,87.3
+north dakota,towner county,92.2
+north dakota,traill county,90.4
+north dakota,walsh county,85.7
+north dakota,ward county,93.3
+north dakota,wells county,84.1
+north dakota,williams county,90.4
+ohio,ohio,88.8
+ohio,adams county,77
+ohio,allen county,88.3
+ohio,ashland county,87.2
+ohio,ashtabula county,85.6
+ohio,athens county,89.4
+ohio,auglaize county,91.9
+ohio,belmont county,89.3
+ohio,brown county,82.7
+ohio,butler county,89.6
+ohio,carroll county,86.6
+ohio,champaign county,88.1
+ohio,clark county,86.4
+ohio,clermont county,88.7
+ohio,clinton county,87.5
+ohio,columbiana county,87.2
+ohio,coshocton county,84.1
+ohio,crawford county,87.4
+ohio,cuyahoga county,87.8
+ohio,darke county,87.3
+ohio,defiance county,89.1
+ohio,delaware county,96.3
+ohio,erie county,89.9
+ohio,fairfield county,91.6
+ohio,fayette county,84
+ohio,franklin county,89.8
+ohio,fulton county,89.1
+ohio,gallia county,79.3
+ohio,geauga county,91
+ohio,greene county,92.4
+ohio,guernsey county,85.2
+ohio,hamilton county,89.2
+ohio,hancock county,91.8
+ohio,hardin county,87
+ohio,harrison county,86.8
+ohio,henry county,90.3
+ohio,highland county,82.2
+ohio,hocking county,86.9
+ohio,holmes county,55.8
+ohio,huron county,88
+ohio,jackson county,82.7
+ohio,jefferson county,89.5
+ohio,knox county,87.4
+ohio,lake county,91.3
+ohio,lawrence county,85.3
+ohio,licking county,89.4
+ohio,logan county,86.6
+ohio,lorain county,89.1
+ohio,lucas county,88.4
+ohio,madison county,85.7
+ohio,mahoning county,89.2
+ohio,marion county,85.9
+ohio,medina county,93.5
+ohio,meigs county,82.4
+ohio,mercer county,91.2
+ohio,miami county,88.7
+ohio,monroe county,85.8
+ohio,montgomery county,88.6
+ohio,morgan county,86.5
+ohio,morrow county,87.4
+ohio,muskingum county,86.6
+ohio,noble county,80.8
+ohio,ottawa county,92.3
+ohio,paulding county,89.9
+ohio,perry county,83.9
+ohio,pickaway county,85.1
+ohio,pike county,77.1
+ohio,portage county,91
+ohio,preble county,87.4
+ohio,putnam county,92.7
+ohio,richland county,86.7
+ohio,ross county,84.9
+ohio,sandusky county,89.5
+ohio,scioto county,82.3
+ohio,seneca county,89.6
+ohio,shelby county,89.1
+ohio,stark county,89.7
+ohio,summit county,90.7
+ohio,trumbull county,88.3
+ohio,tuscarawas county,86.6
+ohio,union county,91.6
+ohio,van wert county,90.9
+ohio,vinton county,79
+ohio,warren county,92.4
+ohio,washington county,89.1
+ohio,wayne county,85.2
+ohio,williams county,89
+ohio,wood county,93.7
+ohio,wyandot county,89.5
+oklahoma,oklahoma,86.7
+oklahoma,adair county,78.5
+oklahoma,alfalfa county,85.7
+oklahoma,atoka county,82.1
+oklahoma,beaver county,82.7
+oklahoma,beckham county,83.5
+oklahoma,blaine county,84
+oklahoma,bryan county,83.9
+oklahoma,caddo county,84.1
+oklahoma,canadian county,91.5
+oklahoma,carter county,85.5
+oklahoma,cherokee county,85.4
+oklahoma,choctaw county,79.4
+oklahoma,cimarron county,83.7
+oklahoma,cleveland county,91.3
+oklahoma,coal county,82.8
+oklahoma,comanche county,89.3
+oklahoma,cotton county,84.4
+oklahoma,craig county,83.5
+oklahoma,creek county,85.3
+oklahoma,custer county,85.5
+oklahoma,delaware county,84.4
+oklahoma,dewey county,88.7
+oklahoma,ellis county,89.5
+oklahoma,garfield county,86.1
+oklahoma,garvin county,83.7
+oklahoma,grady county,85.6
+oklahoma,grant county,90.2
+oklahoma,greer county,80.1
+oklahoma,harmon county,78.7
+oklahoma,harper county,84.3
+oklahoma,haskell county,77.8
+oklahoma,hughes county,78.1
+oklahoma,jackson county,83.2
+oklahoma,jefferson county,82.6
+oklahoma,johnston county,80.1
+oklahoma,kay county,87
+oklahoma,kingfisher county,85.7
+oklahoma,kiowa county,83.9
+oklahoma,latimer county,84.3
+oklahoma,le flore county,80.6
+oklahoma,lincoln county,84.6
+oklahoma,logan county,91
+oklahoma,love county,83.6
+oklahoma,mcclain county,87.3
+oklahoma,mccurtain county,81
+oklahoma,mcintosh county,82.8
+oklahoma,major county,87
+oklahoma,marshall county,80.4
+oklahoma,mayes county,85.4
+oklahoma,murray county,81.1
+oklahoma,muskogee county,85.2
+oklahoma,noble county,87.4
+oklahoma,nowata county,84.2
+oklahoma,okfuskee county,79.2
+oklahoma,oklahoma county,86.1
+oklahoma,okmulgee county,86.3
+oklahoma,osage county,87.2
+oklahoma,ottawa county,83.5
+oklahoma,pawnee county,87.7
+oklahoma,payne county,90.8
+oklahoma,pittsburg county,84.5
+oklahoma,pontotoc county,86.6
+oklahoma,pottawatomie county,87
+oklahoma,pushmataha county,80.9
+oklahoma,roger mills county,91.7
+oklahoma,rogers county,90.6
+oklahoma,seminole county,82.1
+oklahoma,sequoyah county,82.3
+oklahoma,stephens county,86.2
+oklahoma,texas county,70.2
+oklahoma,tillman county,75.8
+oklahoma,tulsa county,88.6
+oklahoma,wagoner county,89.2
+oklahoma,washington county,89.9
+oklahoma,washita county,86.8
+oklahoma,woods county,88.3
+oklahoma,woodward county,86.1
+oregon,oregon,89.5
+oregon,baker county,89.8
+oregon,benton county,94.6
+oregon,clackamas county,92.8
+oregon,clatsop county,90.9
+oregon,columbia county,89.6
+oregon,coos county,88.6
+oregon,crook county,84.8
+oregon,curry county,90.8
+oregon,deschutes county,92.9
+oregon,douglas county,88.1
+oregon,gilliam county,91.5
+oregon,grant county,87.9
+oregon,harney county,87.7
+oregon,hood river county,82.2
+oregon,jackson county,88.8
+oregon,jefferson county,84.4
+oregon,josephine county,88.7
+oregon,klamath county,87.4
+oregon,lake county,85.5
+oregon,lane county,91.1
+oregon,lincoln county,88.4
+oregon,linn county,89.6
+oregon,malheur county,80.1
+oregon,marion county,83.6
+oregon,morrow county,76.3
+oregon,multnomah county,90
+oregon,polk county,90.5
+oregon,sherman county,92.5
+oregon,tillamook county,89.5
+oregon,umatilla county,83.3
+oregon,union county,90.8
+oregon,wallowa county,93.1
+oregon,wasco county,85.1
+oregon,washington county,90.6
+oregon,wheeler county,89.3
+oregon,yamhill county,86.7
+pennsylvania,pennsylvania,89
+pennsylvania,adams county,86.6
+pennsylvania,allegheny county,93.4
+pennsylvania,armstrong county,89.1
+pennsylvania,beaver county,91.4
+pennsylvania,bedford county,85.7
+pennsylvania,berks county,84.5
+pennsylvania,blair county,90.3
+pennsylvania,bradford county,87.9
+pennsylvania,bucks county,93.5
+pennsylvania,butler county,93.2
+pennsylvania,cambria county,89
+pennsylvania,cameron county,88.2
+pennsylvania,carbon county,88.9
+pennsylvania,centre county,92.9
+pennsylvania,chester county,92.8
+pennsylvania,clarion county,88.5
+pennsylvania,clearfield county,87.2
+pennsylvania,clinton county,86.9
+pennsylvania,columbia county,88.8
+pennsylvania,crawford county,87.4
+pennsylvania,cumberland county,91.5
+pennsylvania,dauphin county,88.7
+pennsylvania,delaware county,91.9
+pennsylvania,elk county,90.8
+pennsylvania,erie county,90.4
+pennsylvania,fayette county,86.1
+pennsylvania,forest county,81.9
+pennsylvania,franklin county,85.8
+pennsylvania,fulton county,85.3
+pennsylvania,greene county,85.7
+pennsylvania,huntingdon county,87.7
+pennsylvania,indiana county,88.6
+pennsylvania,jefferson county,88.8
+pennsylvania,juniata county,82.1
+pennsylvania,lackawanna county,89.6
+pennsylvania,lancaster county,84.3
+pennsylvania,lawrence county,88.8
+pennsylvania,lebanon county,85.6
+pennsylvania,lehigh county,87
+pennsylvania,luzerne county,88.6
+pennsylvania,lycoming county,87.7
+pennsylvania,mckean county,89.5
+pennsylvania,mercer county,88.9
+pennsylvania,mifflin county,82
+pennsylvania,monroe county,89.8
+pennsylvania,montgomery county,93.5
+pennsylvania,montour county,89.6
+pennsylvania,northampton county,89.4
+pennsylvania,northumberland county,85.7
+pennsylvania,perry county,87.5
+pennsylvania,philadelphia county,81.4
+pennsylvania,pike county,90.5
+pennsylvania,potter county,87.6
+pennsylvania,schuylkill county,87.1
+pennsylvania,snyder county,82.3
+pennsylvania,somerset county,86.4
+pennsylvania,sullivan county,88.3
+pennsylvania,susquehanna county,89.3
+pennsylvania,tioga county,88.6
+pennsylvania,union county,85.5
+pennsylvania,venango county,89.2
+pennsylvania,warren county,90.1
+pennsylvania,washington county,90.8
+pennsylvania,wayne county,88.2
+pennsylvania,westmoreland county,92.2
+pennsylvania,wyoming county,90.4
+pennsylvania,york county,88.3
+rhode island,rhode island,85.4
+rhode island,bristol county,90.3
+rhode island,kent county,90.2
+rhode island,newport county,92.3
+rhode island,providence county,81.2
+rhode island,washington county,92.7
+south carolina,south carolina,85
+south carolina,abbeville county,77.7
+south carolina,aiken county,85.7
+south carolina,allendale county,71.2
+south carolina,anderson county,82
+south carolina,bamberg county,75.9
+south carolina,barnwell county,80.5
+south carolina,beaufort county,91.6
+south carolina,berkeley county,87.5
+south carolina,calhoun county,82
+south carolina,charleston county,89.2
+south carolina,cherokee county,77.1
+south carolina,chester county,78.7
+south carolina,chesterfield county,75.7
+south carolina,clarendon county,78.8
+south carolina,colleton county,79.8
+south carolina,darlington county,80.5
+south carolina,dillon county,71.7
+south carolina,dorchester county,89.2
+south carolina,edgefield county,81.9
+south carolina,fairfield county,80.8
+south carolina,florence county,83.2
+south carolina,georgetown county,85.7
+south carolina,greenville county,86.4
+south carolina,greenwood county,79.9
+south carolina,hampton county,76.8
+south carolina,horry county,87.8
+south carolina,jasper county,78.3
+south carolina,kershaw county,84.1
+south carolina,lancaster county,84.7
+south carolina,laurens county,78.2
+south carolina,lee county,74.7
+south carolina,lexington county,88.5
+south carolina,mccormick county,78.2
+south carolina,marion county,81.5
+south carolina,marlboro county,72.5
+south carolina,newberry county,77.7
+south carolina,oconee county,83.2
+south carolina,orangeburg county,80.5
+south carolina,pickens county,82.3
+south carolina,richland county,89.6
+south carolina,saluda county,76.7
+south carolina,spartanburg county,82.7
+south carolina,sumter county,81.4
+south carolina,union county,79.2
+south carolina,williamsburg county,78.6
+south carolina,york county,87.6
+south dakota,south dakota,90.7
+south dakota,aurora county,88.3
+south dakota,beadle county,83.8
+south dakota,bennett county,79.2
+south dakota,bon homme county,87.7
+south dakota,brookings county,94.1
+south dakota,brown county,91.9
+south dakota,brule county,84.6
+south dakota,buffalo county,79.4
+south dakota,butte county,87.1
+south dakota,campbell county,88.1
+south dakota,charles mix county,87.1
+south dakota,clark county,89.8
+south dakota,clay county,95.7
+south dakota,codington county,90.9
+south dakota,corson county,83.1
+south dakota,custer county,93.6
+south dakota,davison county,90.3
+south dakota,day county,88.1
+south dakota,deuel county,88.8
+south dakota,dewey county,82.2
+south dakota,douglas county,83.1
+south dakota,edmunds county,87.7
+south dakota,fall river county,91.9
+south dakota,faulk county,92.2
+south dakota,grant county,88.9
+south dakota,gregory county,86.5
+south dakota,haakon county,89.8
+south dakota,hamlin county,90
+south dakota,hand county,89
+south dakota,hanson county,92.6
+south dakota,harding county,92.8
+south dakota,hughes county,91.7
+south dakota,hutchinson county,85.5
+south dakota,hyde county,90.2
+south dakota,jackson county,90.8
+south dakota,jerauld county,87.8
+south dakota,jones county,93.1
+south dakota,kingsbury county,92.5
+south dakota,lake county,93
+south dakota,lawrence county,94
+south dakota,lincoln county,95.9
+south dakota,lyman county,89.3
+south dakota,mccook county,91.3
+south dakota,mcpherson county,79.5
+south dakota,marshall county,91.3
+south dakota,meade county,92.8
+south dakota,mellette county,85.5
+south dakota,miner county,92.1
+south dakota,minnehaha county,90.8
+south dakota,moody county,91.8
+south dakota,pennington county,92
+south dakota,perkins county,88.4
+south dakota,potter county,89.4
+south dakota,roberts county,87.3
+south dakota,sanborn county,90.3
+south dakota,shannon county,79
+south dakota,spink county,88.9
+south dakota,stanley county,89.6
+south dakota,sully county,91.1
+south dakota,todd county,76.8
+south dakota,tripp county,87.6
+south dakota,turner county,90.4
+south dakota,union county,93
+south dakota,walworth county,87.7
+south dakota,yankton county,91.9
+south dakota,ziebach county,87.5
+tennessee,tennessee,84.9
+tennessee,anderson county,85.9
+tennessee,bedford county,78.1
+tennessee,benton county,79.1
+tennessee,bledsoe county,78
+tennessee,blount county,87.3
+tennessee,bradley county,82.5
+tennessee,campbell county,72
+tennessee,cannon county,79.2
+tennessee,carroll county,78.9
+tennessee,carter county,80.2
+tennessee,cheatham county,82.9
+tennessee,chester county,81.2
+tennessee,claiborne county,75
+tennessee,clay county,74.5
+tennessee,cocke county,77.8
+tennessee,coffee county,83.2
+tennessee,crockett county,76.8
+tennessee,cumberland county,82.9
+tennessee,davidson county,86.4
+tennessee,decatur county,80
+tennessee,dekalb county,77.2
+tennessee,dickson county,84.3
+tennessee,dyer county,84.4
+tennessee,fayette county,87.2
+tennessee,fentress county,71.8
+tennessee,franklin county,80.9
+tennessee,gibson county,83.9
+tennessee,giles county,80.4
+tennessee,grainger county,77.4
+tennessee,greene county,80.4
+tennessee,grundy county,71.1
+tennessee,hamblen county,80.6
+tennessee,hamilton county,87
+tennessee,hancock county,76.3
+tennessee,hardeman county,76.2
+tennessee,hardin county,79
+tennessee,hawkins county,81.3
+tennessee,haywood county,77.8
+tennessee,henderson county,81.2
+tennessee,henry county,83.5
+tennessee,hickman county,75.3
+tennessee,houston county,80.5
+tennessee,humphreys county,84.7
+tennessee,jackson county,73.9
+tennessee,jefferson county,81.1
+tennessee,johnson county,74.2
+tennessee,knox county,89.9
+tennessee,lake county,71.5
+tennessee,lauderdale county,74.9
+tennessee,lawrence county,79
+tennessee,lewis county,79.1
+tennessee,lincoln county,82.3
+tennessee,loudon county,85.6
+tennessee,mcminn county,82.5
+tennessee,mcnairy county,78.8
+tennessee,macon county,74.4
+tennessee,madison county,86.7
+tennessee,marion county,76.8
+tennessee,marshall county,81.7
+tennessee,maury county,86.4
+tennessee,meigs county,75.1
+tennessee,monroe county,77.9
+tennessee,montgomery county,91
+tennessee,moore county,83.8
+tennessee,morgan county,80.2
+tennessee,obion county,81.1
+tennessee,overton county,77.7
+tennessee,perry county,77.3
+tennessee,pickett county,75.5
+tennessee,polk county,77.6
+tennessee,putnam county,84
+tennessee,rhea county,76.8
+tennessee,roane county,83.7
+tennessee,robertson county,85.9
+tennessee,rutherford county,90.2
+tennessee,scott county,75.2
+tennessee,sequatchie county,82
+tennessee,sevier county,81.8
+tennessee,shelby county,86.7
+tennessee,smith county,80.7
+tennessee,stewart county,84.8
+tennessee,sullivan county,84.7
+tennessee,sumner county,88.2
+tennessee,tipton county,85.2
+tennessee,trousdale county,76.1
+tennessee,unicoi county,77.2
+tennessee,union county,74.4
+tennessee,van buren county,80.2
+tennessee,warren county,78.3
+tennessee,washington county,87.1
+tennessee,wayne county,75.4
+tennessee,weakley county,83.6
+tennessee,white county,79.5
+tennessee,williamson county,94.8
+tennessee,wilson county,88.7
+texas,texas,81.6
+texas,anderson county,80.2
+texas,andrews county,76.7
+texas,angelina county,79.2
+texas,aransas county,84.3
+texas,archer county,87.3
+texas,armstrong county,89.4
+texas,atascosa county,75.8
+texas,austin county,86
+texas,bailey county,64.7
+texas,bandera county,86.4
+texas,bastrop county,79.6
+texas,baylor county,84.6
+texas,bee county,71.4
+texas,bell county,89.5
+texas,bexar county,83
+texas,blanco county,88.2
+texas,borden county,92.1
+texas,bosque county,81.1
+texas,bowie county,87.1
+texas,brazoria county,85.5
+texas,brazos county,85.3
+texas,brewster county,86.8
+texas,briscoe county,76.6
+texas,brooks county,66.7
+texas,brown county,84.7
+texas,burleson county,78.1
+texas,burnet county,84.7
+texas,caldwell county,78.2
+texas,calhoun county,79
+texas,callahan county,87.2
+texas,cameron county,64.1
+texas,camp county,76.2
+texas,carson county,89.6
+texas,cass county,84.5
+texas,castro county,71.3
+texas,chambers county,84
+texas,cherokee county,78.1
+texas,childress county,90
+texas,clay county,87.8
+texas,cochran county,67.3
+texas,coke county,88.5
+texas,coleman county,80.8
+texas,collin county,93.4
+texas,collingsworth county,79
+texas,colorado county,81.9
+texas,comal county,89.5
+texas,comanche county,77.1
+texas,concho county,65.8
+texas,cooke county,85.1
+texas,coryell county,87.8
+texas,cottle county,73.5
+texas,crane county,70.6
+texas,crockett county,68.4
+texas,crosby county,70.1
+texas,culberson county,65.2
+texas,dallam county,74.4
+texas,dallas county,77.7
+texas,dawson county,70.5
+texas,deaf smith county,70
+texas,delta county,86
+texas,denton county,92
+texas,dewitt county,76.2
+texas,dickens county,76.8
+texas,dimmit county,66.4
+texas,donley county,84
+texas,duval county,65
+texas,eastland county,83.1
+texas,ector county,73.4
+texas,edwards county,72.3
+texas,ellis county,84.3
+texas,el paso county,74.8
+texas,erath county,82.8
+texas,falls county,75.1
+texas,fannin county,81.9
+texas,fayette county,80.1
+texas,fisher county,81.8
+texas,floyd county,76.4
+texas,foard county,78.7
+texas,fort bend county,88.5
+texas,franklin county,84.3
+texas,freestone county,79.3
+texas,frio county,67.8
+texas,gaines county,58.7
+texas,galveston county,87.4
+texas,garza county,63.6
+texas,gillespie county,86.4
+texas,glasscock county,80.6
+texas,goliad county,88.2
+texas,gonzales county,71.1
+texas,gray county,80.9
+texas,grayson county,86.7
+texas,gregg county,82.9
+texas,grimes county,79.8
+texas,guadalupe county,86.8
+texas,hale county,70.8
+texas,hall county,70.6
+texas,hamilton county,82
+texas,hansford county,74.2
+texas,hardeman county,80.7
+texas,hardin county,86.1
+texas,harris county,79.1
+texas,harrison county,84
+texas,hartley county,79.6
+texas,haskell county,74.7
+texas,hays county,89.1
+texas,hemphill county,81.5
+texas,henderson county,81.6
+texas,hidalgo county,62.2
+texas,hill county,79.1
+texas,hockley county,76.9
+texas,hood county,87.1
+texas,hopkins county,81
+texas,houston county,81.1
+texas,howard county,76.1
+texas,hudspeth county,53.2
+texas,hunt county,83
+texas,hutchinson county,83.6
+texas,irion county,86.4
+texas,jack county,80.3
+texas,jackson county,81.5
+texas,jasper county,83.6
+texas,jeff davis county,85.1
+texas,jefferson county,82.9
+texas,jim hogg county,75.6
+texas,jim wells county,71.6
+texas,johnson county,82.9
+texas,jones county,72.9
+texas,karnes county,72.1
+texas,kaufman county,83.3
+texas,kendall county,90
+texas,kenedy county,67.9
+texas,kent county,79.7
+texas,kerr county,88.2
+texas,kimble county,82.6
+texas,king county,80.9
+texas,kinney county,69.2
+texas,kleberg county,73.9
+texas,knox county,81
+texas,lamar county,85
+texas,lamb county,70.9
+texas,lampasas county,87.4
+texas,la salle county,61.3
+texas,lavaca county,81.1
+texas,lee county,82.8
+texas,leon county,83.9
+texas,liberty county,76.6
+texas,limestone county,79.4
+texas,lipscomb county,82.2
+texas,live oak county,80.7
+texas,llano county,87.1
+texas,loving county,88.2
+texas,lubbock county,85.1
+texas,lynn county,76.5
+texas,mcculloch county,78.6
+texas,mclennan county,82.8
+texas,mcmullen county,70.2
+texas,madison county,77.5
+texas,marion county,83.9
+texas,martin county,75.4
+texas,mason county,84.8
+texas,matagorda county,76.8
+texas,maverick county,57.5
+texas,medina county,81.1
+texas,menard county,75.3
+texas,midland county,82.3
+texas,milam county,81
+texas,mills county,82.6
+texas,mitchell county,75.9
+texas,montague county,83.1
+texas,montgomery county,86.4
+texas,moore county,65.9
+texas,morris county,83
+texas,motley county,84.1
+texas,nacogdoches county,81.9
+texas,navarro county,77.6
+texas,newton county,85.1
+texas,nolan county,77.6
+texas,nueces county,80.4
+texas,ochiltree county,73.9
+texas,oldham county,82.4
+texas,orange county,87.5
+texas,palo pinto county,80.7
+texas,panola county,83.4
+texas,parker county,89.1
+texas,parmer county,65
+texas,pecos county,68.2
+texas,polk county,77.8
+texas,potter county,76.3
+texas,presidio county,55
+texas,rains county,83.3
+texas,randall county,91.6
+texas,reagan county,60.5
+texas,real county,80.8
+texas,red river county,77.7
+texas,reeves county,62.4
+texas,refugio county,79.6
+texas,roberts county,96
+texas,robertson county,77.7
+texas,rockwall county,91.7
+texas,runnels county,79.4
+texas,rusk county,81
+texas,sabine county,83.7
+texas,san augustine county,78
+texas,san jacinto county,81
+texas,san patricio county,76.8
+texas,san saba county,79.9
+texas,schleicher county,73.7
+texas,scurry county,77.3
+texas,shackelford county,86.2
+texas,shelby county,76.2
+texas,sherman county,73.8
+texas,smith county,85.2
+texas,somervell county,82.9
+texas,starr county,46.7
+texas,stephens county,80.7
+texas,sterling county,76.2
+texas,stonewall county,80.3
+texas,sutton county,75.6
+texas,swisher county,76.9
+texas,tarrant county,84.7
+texas,taylor county,85.7
+texas,terrell county,76.7
+texas,terry county,68.8
+texas,throckmorton county,85.5
+texas,titus county,72.5
+texas,tom green county,82.9
+texas,travis county,87.4
+texas,trinity county,83
+texas,tyler county,84.3
+texas,upshur county,82.5
+texas,upton county,77.6
+texas,uvalde county,68.9
+texas,val verde county,66.4
+texas,van zandt county,81.5
+texas,victoria county,81.1
+texas,walker county,82.9
+texas,waller county,79.4
+texas,ward county,73.4
+texas,washington county,80.9
+texas,webb county,64.4
+texas,wharton county,75.7
+texas,wheeler county,81.5
+texas,wichita county,85.8
+texas,wilbarger county,79.8
+texas,willacy county,63.1
+texas,williamson county,92.3
+texas,wilson county,84.5
+texas,winkler county,70.8
+texas,wise county,84.8
+texas,wood county,84
+texas,yoakum county,73.4
+texas,young county,80
+texas,zapata county,56.1
+texas,zavala county,59.6
+utah,utah,91
+utah,beaver county,92.2
+utah,box elder county,92
+utah,cache county,92.5
+utah,carbon county,87
+utah,daggett county,87.6
+utah,davis county,95.3
+utah,duchesne county,86.5
+utah,emery county,89.5
+utah,garfield county,92.1
+utah,grand county,90.2
+utah,iron county,90.5
+utah,juab county,90
+utah,kane county,95.8
+utah,millard county,88.1
+utah,morgan county,98
+utah,piute county,83.6
+utah,rich county,96.1
+utah,salt lake county,89.2
+utah,san juan county,82.9
+utah,sanpete county,89.3
+utah,sevier county,90.4
+utah,summit county,93.3
+utah,tooele county,91.4
+utah,uintah county,87.4
+utah,utah county,93.5
+utah,wasatch county,90.5
+utah,washington county,92.2
+utah,wayne county,94.3
+utah,weber county,89.2
+vermont,vermont,91.6
+vermont,addison county,91.7
+vermont,bennington county,90.6
+vermont,caledonia county,89.9
+vermont,chittenden county,93.9
+vermont,essex county,82.7
+vermont,franklin county,89
+vermont,grand isle county,93
+vermont,lamoille county,92.1
+vermont,orange county,91.6
+vermont,orleans county,86.2
+vermont,rutland county,89.8
+vermont,washington county,93.7
+vermont,windham county,91.5
+vermont,windsor county,93
+virginia,virginia,87.9
+virginia,accomack county,78.8
+virginia,albemarle county,91.4
+virginia,alleghany county,84.2
+virginia,amelia county,79.7
+virginia,amherst county,80.8
+virginia,appomattox county,82
+virginia,arlington county,93.4
+virginia,augusta county,85.7
+virginia,bath county,87.5
+virginia,bedford county,88.2
+virginia,bland county,82.8
+virginia,botetourt county,91.2
+virginia,brunswick county,72.9
+virginia,buchanan county,69.1
+virginia,buckingham county,73
+virginia,campbell county,83.9
+virginia,caroline county,81.9
+virginia,carroll county,77.8
+virginia,charles city county,75.5
+virginia,charlotte county,77
+virginia,chesterfield county,90.5
+virginia,clarke county,89.6
+virginia,craig county,89.8
+virginia,culpeper county,84.1
+virginia,cumberland county,76.8
+virginia,dickenson county,72.6
+virginia,dinwiddie county,80.9
+virginia,essex county,79.1
+virginia,fairfax county,91.9
+virginia,fauquier county,91.2
+virginia,floyd county,83.7
+virginia,fluvanna county,85
+virginia,franklin county,83.1
+virginia,frederick county,86.4
+virginia,giles county,83.1
+virginia,gloucester county,90.5
+virginia,goochland county,89.6
+virginia,grayson county,77.6
+virginia,greene county,82.6
+virginia,greensville county,75.9
+virginia,halifax county,79.1
+virginia,hanover county,92.4
+virginia,henrico county,89.9
+virginia,henry county,77.8
+virginia,highland county,80.3
+virginia,isle of wight county,86.3
+virginia,james city county,93.6
+virginia,king and queen county,84.4
+virginia,king george county,92.4
+virginia,king william county,89.2
+virginia,lancaster county,88
+virginia,lee county,73.1
+virginia,loudoun county,93.5
+virginia,louisa county,82.7
+virginia,lunenburg county,72.8
+virginia,madison county,81.1
+virginia,mathews county,90.3
+virginia,mecklenburg county,78.4
+virginia,middlesex county,89.6
+virginia,montgomery county,90.4
+virginia,nelson county,83.3
+virginia,new kent county,89
+virginia,northampton county,79.1
+virginia,northumberland county,86
+virginia,nottoway county,75.9
+virginia,orange county,86.4
+virginia,page county,75.4
+virginia,patrick county,78.5
+virginia,pittsylvania county,80.2
+virginia,powhatan county,88.4
+virginia,prince edward county,79.1
+virginia,prince george county,86.8
+virginia,prince william county,89.6
+virginia,pulaski county,82.7
+virginia,rappahannock county,84.1
+virginia,richmond county,76.1
+virginia,roanoke county,91.3
+virginia,rockbridge county,84.5
+virginia,rockingham county,81.5
+virginia,russell county,76.2
+virginia,scott county,75.9
+virginia,shenandoah county,84
+virginia,smyth county,79.8
+virginia,southampton county,79
+virginia,spotsylvania county,89.1
+virginia,stafford county,93.2
+virginia,surry county,78.8
+virginia,sussex county,68.6
+virginia,tazewell county,78.4
+virginia,warren county,85.7
+virginia,washington county,83.6
+virginia,westmoreland county,79.5
+virginia,wise county,73.7
+virginia,wythe county,82.3
+virginia,york county,94
+virginia,alexandria city,91.3
+virginia,bristol city,80.9
+virginia,buena vista city,76.9
+virginia,charlottesville city,88.7
+virginia,chesapeake city,91
+virginia,colonial heights city,87.2
+virginia,covington city,82.3
+virginia,danville city,78.8
+virginia,emporia city,69.8
+virginia,fairfax city,91.7
+virginia,falls church city,96.8
+virginia,franklin city,78.1
+virginia,fredericksburg city,91.3
+virginia,galax city,74.3
+virginia,hampton city,89.4
+virginia,harrisonburg city,83.8
+virginia,hopewell city,80.2
+virginia,lexington city,82
+virginia,lynchburg city,87.3
+virginia,manassas city,82.7
+virginia,manassas park city,81.1
+virginia,martinsville city,77.5
+virginia,newport news city,88.8
+virginia,norfolk city,86.6
+virginia,norton city,79
+virginia,petersburg city,76.1
+virginia,poquoson city,92.7
+virginia,portsmouth city,82.6
+virginia,radford city,87.9
+virginia,richmond city,82.4
+virginia,roanoke city,83.3
+virginia,salem city,89.6
+virginia,staunton city,85.2
+virginia,suffolk city,87.1
+virginia,virginia beach city,93.4
+virginia,waynesboro city,84.6
+virginia,williamsburg city,91.9
+virginia,winchester city,83.3
+washington,washington,90.2
+washington,adams county,66.4
+washington,asotin county,88.7
+washington,benton county,88.7
+washington,chelan county,84
+washington,clallam county,91.6
+washington,clark county,91.2
+washington,columbia county,88.3
+washington,cowlitz county,87.2
+washington,douglas county,80.1
+washington,ferry county,87.5
+washington,franklin county,71.9
+washington,garfield county,96.9
+washington,grant county,75.8
+washington,grays harbor county,86.5
+washington,island county,94.9
+washington,jefferson county,94.4
+washington,king county,92.1
+washington,kitsap county,94.1
+washington,kittitas county,90.9
+washington,klickitat county,87.4
+washington,lewis county,86.8
+washington,lincoln county,92.3
+washington,mason county,87.3
+washington,okanogan county,82.4
+washington,pacific county,87.5
+washington,pend oreille county,90.3
+washington,pierce county,90.5
+washington,san juan county,95.1
+washington,skagit county,88.2
+washington,skamania county,90.3
+washington,snohomish county,91.3
+washington,spokane county,92.6
+washington,stevens county,90.9
+washington,thurston county,93.6
+washington,wahkiakum county,92.7
+washington,walla walla county,88.6
+washington,whatcom county,91
+washington,whitman county,95.7
+washington,yakima county,71.5
+west virginia,west virginia,84.4
+west virginia,barbour county,79.1
+west virginia,berkeley county,86.4
+west virginia,boone county,77.6
+west virginia,braxton county,79.5
+west virginia,brooke county,90.4
+west virginia,cabell county,86.1
+west virginia,calhoun county,75.8
+west virginia,clay county,70.5
+west virginia,doddridge county,81.9
+west virginia,fayette county,80.2
+west virginia,gilmer county,77.5
+west virginia,grant county,81.6
+west virginia,greenbrier county,84.2
+west virginia,hampshire county,76.2
+west virginia,hancock county,87
+west virginia,hardy county,80.2
+west virginia,harrison county,87.1
+west virginia,jackson county,84.2
+west virginia,jefferson county,88.1
+west virginia,kanawha county,87.6
+west virginia,lewis county,85.3
+west virginia,lincoln county,76.2
+west virginia,logan county,77.5
+west virginia,mcdowell county,64.5
+west virginia,marion county,88.3
+west virginia,marshall county,88.9
+west virginia,mason county,83.4
+west virginia,mercer county,82
+west virginia,mineral county,86.5
+west virginia,mingo county,72.4
+west virginia,monongalia county,91.2
+west virginia,monroe county,81
+west virginia,morgan county,82.1
+west virginia,nicholas county,83.8
+west virginia,ohio county,91.2
+west virginia,pendleton county,81
+west virginia,pleasants county,89
+west virginia,pocahontas county,84.7
+west virginia,preston county,82.7
+west virginia,putnam county,90.5
+west virginia,raleigh county,82.9
+west virginia,randolph county,83.1
+west virginia,ritchie county,80.5
+west virginia,roane county,77.1
+west virginia,summers county,81.1
+west virginia,taylor county,84.7
+west virginia,tucker county,86.8
+west virginia,tyler county,86.3
+west virginia,upshur county,83.7
+west virginia,wayne county,78
+west virginia,webster county,71.7
+west virginia,wetzel county,83.1
+west virginia,wirt county,86.9
+west virginia,wood county,89
+west virginia,wyoming county,73.9
+wisconsin,wisconsin,90.8
+wisconsin,adams county,86.4
+wisconsin,ashland county,90.5
+wisconsin,barron county,89
+wisconsin,bayfield county,93.8
+wisconsin,brown county,90.6
+wisconsin,buffalo county,90.4
+wisconsin,burnett county,90.7
+wisconsin,calumet county,92.6
+wisconsin,chippewa county,91.4
+wisconsin,clark county,81.8
+wisconsin,columbia county,92.3
+wisconsin,crawford county,90
+wisconsin,dane county,94.9
+wisconsin,dodge county,87.5
+wisconsin,door county,94
+wisconsin,douglas county,93.2
+wisconsin,dunn county,92.4
+wisconsin,eau claire county,93.2
+wisconsin,florence county,89.7
+wisconsin,fond du lac county,90.5
+wisconsin,forest county,86.3
+wisconsin,grant county,90.7
+wisconsin,green county,91.8
+wisconsin,green lake county,87.6
+wisconsin,iowa county,92.4
+wisconsin,iron county,92.4
+wisconsin,jackson county,86.4
+wisconsin,jefferson county,91.7
+wisconsin,juneau county,84.6
+wisconsin,kenosha county,89.7
+wisconsin,kewaunee county,91.4
+wisconsin,la crosse county,94
+wisconsin,lafayette county,89.9
+wisconsin,langlade county,88.1
+wisconsin,lincoln county,89.1
+wisconsin,manitowoc county,90.3
+wisconsin,marathon county,90.8
+wisconsin,marinette county,89.8
+wisconsin,marquette county,87.8
+wisconsin,menominee county,91.1
+wisconsin,milwaukee county,86.3
+wisconsin,monroe county,88.2
+wisconsin,oconto county,90
+wisconsin,oneida county,93.1
+wisconsin,outagamie county,93.1
+wisconsin,ozaukee county,96.2
+wisconsin,pepin county,90.7
+wisconsin,pierce county,93.9
+wisconsin,polk county,91.7
+wisconsin,portage county,92
+wisconsin,price county,89.8
+wisconsin,racine county,87.9
+wisconsin,richland county,89.6
+wisconsin,rock county,88.4
+wisconsin,rusk county,87.5
+wisconsin,st  croix county,95.3
+wisconsin,sauk county,89.6
+wisconsin,sawyer county,90
+wisconsin,shawano county,89.6
+wisconsin,sheboygan county,90.7
+wisconsin,taylor county,87.6
+wisconsin,trempealeau county,87.4
+wisconsin,vernon county,87.7
+wisconsin,vilas county,91.7
+wisconsin,walworth county,90.3
+wisconsin,washburn county,91.2
+wisconsin,washington county,92.8
+wisconsin,waukesha county,95.7
+wisconsin,waupaca county,90.2
+wisconsin,waushara county,86.4
+wisconsin,winnebago county,91.9
+wisconsin,wood county,91.4
+wyoming,wyoming,92.3
+wyoming,albany county,95.8
+wyoming,big horn county,89
+wyoming,campbell county,91.2
+wyoming,carbon county,89.4
+wyoming,converse county,91.3
+wyoming,crook county,94.4
+wyoming,fremont county,91.4
+wyoming,goshen county,89.7
+wyoming,hot springs county,87.5
+wyoming,johnson county,94.9
+wyoming,laramie county,93.4
+wyoming,lincoln county,93.4
+wyoming,natrona county,91.8
+wyoming,niobrara county,91.7
+wyoming,park county,93.6
+wyoming,platte county,92.5
+wyoming,sheridan county,94.2
+wyoming,sublette county,94.7
+wyoming,sweetwater county,90.5
+wyoming,teton county,95.7
+wyoming,uinta county,89.2
+wyoming,washakie county,89.1
+wyoming,weston county,88.6
