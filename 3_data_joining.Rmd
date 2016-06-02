@@ -638,6 +638,11 @@ df <- df %>%
 
 ## Median Income
 
+Looping through each row in the data set, we want to look for specific rows
+that have the `med_income` as a null value. Then we proceed to take the median
+income for it's respective state and generate a random median income using
+a standard deviation for the state.
+
 ```{r}
 for (i in seq_len(nrow(df))) {
   if (is.na(df[i, "med_income"])) {
@@ -652,6 +657,8 @@ for (i in seq_len(nrow(df))) {
 ```
 
 ## Poverty
+
+We repeat the process, but for poverty data. 
 
 ```{r}
 for (i in seq_len(nrow(df))) {
@@ -668,6 +675,8 @@ for (i in seq_len(nrow(df))) {
 
 ## Unemployment Rate
 
+We also vet through unemployment rate in the data.
+
 ```{r}
 for (i in seq_len(nrow(df))) {
   if (is.na(df[i, "unemployment_rate"])) {
@@ -683,6 +692,8 @@ for (i in seq_len(nrow(df))) {
 
 ## Educational Attainment
 
+Lastly, we fill in the missing values for educational attainment. 
+
 ```{r}
 for (i in seq_len(nrow(df))) {
   if (is.na(df[i, "educ_pct"])) {
@@ -690,7 +701,7 @@ for (i in seq_len(nrow(df))) {
       df[i, "educ_pct"] <- rnorm(mean = df[i, "med_educ"] %>% unlist(),
                                    sd = df[i, "sd_educ"] %>% unlist(), n = 1)
     } else {
-      df[i, "educ_pct"] <- df[i, "inc_med"]
+      df[i, "educ_pct"] <- df[i, "med_educ"]
     }
   }
 }
