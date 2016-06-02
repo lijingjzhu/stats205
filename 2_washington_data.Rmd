@@ -185,7 +185,7 @@ washington <- washington %>%
 
 ## Final Dimensions
 
-We end up with 1357 null values.
+We end up with 1357 observations. 
 
 ```{r}
 dim(washington)
