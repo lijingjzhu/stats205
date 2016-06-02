@@ -155,7 +155,8 @@ county_race <- ethnicity %>%
          `Asian/Pacific Islander` = Asian + `Pacific Islander`,
          county = tolower(county),
          state = tolower(trimws(state))) %>%
-  select(-c(Other1, Other2, Other3, Asian, `Pacific Islander`))
+  select(-c(Other1, Other2, Other3, Asian, `Pacific Islander`)) %>%
+  select(state, county, Total:`Asian/Pacific Islander`)
 ```
  
 We create another data set that has the aggregate sums of all the ethnicities.
@@ -346,21 +347,22 @@ county <- county %>%
   filter(!is.na(primary_city), !is.na(state), !is.na(county),
          state %in% df$state) %>%
   mutate(county = tolower(county),
-         primary_city = tolower(primary_city)) %>%
-  unique()
+         primary_city = tolower(primary_city))
 
 poverty <- poverty %>%
+  filter(state %in% df$state) %>%
   mutate(county = tolower(county)) 
 
 education <- education %>%
   filter(state %in% c(state.name, "District of Columbia")) %>%
   mutate(county = str_replace_all(county, "[[:punct:]]", " "),
          county = tolower(county),
-         state = tolower(state))
+         state = tolower(state)) 
 
 unemployment <- unemployment %>%
   mutate(county = tolower(county),
-         state = tolower(trimws(state))) 
+         state = tolower(trimws(state))) %>%
+  filter(state %in% c(state.name, "District of Columbia")) 
 ```
 
 Next, we want to take care of misspellings and discrepencies in abbreviations.
@@ -382,7 +384,8 @@ df <- df %>%
          county = ifelse(county == "do̱a ana county", "dona ana county",
                          county)) %>%
   mutate(county = ifelse(is.na(county), city, county)) %>%
-  left_join(poverty, by = c("state" = "state", "county" = "county")) 
+  left_join(poverty, by = c("state" = "state", "county" = "county")) %>%
+  distinct(name)
 ```
 
 Before we join with unemployment, education, and race data, we need to map
@@ -400,7 +403,13 @@ of the names that we had to go back and remove in the pre-processing steps.
 ```{r}
 df <- df %>%
   left_join(state_info, by = c("state" = "state")) %>%
-  mutate(state_name = tolower(state_name)) %>%
+  mutate(state_name = tolower(state_name)) 
+
+df$state_name[is.na(df$state_name)] <- df %>% 
+  filter(is.na(state_name)) %>% 
+  .$county
+
+df <- df %>%
   left_join(unemployment, by = c("county" = "county", 
                                  "state_name" = "state")) %>% 
   left_join(education, by = c("county" = "county", 
@@ -409,7 +418,182 @@ df <- df %>%
                                 "state_name" = "state")) 
 ```
 
-# 
+We see that we have `r sum(is.na(df$educ_pct))` missing values due to
+no county data for that region. We will go back and look that these missing
+values to see how we can impute them. 
+
+# Missing Data Imputation
+
+Before we move on, we see that we have some duplicate names in which one
+set of data has complete information for them, but the other set of data does 
+not. We then make the assumption that each victim is unique given a combination
+of gender, age, state, race, date, and county. 
+
+We rename the ethnicity populations to make them more understandable. 
+We also only keep those with the incident date in the year 2015.
+
+We end up with 1195 observations and 26 variables. We write out the census
+files that we joined with so that we can have cleaner files to work with later.
+
+```{r}
+df <- df %>%
+  rename(total_county_pop = Total,
+         white_county_pop = White,
+         black_county_pop = Black,
+         other_county_pop = Other,
+         native_county_pop = `Native American`,
+         asian_county_pop = `Asian/Pacific Islander`,
+         hispanic_county_pop = `Hispanic/Latino`) %>%
+  filter(year(date) == 2015)
+
+# Write out our files
+write_csv(x = county, path = "clean_data/county_city.csv")
+write_csv(x = poverty, path = "clean_data/poverty_income.csv")
+write_csv(x = education, path = "clean_data/education_attainment.csv")
+write_csv(x = unemployment, path = "clean_data/unemployment_rate.csv")
+write_csv(x = total_race, path = "clean_data/total_race.csv")
+write_csv(x = county_race, path = "clean_data/county_race.csv")
+```
+
+Now, note that we have two patterns of missing data in our data set. We have
+missing demographic data like age, race, and whether they are armed. We 
+also have missing census tract data such thats the percent of educational
+attainment, povery rates, and unemployment rates.
+
+## Missing Demographic Data
+
+We see that we have a total of 51 obervations with missing demographic data.
+Besides missing fields in one or two columns, most of the information is
+complete for this group of people. It would be better to leave them in the data
+and take them out of any demographic calculations where they have a missing
+value. 
+
+```{r}
+df %>% filter(is.na(age)) %>% head()
+```
+
+## Missing Environmental Data
+
+We actually have quite a few missing values for situational variables like
+whether the victim was armed, their threat level, classification, and etc. 
+We will actually use simple random imputation to fill in these values. 
+
+Our procedure is as follows: 
+
+1. Determine the probabilities for each factor of the categorical variables
+2. Randomly sample according to those probabilities
+3. Impute the missing values with the results from the sampling
+
+### Body Camera
+
+We first impute the variable corresponding to the existence of body cameras.
+We see that there are only two values that the variable can take on, so we 
+use a simple random sample with replacement to impute the missing values.
+We set a seed in order to be able to replicate our results.
+
+```{r}
+n <- sum(is.na(df$body_camera))
+x <- mean(df$body_camera == "True", na.rm = TRUE)
+y <- mean(df$body_camera == "False", na.rm = TRUE)
+
+set.seed(10)
+df$body_camera[is.na(df$body_camera)] <- sample(c("True", "False"), 
+                                                prob = c(x, y), n, 
+                                                replace = TRUE)
+```
+
+### Threat Level
+
+Threat level has more factors than `body_camera`, so we use a longer vector
+when sampling form the distribution. We use the same methods as above and set
+our seed again to the same value. 
+
+```{r}
+levels(factor(df$threat_level))
+n <- sum(is.na(df$threat_level))
+x <- mean(df$threat_level == "attack", na.rm = TRUE)
+y <- mean(df$threat_level == "other", na.rm = TRUE)
+z <- mean(df$threat_level == "undetermined", na.rm = TRUE)
+
+set.seed(10)
+df$threat_level[is.na(df$threat_level)] <- sample(c("attack", "other",
+                                                    "undetermined"), 
+                                                prob = c(x, y, z), n, 
+                                                replace = TRUE)
+```
+
+### Signs of Mental Illness
+
+Next, we look at signs of mental illness. There are only two levels to this
+factor: true and false. 
+
+```{r}
+levels(factor(df$signs_of_mental_illness))
+n <- sum(is.na(df$signs_of_mental_illness))
+x <- mean(df$signs_of_mental_illness == "False", na.rm = TRUE)
+y <- mean(df$signs_of_mental_illness == "True", na.rm = TRUE)
+
+set.seed(10)
+df$signs_of_mental_illness[is.na(df$signs_of_mental_illness)] <- sample(c("False",
+                                                                          "True"), 
+                                                prob = c(x, y), n, 
+                                                replace = TRUE)
+```
+
+### Classification
+
+Classification has 4 levels (the greatest number of levels for the factors we 
+are trying to impute). We see that some of the probabilities for certain levels
+of the factor are really small. So given th enumber of missing values we have, 
+
+
+```{r}
+levels(factor(df$classification))
+a <- mean(df$classification == "Death in custody", na.rm = TRUE)
+b <- mean(df$classification == "Other", na.rm = TRUE)
+c <- mean(df$classification == "Shot/Tasered", na.rm = TRUE)
+d <- mean(df$classification == "Struck by vehicle", na.rm = TRUE)
+n <- sum(is.na(df$classification))
+
+df$classification[is.na(df$classification)] <- sample(c("Death in custody",
+                                                        "Other", "Shot/Tasered",
+                                                        "Struck by vehicle"), 
+                                                prob = c(a, b, c, d), n, 
+                                                replace = TRUE)
+```
+
+# Flee
+```{r}
+levels(factor(df$flee))
+a <- mean(df$flee == "Car", na.rm = TRUE)
+b <- mean(df$flee == "Foot", na.rm = TRUE)
+c <- mean(df$flee == "Not fleeing", na.rm = TRUE)
+d <- mean(df$flee == "Other", na.rm = TRUE)
+n <- sum(is.na(df$flee))
+
+df$flee[is.na(df$flee)] <- sample(c("Car", "Foot", "Not fleeing", "Other"), 
+                                                prob = c(a, b, c, d), n, 
+                                                replace = TRUE)
+```
+
+
+## Missing Census Data
+
+Next, we see that there are missing census data because the county data for
+that area doesn't exist. Here, we do a median imputation with random disturbance. 
+We use a median imputation to have a more robust estimate of census tract values.
+By adding a random disturbance, we can account for the huge variability between
+counties.
+
+We will assume that the random disturbance has a normal distribution with a
+mean of 0 and a standard deviation of its respective state. This way, instead
+of assuming a standard normal, we can capture even more of the variance that
+exists between counties within the same state. 
+
+```{r}
+
+```
+
 # Descriptive Statistics
 
 In this section, we will be doing some quick summary statistics. 
@@ -529,22 +713,6 @@ Finally, we can write out our edited data to a new file so that we can load it
 in quickly for our next study. Since we got rid of the null values, we can 
 output the new data into `police_killings.csv`.
 
-We rename the ethnicity populations to make them more understandable. 
-We also only keep those with the incident date in the year 2015.
-
-We end up with 1271 observations and 28 variables.
-
 ```{r}
-df <- df %>%
-  rename(total_county_pop = Total,
-         white_county_pop = White,
-         black_county_pop = Black,
-         other_county_pop = Other,
-         native_county_pop = `Native American`,
-         asian_county_pop = `Asian/Pacific Islander`,
-         hispanic_county_pop = `Hispanic/Latino`) %>%
-  distinct(gender, age, city, race, name) %>%
-  filter(year(date) == 2015)
-
-write.csv(x = df, file = file_out)
+write_csv(x = df, path = file_out)
 ```
