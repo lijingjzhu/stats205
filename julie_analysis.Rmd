@@ -22,44 +22,14 @@ library(datasets)
 
 # Parameters
 file_in <- "data/police_killings.csv"
-race_file <- "data/race_and_ethnicity.csv"
+race_file <- "clean_data/county_race.csv"
 ```
 
+We first read in the files. 
+
 ```{r}
-df <- read_csv(file_in)[-1]
+df <- read_csv(file_in)
 ethnicity <- read_csv(race_file)
-```
-
-```{r}
-total_pop <- ethnicity[2, 4] %>% as.numeric()
-ethnicity <- ethnicity[,c(3, seq(6, 26, by = 2))] 
-
-race_names <- c("state", "Total", "White", "Black", "Native American", "Asian", "Pacific Islander", "Other", "Other1", "Other2", "Other3", "Hispanic/Latino")
-colnames(ethnicity) <- race_names
-ethnicity <- ethnicity[-1,]
-county_race <- ethnicity %>%
-  dmap_at(race_names[2:length(race_names)], as.numeric) %>%
-  mutate(county = lapply(str_split(state, ","), '[[', 1) %>% unlist(),
-         state = lapply(str_split(state, ","), '[[', 2) %>% unlist(),
-         Other = Other + Other1 + Other2 + Other3,
-         `Asian/Pacific Islander` = Asian + `Pacific Islander`,
-         county = tolower(county),
-         state = trimws(state)) %>%
-  select(-c(Other1, Other2, Other3, Asian, `Pacific Islander`))
-
-total_race <- county_race %>%
-  group_by(state) %>%
-  summarise(White = sum(White),
-            Black = sum(Black),
-            `Native American` = sum(`Native American`),
-            `Asian/Pacific Islander` = sum(`Asian/Pacific Islander`),
-            Other = sum(Other),
-            `Hispanic/Latino` = sum(`Hispanic/Latino`))
-
-total_race <- total_race %>%
-  gather(race, pop, White:`Hispanic/Latino`) %>%
-  group_by(race) %>%
-  summarise(pop = sum(pop))
 ```
 
 # Mental Illness
@@ -127,32 +97,6 @@ prop.test(race_equal[1:2]*100000, n_total)
 ```
 
 ```{r}
-#n <- 500
-#p <- 269
-alpha <- 0.10
-B <- 10000
-actual_prop <- p_1/n
-
-voters <- c(rep(1, p), rep(0, n - p))
-
-boot_prop <- array(0, B)
-
-set.seed(8)
-for (i in seq_len(B)) {
-  boot_samp <- sample(x = voters, size = 500, replace = T)
-  boot_prop[i] <- sum(boot_samp)/n
-}
-
-samp_sd <- sd(voters)/sqrt(n)
-
-upper <- actual_prop + qnorm(1-alpha/2)*samp_sd
-lower <- actual_prop - qnorm(1-alpha/2)*samp_sd
-
-(boot_conf_90 <- c(lower, upper))
-```
-
-
-```{r}
 df_counts <- table(df$race) %>% as.vector
 
 race_equal <- data_frame(race = total_race$race, 
@@ -173,7 +117,7 @@ critical.range <- c()
 i_val <- c()
 j_val <- c()
 
-## Compute critical values.
+## Compute critical values for Mascaillo Procedure
 for (i in 1:(N-1)) { 
   print (i)
   for (j in (i+1):N) {
@@ -220,8 +164,11 @@ t.test(yo$sample_prop, yo$total_prop)
 prop.test(yo$sample_prop*nrow(df), rep(nrow(df), 6), p = yo$total_prop, correct = FALSE)
 
 # Ethnicity
-binom.test(yo$sample_prop[1]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[1],
+
+binom.test(x = yo$sample_prop[1], n = rep(nrow(df), 1), 
+           p = yo$total_prop[1], 
            alternative = "less")
+
 prop.test(yo$sample_prop[1]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[1])
 
 binom.test(yo$sample_prop[2]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[2],
@@ -242,14 +189,23 @@ binom.test(yo$sample_prop[6]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[6],
 ```
 
 
+# Don't use the plot
+# Doesn't make sense
+
 ```{r}
 sample_prop <- yo$sample_prop 
 total_prop <- yo$total_prop
 
+data_frame(race = yo$race, sample = sample_prop, total = total_prop) %>%
+  gather(location, prop, sample:total)  %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = race, y = prop), color = "location",
+           stat = "identity", position = "dodge")
+
 names(sample_prop) <- c("A", "B", "H", "N", "O", "W")
 names(total_prop) <- c("A", "B", "H", "N", "O", "W")
 
-hey <- as.matrix(rbind(sample_prop, total_prop))
+hey <- as.matrix(rbind(yo$count, yo$pop))
 
 assoc(hey)
 ```
@@ -362,14 +318,10 @@ df %>%
 # More data cleaning
 
 ```{r}
-df <- df %>%
-  distinct(race, age, date, gender, state, county)
-```
-
-```{r}
 sum(is.na(df$classification))
 sum(is.na(df$signs_of_mental_illness))
 sum(is.na(df$date))
+sum(is.na(df$race))
 sum(is.na(df$age))
 sum(is.na(df$educ_pct))
 sum(is.na(df$unemployment_rate))
@@ -379,3 +331,4 @@ sum(is.na(df$armed))
 sum(is.na(df$poverty_pct))
 sum(is.na(df$threat_level))
 ```
+

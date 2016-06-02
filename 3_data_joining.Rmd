@@ -180,6 +180,19 @@ total_race <- total_race %>%
   summarise(pop = sum(pop))
 ```
 
+Lastly, we rename the variable names for `county_race`.
+
+```{r}
+county_race <- county_race %>%
+  rename(total_county_pop = Total,
+         white_county_pop = White,
+         black_county_pop = Black,
+         other_county_pop = Other,
+         native_county_pop = `Native American`,
+         asian_county_pop = `Asian/Pacific Islander`,
+         hispanic_county_pop = `Hispanic/Latino`) 
+```
+
 ## County Data Pre-Processing
 
 The county data set is an intermediate dataset that allows us to map cities
@@ -230,7 +243,8 @@ colnames(unemployment) <- c("county", "unemployment_rate")
 
 unemployment <- unemployment %>%
   mutate(state = lapply(str_split(county, ","), `[[`, 2) %>% unlist(),
-         county = lapply(str_split(county, ","), `[[`, 1) %>% unlist()) 
+         county = lapply(str_split(county, ","), `[[`, 1) %>% unlist()) %>%
+  dmap_at("unemployment_rate", as.numeric())
 ```
 
 ## Poverty Rate Data Pre-Processing
@@ -361,8 +375,9 @@ education <- education %>%
 
 unemployment <- unemployment %>%
   mutate(county = tolower(county),
-         state = tolower(trimws(state))) %>%
-  filter(state %in% c(state.name, "District of Columbia")) 
+         state = trimws(state)) %>%
+  filter(state %in% c(state.name, "District of Columbia")) %>%
+  mutate(state = tolower(state))
 ```
 
 Next, we want to take care of misspellings and discrepencies in abbreviations.
@@ -416,6 +431,15 @@ df <- df %>%
                               "state_name" = "state")) %>% 
   left_join(county_race, by = c("county" = "county", 
                                 "state_name" = "state")) 
+
+# Converting the new variables to a double
+character_rates <- c("unemployment_rate", "educ_pct", "total_county_pop", 
+                     "white_county_pop", "black_county_pop", 
+                     "native_county_pop", "other_county_pop", 
+                     "hispanic_county_pop", "asian_county_pop")
+  
+df <- df %>%
+  dmap_at(character_rates, as.numeric) 
 ```
 
 We see that we have `r sum(is.na(df$educ_pct))` missing values due to
@@ -451,8 +475,8 @@ write_csv(x = county, path = "clean_data/county_city.csv")
 write_csv(x = poverty, path = "clean_data/poverty_income.csv")
 write_csv(x = education, path = "clean_data/education_attainment.csv")
 write_csv(x = unemployment, path = "clean_data/unemployment_rate.csv")
-write_csv(x = total_race, path = "clean_data/total_race.csv")
 write_csv(x = county_race, path = "clean_data/county_race.csv")
+write_csv(x = total_race, path = "clean_data/total_race.csv")
 ```
 
 Now, note that we have two patterns of missing data in our data set. We have
@@ -542,10 +566,7 @@ df$signs_of_mental_illness[is.na(df$signs_of_mental_illness)] <- sample(c("False
 
 ### Classification
 
-Classification has 4 levels (the greatest number of levels for the factors we 
-are trying to impute). We see that some of the probabilities for certain levels
-of the factor are really small. So given th enumber of missing values we have, 
-
+Classification has 4 levels. We repeat the imputation procedure.
 
 ```{r}
 levels(factor(df$classification))
@@ -555,6 +576,7 @@ c <- mean(df$classification == "Shot/Tasered", na.rm = TRUE)
 d <- mean(df$classification == "Struck by vehicle", na.rm = TRUE)
 n <- sum(is.na(df$classification))
 
+set.seed(10)
 df$classification[is.na(df$classification)] <- sample(c("Death in custody",
                                                         "Other", "Shot/Tasered",
                                                         "Struck by vehicle"), 
@@ -562,7 +584,37 @@ df$classification[is.na(df$classification)] <- sample(c("Death in custody",
                                                 replace = TRUE)
 ```
 
-# Flee
+### Armed
+
+The armed variable  has 7 levels (the greatest number of levels for the factors 
+we are trying to impute). Thus, we see that some of the probabilities for 
+certain levels of the factor are really small. So given the number of missing 
+values we have, there are some levels of the factor that might not show up in 
+our random  sample. That's alright. 
+
+```{r}
+levels(factor(df$armed))
+a <- mean(df$armed == "Disputed", na.rm = TRUE)
+b <- mean(df$armed == "Firearm", na.rm = TRUE)
+c <- mean(df$armed == "Knife", na.rm = TRUE)
+d <- mean(df$armed == "No", na.rm = TRUE)
+e <- mean(df$armed == "Non-lethal firearm", na.rm = TRUE)
+f <- mean(df$armed == "Other", na.rm = TRUE)
+g <- mean(df$armed == "Vehicle", na.rm = TRUE)
+n <- sum(is.na(df$armed))
+
+set.seed(10)
+df$armed[is.na(df$armed)] <- sample(c("Disputed", "Firearm", "Knife", "No", 
+                                      "Non-lethal firearm", "Other", "Vehicle"), 
+                                    prob = c(a, b, c, d, e, f, g), n, 
+                                    replace = TRUE)
+```
+
+### Flee
+
+Lastly, we impute the fleeing variable. We see that there are four levels. We
+repreat the same process as above. 
+
 ```{r}
 levels(factor(df$flee))
 a <- mean(df$flee == "Car", na.rm = TRUE)
@@ -575,7 +627,6 @@ df$flee[is.na(df$flee)] <- sample(c("Car", "Foot", "Not fleeing", "Other"),
                                                 prob = c(a, b, c, d), n, 
                                                 replace = TRUE)
 ```
-
 
 ## Missing Census Data
 
@@ -591,7 +642,112 @@ of assuming a standard normal, we can capture even more of the variance that
 exists between counties within the same state. 
 
 ```{r}
+missing_states <- df %>%
+  filter(is.na(educ_pct) | is.na(poverty_pct) | is.na(unemployment_rate)
+         | is.na(med_income)) %>%
+  select(state) %>%
+  distinct(state) %>%
+  .$state
 
+missing_census <- df %>%
+  filter(state %in% missing_states) %>%
+  group_by(state) %>%
+  summarise(sd_income = sd(med_income, na.rm = TRUE),
+            sd_poverty = sd(poverty_pct, na.rm = TRUE),
+            sd_unemploy = sd(unemployment_rate, na.rm = TRUE),
+            sd_educ = sd(educ_pct, na.rm = TRUE),
+            inc_med = median(med_income, na.rm = TRUE),
+            med_poverty = median(poverty_pct, na.rm = TRUE),
+            med_unemploy = median(unemployment_rate, na.rm = TRUE),
+            med_educ = median(educ_pct, na.rm = TRUE)) 
+```
+
+Now that we have the mean and the standard deviation for the estimates, we
+can impute each of the values.
+
+We first attach the data with the imputation parameters. 
+
+```{r}
+df <- df %>%
+  left_join(missing_census, by = c("state" = "state"))
+```
+
+## Median Income
+
+Looping through each row in the data set, we want to look for specific rows
+that have the `med_income` as a null value. Then we proceed to take the median
+income for it's respective state and generate a random median income using
+a standard deviation for the state.
+
+```{r}
+for (i in seq_len(nrow(df))) {
+  if (is.na(df[i, "med_income"])) {
+    if (!is.na(df[i, "sd_income"])) {
+      df[i, "med_income"] <- rnorm(mean = df[i, "inc_med"] %>% unlist(),
+                                   sd = df[i, "sd_income"] %>% unlist(), n = 1)
+    } else {
+      df[i, "med_income"] <- df[i, "inc_med"]
+    }
+  }
+}
+```
+
+## Poverty
+
+We repeat the process, but for poverty data. 
+
+```{r}
+for (i in seq_len(nrow(df))) {
+  if (is.na(df[i, "poverty_pct"])) {
+    if (!is.na(df[i, "sd_poverty"])) {
+      df[i, "poverty_pct"] <- rnorm(mean = df[i, "med_poverty"] %>% unlist(),
+                                   sd = df[i, "sd_poverty"] %>% unlist(), n = 1)
+    } else {
+      df[i, "poverty_pct"] <- df[i, "med_poverty"]
+    }
+  }
+}
+```
+
+## Unemployment Rate
+
+We also vet through unemployment rate in the data.
+
+```{r}
+for (i in seq_len(nrow(df))) {
+  if (is.na(df[i, "unemployment_rate"])) {
+    if (!is.na(df[i, "sd_unemploy"])) {
+      df[i, "unemployment_rate"] <- rnorm(mean = df[i, "med_unemploy"] %>% unlist(),
+                                   sd = df[i, "sd_unemploy"] %>% unlist(), n = 1)
+    } else {
+      df[i, "unemployment_rate"] <- df[i, "med_unemploy"]
+    }
+  }
+}
+```
+
+## Educational Attainment
+
+Lastly, we fill in the missing values for educational attainment. 
+
+```{r}
+for (i in seq_len(nrow(df))) {
+  if (is.na(df[i, "educ_pct"])) {
+    if (!is.na(df[i, "sd_educ"])) {
+      df[i, "educ_pct"] <- rnorm(mean = df[i, "med_educ"] %>% unlist(),
+                                   sd = df[i, "sd_educ"] %>% unlist(), n = 1)
+    } else {
+      df[i, "educ_pct"] <- df[i, "med_educ"]
+    }
+  }
+}
+```
+
+Now, we get rid of the extra entries from `missing_census`.
+
+```{r}
+df <- df %>%
+  select(-(sd_income:med_educ))
 ```
 
 # Descriptive Statistics
@@ -642,7 +798,7 @@ df %>%
 
 Looking at state, we see that with raw deaths, California takes the cake with 
 over 150 police killings. Rounding out the top 5 we have California, Texas, 
-Florida, Arizona, Georgia, and Colorado.
+Florida, Arizona, Oklahoma, and Georgia.
 
 ```{r, fig.width = 5, fig.height = 4}
 df %>%
@@ -661,7 +817,7 @@ Once we normalize the number of people killed, we see that the state rankings
 are quite different. 
 
 We filter out DC since we don't have a population estimate for DC. Rounding 
-out the top five, we have Oklahoma, Arizona, Colorado, Louisiana, and 
+out the top five, we have Oklahoma, Arizona, Louisiana, Colorado, and  
 California. 
 
 A potential route to go here is to see if the ranking of the states is 
