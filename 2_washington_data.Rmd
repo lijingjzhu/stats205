@@ -438,5 +438,8 @@ it in quickly for our next study. Since we got rid of the null values, we can
 output the new data into `washington_police.csv`.
 
 ```{r}
-write.csv(x = washington, file = file_out)
+washington <- washington %>%
+  dmap_at("date", ymd) 
+
+write_csv(x = washington, path = file_out)
 ```

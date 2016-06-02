@@ -63,8 +63,8 @@ out when we read in the data.
 
 ```{r}
 # Reading in police killings data
-guardian <- read_csv(guardian_file)[-1]
-washington <- read_csv(washington_file)[-1]
+guardian <- read_csv(guardian_file)
+washington <- read_csv(washington_file)
 ```
 
 ## Population Data Pre-Processing
@@ -242,9 +242,9 @@ unemployment <- unemployment[-1, c(3, 10)]
 colnames(unemployment) <- c("county", "unemployment_rate")
 
 unemployment <- unemployment %>%
+  dmap_at(c("unemployment_rate"), as.numeric) %>%
   mutate(state = lapply(str_split(county, ","), `[[`, 2) %>% unlist(),
-         county = lapply(str_split(county, ","), `[[`, 1) %>% unlist()) %>%
-  dmap_at("unemployment_rate", as.numeric())
+         county = lapply(str_split(county, ","), `[[`, 1) %>% unlist()) 
 ```
 
 ## Poverty Rate Data Pre-Processing
