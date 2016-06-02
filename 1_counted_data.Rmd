@@ -121,7 +121,7 @@ We will just quickly filter that out.
 
 ```{r}
 counted <- counted %>%
-  filter(!(gender == "Non-conforming"))
+  filter(gender != "Non-conforming")
 ```
 
 ## Null Values
@@ -132,7 +132,6 @@ null isn't already included in the data set.
 
 ```{r}
 counted[counted == "Unknown"] <- NA
-counted[counted == "Undetermined"] <- NA
 ```
 
 We see that there are `r sum(is.na(counted))` total null values in the data. 

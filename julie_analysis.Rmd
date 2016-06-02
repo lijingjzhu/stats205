@@ -299,6 +299,7 @@ df %>%
 
 # median income
 df %>%
+  #distinct(race, county, med_income) %>%
   ggplot() +
   geom_boxplot(mapping = aes(x = race, y = med_income))
 
@@ -367,8 +368,21 @@ df <- df %>%
   distinct(race, age, date, gender, state, county)
 ```
 
-# Body Camera
+```{r}
+sum(is.na(df$classification))
+sum(is.na(df$signs_of_mental_illness))
+sum(is.na(df$date))
+sum(is.na(df$age))
+sum(is.na(df$educ_pct))
+sum(is.na(df$unemployment_rate))
+sum(is.na(df$med_income))
+sum(is.na(df$flee))
+sum(is.na(df$armed))
+sum(is.na(df$poverty_pct))
+sum(is.na(df$threat_level))
+```
 
+# Body Camera
 ```{r}
 levels(factor(df$body_camera))
 n <- sum(is.na(df$body_camera))
@@ -381,7 +395,6 @@ df$body_camera[is.na(df$body_camera)] <- sample(c("True", "False"),
 ```
 
 # Threat Level
-
 ```{r}
 levels(factor(df$threat_level))
 n <- sum(is.na(df$threat_level))
@@ -396,7 +409,6 @@ df$threat_level[is.na(df$threat_level)] <- sample(c("attack", "other",
 ```
 
 # Signs of Mental Illness
-
 ```{r}
 levels(factor(df$signs_of_mental_illness))
 n <- sum(is.na(df$signs_of_mental_illness))
@@ -424,19 +436,6 @@ df$classification[is.na(df$classification)] <- sample(c("Death in custody",
                                                         "Struck by vehicle"), 
                                                 prob = c(a, b, c, d), n, 
                                                 replace = TRUE)
-
-
-sum(is.na(df$classification))
-sum(is.na(df$signs_of_mental_illness))
-sum(is.na(df$date))
-sum(is.na(df$age))
-sum(is.na(df$educ_pct))
-sum(is.na(df$unemployment_rate))
-sum(is.na(df$med_income))
-sum(is.na(df$flee))
-sum(is.na(df$armed))
-sum(is.na(df$poverty_pct))
-sum(is.na(df$threat_level))
 ```
 
 # Flee

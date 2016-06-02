@@ -154,7 +154,7 @@ county_race <- ethnicity %>%
          Other = Other + Other1 + Other2 + Other3,
          `Asian/Pacific Islander` = Asian + `Pacific Islander`,
          county = tolower(county),
-         state = trimws(state)) %>%
+         state = tolower(trimws(state))) %>%
   select(-c(Other1, Other2, Other3, Asian, `Pacific Islander`))
 ```
  
@@ -328,7 +328,7 @@ of the intersection.
 ```{r}
 df <- df %>%
   mutate(name = ifelse(is.na(name), name.y, name)) %>%
-  select(-c(id, uid, name.y))
+  select(-c(id, uid, name.y, streetaddress, lawenforcementagency))
 ```
 
 # Adding in Extra Data
@@ -353,12 +353,14 @@ poverty <- poverty %>%
   mutate(county = tolower(county)) 
 
 education <- education %>%
+  filter(state %in% c(state.name, "District of Columbia")) %>%
   mutate(county = str_replace_all(county, "[[:punct:]]", " "),
-         county = tolower(county)) 
+         county = tolower(county),
+         state = tolower(state))
 
 unemployment <- unemployment %>%
   mutate(county = tolower(county),
-         state = trimws(state)) 
+         state = tolower(trimws(state))) 
 ```
 
 Next, we want to take care of misspellings and discrepencies in abbreviations.
@@ -398,6 +400,7 @@ of the names that we had to go back and remove in the pre-processing steps.
 ```{r}
 df <- df %>%
   left_join(state_info, by = c("state" = "state")) %>%
+  mutate(state_name = tolower(state_name)) %>%
   left_join(unemployment, by = c("county" = "county", 
                                  "state_name" = "state")) %>% 
   left_join(education, by = c("county" = "county", 
@@ -406,6 +409,7 @@ df <- df %>%
                                 "state_name" = "state")) 
 ```
 
+# 
 # Descriptive Statistics
 
 In this section, we will be doing some quick summary statistics. 
