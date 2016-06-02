@@ -370,6 +370,7 @@ df <- df %>%
 sum(is.na(df$classification))
 sum(is.na(df$signs_of_mental_illness))
 sum(is.na(df$date))
+sum(is.na(df$race))
 sum(is.na(df$age))
 sum(is.na(df$educ_pct))
 sum(is.na(df$unemployment_rate))
@@ -379,3 +380,4 @@ sum(is.na(df$armed))
 sum(is.na(df$poverty_pct))
 sum(is.na(df$threat_level))
 ```
+

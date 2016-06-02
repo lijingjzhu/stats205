@@ -552,11 +552,7 @@ df$signs_of_mental_illness[is.na(df$signs_of_mental_illness)] <- sample(c("False
 
 ### Classification
 
-Classification has 4 levels (the greatest number of levels for the factors we 
-are trying to impute). We see that some of the probabilities for certain levels
-of the factor are really small. So given the number of missing values we have,
-there are some levels of the factor that might not show up in our random 
-sample. That's alright. 
+Classification has 4 levels. We repeat the imputation procedure.
 
 ```{r}
 levels(factor(df$classification))
@@ -572,6 +568,32 @@ df$classification[is.na(df$classification)] <- sample(c("Death in custody",
                                                         "Struck by vehicle"), 
                                                 prob = c(a, b, c, d), n, 
                                                 replace = TRUE)
+```
+
+### Armed
+
+The armed variable  has 7 levels (the greatest number of levels for the factors 
+we are trying to impute). Thus, we see that some of the probabilities for 
+certain levels of the factor are really small. So given the number of missing 
+values we have, there are some levels of the factor that might not show up in 
+our random  sample. That's alright. 
+
+```{r}
+levels(factor(df$armed))
+a <- mean(df$armed == "Disputed", na.rm = TRUE)
+b <- mean(df$armed == "Firearm", na.rm = TRUE)
+c <- mean(df$armed == "Knife", na.rm = TRUE)
+d <- mean(df$armed == "No", na.rm = TRUE)
+e <- mean(df$armed == "Non-lethal firearm", na.rm = TRUE)
+f <- mean(df$armed == "Other", na.rm = TRUE)
+g <- mean(df$armed == "Vehicle", na.rm = TRUE)
+n <- sum(is.na(df$armed))
+
+set.seed(10)
+df$armed[is.na(df$armed)] <- sample(c("Disputed", "Firearm", "Knife", "No", 
+                                      "Non-lethal firearm", "Other", "Vehicle"), 
+                                    prob = c(a, b, c, d, e, f, g), n, 
+                                    replace = TRUE)
 ```
 
 ### Flee
