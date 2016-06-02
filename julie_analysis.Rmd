@@ -22,44 +22,12 @@ library(datasets)
 
 # Parameters
 file_in <- "data/police_killings.csv"
-race_file <- "data/race_and_ethnicity.csv"
+race_file <- "clean_data/county_race.csv"
 ```
 
 ```{r}
-df <- read_csv(file_in)[-1]
+df <- read_csv(file_in)
 ethnicity <- read_csv(race_file)
-```
-
-```{r}
-total_pop <- ethnicity[2, 4] %>% as.numeric()
-ethnicity <- ethnicity[,c(3, seq(6, 26, by = 2))] 
-
-race_names <- c("state", "Total", "White", "Black", "Native American", "Asian", "Pacific Islander", "Other", "Other1", "Other2", "Other3", "Hispanic/Latino")
-colnames(ethnicity) <- race_names
-ethnicity <- ethnicity[-1,]
-county_race <- ethnicity %>%
-  dmap_at(race_names[2:length(race_names)], as.numeric) %>%
-  mutate(county = lapply(str_split(state, ","), '[[', 1) %>% unlist(),
-         state = lapply(str_split(state, ","), '[[', 2) %>% unlist(),
-         Other = Other + Other1 + Other2 + Other3,
-         `Asian/Pacific Islander` = Asian + `Pacific Islander`,
-         county = tolower(county),
-         state = trimws(state)) %>%
-  select(-c(Other1, Other2, Other3, Asian, `Pacific Islander`))
-
-total_race <- county_race %>%
-  group_by(state) %>%
-  summarise(White = sum(White),
-            Black = sum(Black),
-            `Native American` = sum(`Native American`),
-            `Asian/Pacific Islander` = sum(`Asian/Pacific Islander`),
-            Other = sum(Other),
-            `Hispanic/Latino` = sum(`Hispanic/Latino`))
-
-total_race <- total_race %>%
-  gather(race, pop, White:`Hispanic/Latino`) %>%
-  group_by(race) %>%
-  summarise(pop = sum(pop))
 ```
 
 # Mental Illness

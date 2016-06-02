@@ -180,6 +180,19 @@ total_race <- total_race %>%
   summarise(pop = sum(pop))
 ```
 
+Lastly, we rename the variable names for `county_race`.
+
+```{r}
+county_race <- county_race %>%
+  rename(total_county_pop = Total,
+         white_county_pop = White,
+         black_county_pop = Black,
+         other_county_pop = Other,
+         native_county_pop = `Native American`,
+         asian_county_pop = `Asian/Pacific Islander`,
+         hispanic_county_pop = `Hispanic/Latino`) 
+```
+
 ## County Data Pre-Processing
 
 The county data set is an intermediate dataset that allows us to map cities
@@ -230,7 +243,8 @@ colnames(unemployment) <- c("county", "unemployment_rate")
 
 unemployment <- unemployment %>%
   mutate(state = lapply(str_split(county, ","), `[[`, 2) %>% unlist(),
-         county = lapply(str_split(county, ","), `[[`, 1) %>% unlist()) 
+         county = lapply(str_split(county, ","), `[[`, 1) %>% unlist()) %>%
+  dmap_at("unemployment_rate", as.numeric())
 ```
 
 ## Poverty Rate Data Pre-Processing
@@ -461,8 +475,8 @@ write_csv(x = county, path = "clean_data/county_city.csv")
 write_csv(x = poverty, path = "clean_data/poverty_income.csv")
 write_csv(x = education, path = "clean_data/education_attainment.csv")
 write_csv(x = unemployment, path = "clean_data/unemployment_rate.csv")
-write_csv(x = total_race, path = "clean_data/total_race.csv")
 write_csv(x = county_race, path = "clean_data/county_race.csv")
+write_csv(x = total_race, path = "clean_data/total_race.csv")
 ```
 
 Now, note that we have two patterns of missing data in our data set. We have

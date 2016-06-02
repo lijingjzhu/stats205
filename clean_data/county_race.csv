@@ -1,4 +1,4 @@
-state,county,Total,White,Black,Native American,Other,Hispanic/Latino,Asian/Pacific Islander
+state,county,total_county_pop,white_county_pop,black_county_pop,native_county_pop,other_county_pop,hispanic_county_pop,asian_county_pop
 alabama,autauga county,53745,42033,10156,230,1564,1391,500
 alabama,baldwin county,182575,159047,17833,929,6820,8630,1256
 alabama,barbour county,25836,12505,12528,48,1151,1283,100
