@@ -7,6 +7,7 @@ output: html_document
 GOAL #1
 First, we will perform a chi squared test of homogenity to see whether or not the distribution of race is the same for each type of "armed" status. Blacks make up 35% of all unarmed police killings, even though they make up 6% of the entire population.
 ```{r setup, include=FALSE}
+library(readr)
 police_killings <- read_csv("data/police_killings.csv")
 armed_v_race <- data.frame(as.character(police_killings$race),  as.character(police_killings$armed))
 contingency_table <- t(table(armed_v_race))
