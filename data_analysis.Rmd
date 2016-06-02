@@ -7,7 +7,7 @@ output: html_document
 GOAL #1
 First, we will perform a chi squared test of homogenity to see whether or not the distribution of race is the same for each type of "armed" status. Blacks make up 35% of all unarmed police killings, even though they make up 6% of the entire population.
 ```{r setup, include=FALSE}
-police_killings <- read.csv("data/police_killings.csv")
+police_killings <- read_csv("data/police_killings.csv")
 armed_v_race <- data.frame(as.character(police_killings$race),  as.character(police_killings$armed))
 contingency_table <- t(table(armed_v_race))
 chifit <- chisq.test(contingency_table)
@@ -132,7 +132,7 @@ p.adjust(p_values, method = "bonferroni", n = length(p_values)) #bonferroni
 
 Now we will compare the values for the killed population to the national averages.
 ```{r}
-poverty_dataset <- read_csv(poverty_file, col_names = TRUE, skip = 5)
+poverty_dataset <- read_csv("clean_data/poverty_income.csv", col_names = TRUE)
 poverty_dataset <- poverty[,c(3, 4, 8, 23)] 
 colnames(poverty_dataset) <- c("state", "county", "poverty_pct", "med_income")
 wilcox <- wilcox.test(poverty_dataset$med_income, police_killings$med_income)
