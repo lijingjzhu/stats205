@@ -40,9 +40,10 @@ The goal is to see whether there is a difference in the distribution of races be
 library(plyr)
 race_summary <- table(police_killings$race)
 true_pop <- total_race[,2]#/ sum(total_race[,2])*100000
-killed_rop <- race_summary#/sum(race_summary)*100000
-both_populations <- cbind(unlist(unname(true_prop)), unname(killed_prop))
-colnames(both_populations) <- c("true_prop", "killed_prop")
+killed_pop <- race_summary#/sum(race_summary)*100000
+both_populations <- cbind(unlist(unname(true_pop)), unname(killed_pop))
+colnames(both_populations) <- c("true_pop", "killed_pop")
+rownames(both_populations) <- total_race$race
 both_populations_t <- t(both_populations)
 ```
 
