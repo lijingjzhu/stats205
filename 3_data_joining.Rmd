@@ -873,5 +873,20 @@ output the new data into `police_killings.csv`.
 df <- df %>%
   distinct(name) 
 
+df$educ_pct[df$educ_pct > 100] <- 100
+df$educ_pct[df$educ_pct < 0] <- 0
+
+df$poverty_pct[df$poverty_pct > 100] <- 100
+df$poverty_pct[df$poverty_pct < 0] <- 0
+
+df$med_income[df$med_income < 0] <- 0
+
+df$unemployment_rate[df$unemployment_rate < 0] <- 0
+df$unemployment_rate[df$unemployment_rate > 100] <- 0
+```
+
+Finally, we write out the data. 
+
+```{r}
 write_csv(x = df, path = file_out)
 ```
