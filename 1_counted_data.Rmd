@@ -428,7 +428,8 @@ counted <- counted %>%
          month = ifelse(month == "December", 12, month)) %>%
   mutate(date = ymd(str_c(year, month, day, sep = "-"))) %>%
   rename(race = raceethnicity) %>%
-  select(-c(month, day, year))
+  select(-c(month, day, year)) %>%
+  dmap_at("date", ymd)
 ```
 
 As an after thought, we also renamed the column `raceethnicity` to `race` so 
@@ -440,5 +441,5 @@ Finally, we can write out our edited data to a new file so that we can load
 it in quickly for our next study. 
 
 ```{r}
-write.csv(x = counted, file = file_out)
+write_csv(x = counted, path = file_out)
 ```
