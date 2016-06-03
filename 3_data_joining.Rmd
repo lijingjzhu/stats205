@@ -856,6 +856,7 @@ trails off starting from August.
 
 ```{r}
 df %>%
+  filter(!is.na(date)) %>%
   mutate(month = month(date)) %>%
   count(month) %>%
   ggplot() +
@@ -872,7 +873,7 @@ df %>%
 
 Next steps would be to perform the tests we outlined in our project proposal 
 to test our questions. 
-p
+
 ## Writing Out Data
 
 Finally, we can write out our edited data to a new file so that we can load it 

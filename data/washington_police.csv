@@ -844,7 +844,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 991,Cesar Cuellar,2015-11-09T00:00:00Z,shot,Firearm,25,Male,Hispanic/Latino,North Laredo,TX,True,attack,Not fleeing,False
 993,Dale Maverick Hudson,2015-11-09T00:00:00Z,shot,Firearm,26,Male,White,Braxton County,WV,False,attack,Not fleeing,False
 994,Leonel Acevedo,2015-11-09T00:00:00Z,shot,Firearm,45,Male,Hispanic/Latino,San Jose,CA,False,attack,Not fleeing,False
-1001,Miguel Cano,2015-11-09T00:00:00Z,shot and Tasered,Firearm,35,Male,Hispanic/Latino,Los Angeles,CA,False,other,Not fleeing,False
+1001,Miguel Cano,2015-11-09T00:00:00Z,shot and Tasered,Non-lethal firearm,35,Male,Hispanic/Latino,Los Angeles,CA,False,other,Not fleeing,False
 1161,Dana Bruce Ott,2015-11-10T00:00:00Z,shot,Firearm,63,Male,White,Colorado Springs,CO,False,attack,Not fleeing,False
 995,Eddie Gabriel Sanchez,2015-11-10T00:00:00Z,shot,Firearm,34,Male,Hispanic/Latino,Chico,CA,False,attack,Not fleeing,False
 996,Jason Leanard Mesaros,2015-11-10T00:00:00Z,shot,Vehicle,36,Male,Hispanic/Latino,Brighton,CO,False,other,Car,False
