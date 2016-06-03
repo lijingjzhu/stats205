@@ -10,7 +10,7 @@ First, we will perform a chi squared test of homogenity to see whether or not th
 library(readr)
 police_killings <- read.csv("data/police_killings.csv")
 armed_v_race <- data.frame(as.character(police_killings$race),  as.character(police_killings$armed))
-contingency_table <- t(table(armed_v_race))
+contingency_table <- t(table(armed_v_race))[,c(2,3,6)]
 chifit <- chisq.test(contingency_table)
 (chifit$residuals)^2
 
@@ -56,30 +56,90 @@ chifit2 <- chisq.test(both_populations)
 ```
 
 GOAL 3
-Map county data of killings
+RELATIVE RISK
 ```{r}
-library(ggplot2)
-library(googleVis)
-map_data("county", region = ".", exact = FALSE)
-
-data <- data.frame(unlist(unname(table(police_killings$state_name))) , names(table(police_killings$state_name)))
-data <-data[,-1]
-colnames(data) <- c( "colorvar", "locationvar")
-gvisGeoChart(data)
-
-colors <- topo.colors(7)
-data$color_buckets <- as.numeric(cut(data$colorvar, c(0, 10, 20, 40, 80, 160, 320)))
-normalized <- data$colorvar - min(data$colorvar) / (max(data$colorvar)- min(data$colorvar))
-tmp <- map('state',plot=FALSE,namesonly=TRUE)
-split_names <- lapply(str_split(tmp, ":"), `[[`, 1) %>% unlist()
-tmp <- match(gsub('(:.*)','',tmp),tolower(data$locationvar))
-map('state',fill=TRUE, col=data$color_buckets[tmp])
-legend("topright", )
+library(abd)
+library(epitools)
+blacks_killed <- police_killings[which(police_killings$race == "Black"),]
+whites_killed <- police_killings[which(police_killings$race == "White"),]
+histpanics_killed <- police_killings[which(police_killings$race == "Hispanic/Latino"),]
 
 
-map('state', fill=TRUE, col=)
+total_race = read.csv("clean_data/total_race.csv")
+killed <- c(nrow(blacks_killed), nrow(whites_killed))
+not_killed <- c(total_race[2,2] - nrow(blacks_killed), total_race[6,2] - nrow(whites_killed))
+twoBytwo <- c(killed[1], not_killed[1], killed[2], not_killed[2])
+rownames(twoBytwo) <- c("Black", "White")
+oddsratio(twoBytwo, method="wald", conf.level=0.95)
+
+
+relative_risk <- function(race1_killed, race2_killed, total_race1, total_race2){
+    black_p <- race1_killed/total_race1
+    white_p <- race2_killed/total_race2
+    RR <- black_p/white_p  
+    return(RR)
+}
+
+RR_CI <- function(rr, x1, x2, n1, n2){
+    SE <- sqrt( ((n1-x1)/x1)/n1 + ((n2-x2)/x2)/n2 )
+    lower <- log(rr) - 1.96 * SE
+    upper <- log(rr) + 1.96 * SE
+    return (c(exp(lower),exp(upper)))
+}
+
+# x1 = nrow(blacks_killed)
+# x2 =  nrow(whites_killed)
+# n1 = total_race[2,2]
+# n2 = total_race[6,2])
+
+rr_bw <- relative_risk(nrow(blacks_killed), nrow(whites_killed), total_race[2,2], total_race[6,2])
+RR_CI(rr_bw, nrow(blacks_killed),nrow(whites_killed), total_race[2,2], total_race[6,2])
+
+rr_hw <- relative_risk(nrow(histpanics_killed), nrow(whites_killed), total_race[3,2], total_race[6,2])
+RR_CI(rr_hw, nrow(histpanics_killed), nrow(whites_killed), total_race[3,2], total_race[6,2])
+
+rr_bh <- relative_risk(nrow(blacks_killed), nrow(histpanics_killed),  total_race[2,2], total_race[3,2])
+RR_CI(rr_bh, nrow(blacks_killed),nrow(histpanics_killed), total_race[2,2], total_race[3,2])
+
+
 
 ```
+
+Relative risk for armed vs not armed
+```{r}
+not_armed <- police_killings[which(police_killings$armed == "No"),]
+armed <- police_killings[which(police_killings$armed != "No"),]
+
+unarmed_blacks_killed <- not_armed[which(not_armed$race == "Black"),]
+unarmed_whites_killed <- not_armed[which(not_armed$race == "White"),]
+unarmed_histpanics_killed <- not_armed[which(not_armed$race == "Hispanic/Latino"),]
+
+rr_bw <- relative_risk(nrow(unarmed_blacks_killed), nrow(unarmed_whites_killed), total_race[2,2], total_race[6,2])
+RR_CI(rr_bw, nrow(unarmed_blacks_killed),nrow(unarmed_whites_killed), total_race[2,2], total_race[6,2])
+
+rr_hw <- relative_risk(nrow(unarmed_histpanics_killed), nrow(unarmed_whites_killed), total_race[3,2], total_race[6,2])
+RR_CI(rr_hw, nrow(unarmed_histpanics_killed), nrow(unarmed_whites_killed), total_race[3,2], total_race[6,2])
+
+rr_bh <- relative_risk(nrow(unarmed_blacks_killed), nrow(unarmed_histpanics_killed),  total_race[2,2], total_race[3,2])
+RR_CI(rr_bh, nrow(unarmed_blacks_killed),nrow(unarmed_histpanics_killed), total_race[2,2], total_race[3,2])
+
+armed_blacks_killed <- armed[which(armed$race == "Black"),]
+armed_whites_killed <- armed[which(armed$race == "White"),]
+armed_histpanics_killed <- armed[which(armed$race == "Hispanic/Latino"),]
+
+rr_bw <- relative_risk(nrow(armed_blacks_killed), nrow(armed_whites_killed), total_race[2,2], total_race[6,2])
+RR_CI(rr_bw, nrow(armed_blacks_killed),nrow(armed_whites_killed), total_race[2,2], total_race[6,2])
+
+rr_hw <- relative_risk(nrow(armed_histpanics_killed), nrow(armed_whites_killed), total_race[3,2], total_race[6,2])
+RR_CI(rr_hw, nrow(armed_histpanics_killed), nrow(armed_whites_killed), total_race[3,2], total_race[6,2])
+
+rr_bh <- relative_risk(nrow(armed_blacks_killed), nrow(armed_histpanics_killed),  total_race[2,2], total_race[3,2])
+RR_CI(rr_bh, nrow(armed_blacks_killed),nrow(armed_histpanics_killed), total_race[2,2], total_race[3,2])
+
+
+```
+
+
 
 GOAL 4
 Next we want to investigate what the socioeconomic status is between the areas where people of different races were killed.
@@ -109,7 +169,7 @@ census_test <- function(blacks, whites, race1, race2){
 }
 
 #INCOME
-bw_income <-census_test(blacks_killed$med_income, whites_killed$med_income, blacks_killed$race, whites_killed$race) #significant
+bw_income <- census_test(blacks_killed$med_income, whites_killed$med_income, blacks_killed$race, whites_killed$race) #significant
 hw_income <- census_test(hispanics_killed$med_income, whites_killed$med_income, hispanics_killed$race, whites_killed$race) #significant
 nw_income <- census_test(native_american_killed$med_income, whites_killed$med_income, native_american_killed$race, whites_killed$race) #NOT significant
 
@@ -125,8 +185,6 @@ bw_unemployment <- census_test(blacks_killed$unemployment_rate, whites_killed$un
 
 p_values <- c(bw_income$p.value, hw_income$p.value, nw_income$p.value, bw_poverty$p.value, bw_educ$p.value, bw_unemployment$p.value)
 p.adjust(p_values, method = "holm", n = length(p_values)) # holm method
-p.adjust(p_values, method = "fdr", n = length(p_values)) #false discovery rate
-p.adjust(p_values, method = "bonferroni", n = length(p_values)) #bonferroni
 
 
 ```
@@ -135,16 +193,13 @@ Now we will compare the values for the killed population to the national average
 ```{r}
 poverty_dataset <- read_csv("clean_data/poverty_income.csv", col_names = TRUE)
 poverty_dataset <- poverty[,c(3, 4, 8, 23)] 
-colnames(poverty_dataset) <- c("state", "county", "poverty_pct", "med_income")
 wilcox <- wilcox.test(poverty_dataset$med_income, police_killings$med_income)
 wilcox <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
 
-boxplot(cbind(poverty_dataset$med_income, blacks_killed$med_income, whites_killed$med_income))
+boxplot(cbind(poverty_dataset$med_income, blacks_killed$med_income, whites_killed$med_income, hispanics_killed$med_income, native_american_killed$med_income))
 
 
 unemployment <- read_csv("clean_data/unemployment_rate.csv", col_name = TRUE)
-unemployment <- unemployment[-1, c(3, 10)]
-colnames(unemployment) <- c("county", "unemployment_rate")
 wilcox <- wilcox.test(as.numeric(unemployment$unemployment_rate), police_killings$unemployment_rate)
 boxplot(cbind(as.numeric(unemployment$unemployment_rate), police_killings$unemployment_rate))
 boxplot(cbind(as.numeric(unemployment$unemployment_rate), blacks_killed$unemployment_rate, whites_killed$unemployment_rate))
@@ -154,4 +209,5 @@ education <- read_csv("clean_data/education_attainment.csv", col_names = TRUE, s
 education <- education[,6:8]
 colnames(education) <- c("state", "county", "educ_pct")
 ```
+
 
