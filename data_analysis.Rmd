@@ -8,7 +8,7 @@ GOAL #1
 First, we will perform a chi squared test of homogenity to see whether or not the distribution of race is the same for each type of "armed" status. Blacks make up 35% of all unarmed police killings, even though they make up 6% of the entire population.
 ```{r setup, include=FALSE}
 library(readr)
-police_killings <- read_csv("data/police_killings.csv")
+police_killings <- read.csv("data/police_killings.csv")
 armed_v_race <- data.frame(as.character(police_killings$race),  as.character(police_killings$armed))
 contingency_table <- t(table(armed_v_race))
 chifit <- chisq.test(contingency_table)
@@ -142,7 +142,7 @@ wilcox <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
 boxplot(cbind(poverty_dataset$med_income, blacks_killed$med_income, whites_killed$med_income))
 
 
-unemployment <- read_csv(unemployment_file, col_name = TRUE)
+unemployment <- read_csv("clean_data/unemployment_rate.csv", col_name = TRUE)
 unemployment <- unemployment[-1, c(3, 10)]
 colnames(unemployment) <- c("county", "unemployment_rate")
 wilcox <- wilcox.test(as.numeric(unemployment$unemployment_rate), police_killings$unemployment_rate)
@@ -150,7 +150,7 @@ boxplot(cbind(as.numeric(unemployment$unemployment_rate), police_killings$unempl
 boxplot(cbind(as.numeric(unemployment$unemployment_rate), blacks_killed$unemployment_rate, whites_killed$unemployment_rate))
 
 
-education <- read_csv(education_file, col_names = TRUE, skip = 1)
+education <- read_csv("clean_data/education_attainment.csv", col_names = TRUE, skip = 1)
 education <- education[,6:8]
 colnames(education) <- c("state", "county", "educ_pct")
 ```
