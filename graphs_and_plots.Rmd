@@ -2,7 +2,12 @@
 title: 'STATS 205: Graphs and Plots'
 author: "Julie Zhu and Emily Alsentzer"
 date: "May 31, 2016"
-output: html_document
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    theme: spacelab
+    tango: true
 ---
 
 ```{r setup, include = FALSE}

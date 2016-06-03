@@ -1,21 +1,51 @@
 ---
-title: 'STATS 205: Pairwise Binomial Tests'
+title: 'STATS 205: Pairwise Chi-squared and Binomial Tests'
 author: "Julie Zhu"
 date: "June 3, 2016"
-output: html_document
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    theme: spacelab
+    tango: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-library(mice)
-md.pattern(df) %>% View()
+```{r}
+# Libraries
+library(ggplot2)
+library(purrr)
+library(readr)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(datasets)
 
-# Mental Illness
+# Parameters
+file_in <- "data/police_killings.csv"
+race_file <- "clean_data/total_race.csv"
+```
 
-Chi-squared test of homogeneity
-is significant, not the same across all ethnicities
+First, we read in the data. 
+
+```{r}
+df <- read_csv(file_in, col_names = TRUE)
+total_race <- read_csv(race_file, col_names = TRUE)
+```
+
+# Chi-squared Test of Homogeneity
+
+For all of the factors below, we want to compare whether the distribution
+in factor level is the same across ethnicities. This means in our contigency 
+table, ethnicities will be the columns and factors will be the rows. 
+
+We limit to only three ethnicities due to the small cell adjustment. 
+
+## Signs of Mental Illness
 
 ```{r}
 mental_v_race <- df %>%
@@ -23,17 +53,13 @@ mental_v_race <- df %>%
   filter(race %in% c("Black", "Hispanic/Latino", "White"))
 
 contingency_table <- t(table(mental_v_race))
-contingency_table[1,]/sum(contingency_table[1,])
-contingency_table[2,]/sum(contingency_table[2,])
-
 mentalfit <- chisq.test(contingency_table)
 
 (mentalfit$residuals)^2
 ```
 
-# Classification
+## Classification
 
-almost significant
 ```{r}
 classification_v_race <- df %>%
   select(race, classification) %>%
@@ -48,11 +74,6 @@ classificationfit <- chisq.test(contingency_table)
 
 # Body Camera
 
-Given that you have been killed, what's the likelihood had the police had a 
-body camera
-
-Chi squared of homogeneity
-not significant
 ```{r}
 camera_v_race <- df %>%
   select(race, body_camera) %>%
@@ -64,10 +85,7 @@ camerafit <- chisq.test(contingency_table)
 (camerafit$residuals)^2
 ```
 
-#Threatlevel
-
-Chi-squared
-significant
+## Threat Level
 
 ```{r}
 threat_v_race <- df %>%
@@ -80,7 +98,7 @@ threatfit <- chisq.test(contingency_table)
 (threatfit$residuals)^2
 ```
 
-# Flee
+## Flee
 
 ```{r}
 flee_v_race <- df %>%
@@ -93,8 +111,8 @@ fleefit <- chisq.test(contingency_table)
 (fleefit$residuals)^2
 ```
 
-# Armed
-significant
+## Armed
+
 ```{r}
 armed_v_race <- df %>%
   select(race, armed) %>%
@@ -106,93 +124,127 @@ armedfit <- chisq.test(contingency_table)
 (armedfit$residuals)^2
 ```
 
-# P.adjust
+## Using the Holm Correction
 
 ```{r}
-p_values <- c(armedfit$p.value, mentalfit$p.value, classificationfit$p.value, fleefit$p.value, threatfit$p.value, camerafit$p.value)
+p_values <- c(armedfit$p.value, mentalfit$p.value, classificationfit$p.value,
+              camerafit$p.value)
 
-# only armed is significant
-p.adjust(c(armedfit$p.value, mentalfit$p.value, classificationfit$p.value, camerafit$p.value), method = "holm", n = 4) # holm method
+# Armed and Mental Illness are significant
+p.adjust(p_values, method = "holm", n = 4) 
 ```
 
-# Race Equality
+# Pair-wise Individual Ethnicity Tests
+
+For each of the binomial tests, we see that there are two events: the victim
+killed is of the race we are testing for or they are not. We will assume that
+the probability of the victim being a certain race is determined by the 
+proportion of that race in the United States population. 
 
 ```{r}
-df_counts <- table(df$race) %>% as.vector
+count_df <- df %>%
+  filter(!is.na(race)) %>%
+  count(race) 
 
-race_equal <- data_frame(race = total_race$race, 
-           pop = total_race$pop,
-           count = df_counts) %>%
-  mutate(death_prop = count/pop) %>%
-  .$death_prop
-
-total_equal <- total_race %>%
-  .$pop
-
-  .$death_prop
-prop.test()
-N <- length(race_equal)
 n <- nrow(df)
-value <- c()
-critical.range <- c()
-i_val <- c()
-j_val <- c()
 
-## Compute critical values for Mascaillo Procedure
-for (i in 1:(N-1)) { 
-  print (i)
-  for (j in (i+1):N) {
-    print (j)
-     value <- c(value, (abs(race_equal[i] - race_equal[j])))
-     critical.range <- c(critical.range, 
-                         sqrt(qchisq(.95, N - 1))
-                         *sqrt(race_equal[i]*
-                                 (1-race_equal[i])/n +
-                                 race_equal[j]*(1-race_equal[j])/n))
-     i_val <- c(i_val, i)
-     j_val <- c(j_val, j)
-    }
-   }
-
-round(cbind(value, critical.range, i_val, j_val), 10)
+us_pop <- sum(total_race$pop)
+true_race_prop <- total_race %>%
+  mutate(true_prop = pop/us_pop)
 ```
 
-HISPANIC IS SIGNIFICANT individiual one by one
-
+## Asian and Pacific Islander
 
 ```{r}
-total_race <- read_csv("clean_data/total_race.csv")
-race_props <- data_frame(race = total_race$race, 
-           pop = total_race$pop,
-           count = df_counts) %>%
-  mutate(data_total = nrow(df),
-         total = sum(total_race$pop),
-         sample_prop = count/data_total,
-         total_prop = pop/total) 
-
-t.test(race_props$sample_prop, race_props$total_prop)
-
-# Ethnicity
-
-binom.test(x = race_props$sample_prop[1], n = rep(nrow(df), 1), 
-           p = race_props$total_prop[1], 
-           alternative = "less")
-
-prop.test(race_props$sample_prop[1]*nrow(df), rep(nrow(df), 1), p = race_props$total_prop[1])
-
-binom.test(race_props$sample_prop[2]*nrow(df), rep(nrow(df), 1), p = race_props$total_prop[2],
-           alternative = "greater")
-prop.test(yo$sample_prop[2]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[2])
-
-binom.test(yo$sample_prop[3]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[3])
-prop.test(yo$sample_prop[3]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[3])
-
-binom.test(yo$sample_prop[4]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[4],
+binom.test(count_df$n[1], n, p = true_race_prop$true_prop[1],
            alternative = "greater")
 
-binom.test(yo$sample_prop[5]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[5],
+prop.test(count_df$n[1], n, p = true_race_prop$true_prop[1],
+           alternative = "greater")
+
+binom.test(count_df$n[1], n, p = true_race_prop$true_prop[1],
            alternative = "less")
 
-binom.test(yo$sample_prop[6]*nrow(df), rep(nrow(df), 1), p = yo$total_prop[6],
+prop.test(count_df$n[1], n, p = true_race_prop$true_prop[1],
+           alternative = "less")
+```
+
+## Black
+
+```{r}
+binom.test(count_df$n[2], n, p = true_race_prop$true_prop[2],
+           alternative = "greater")
+
+prop.test(count_df$n[2], n, p = true_race_prop$true_prop[2],
+           alternative = "greater")
+
+binom.test(count_df$n[2], n, p = true_race_prop$true_prop[2],
+           alternative = "less")
+
+prop.test(count_df$n[2], n, p = true_race_prop$true_prop[2],
+           alternative = "less")
+```
+
+## Hispanic/Latino
+
+```{r}
+binom.test(count_df$n[3], n, p = true_race_prop$true_prop[3],
+           alternative = "greater")
+
+prop.test(count_df$n[3], n, p = true_race_prop$true_prop[3],
+           alternative = "greater")
+
+binom.test(count_df$n[3], n, p = true_race_prop$true_prop[3],
+           alternative = "less")
+
+prop.test(count_df$n[3], n, p = true_race_prop$true_prop[3],
+           alternative = "less")
+```
+
+## Native American
+
+```{r}
+binom.test(count_df$n[4], n, p = true_race_prop$true_prop[4],
+           alternative = "greater")
+
+prop.test(count_df$n[4], n, p = true_race_prop$true_prop[4],
+           alternative = "greater")
+
+binom.test(count_df$n[4], n, p = true_race_prop$true_prop[4],
+           alternative = "less")
+
+prop.test(count_df$n[4], n, p = true_race_prop$true_prop[4],
+           alternative = "less")
+```
+
+## Other
+
+```{r}
+binom.test(count_df$n[5], n, p = true_race_prop$true_prop[5],
+           alternative = "greater")
+
+prop.test(count_df$n[5], n, p = true_race_prop$true_prop[5],
+           alternative = "greater")
+
+binom.test(count_df$n[5], n, p = true_race_prop$true_prop[5],
+           alternative = "less")
+
+prop.test(count_df$n[5], n, p = true_race_prop$true_prop[5],
+           alternative = "less")
+```
+
+## White
+
+```{r}
+binom.test(count_df$n[6], n, p = true_race_prop$true_prop[6],
+           alternative = "greater")
+
+prop.test(count_df$n[6], n, p = true_race_prop$true_prop[6],
+           alternative = "greater")
+
+binom.test(count_df$n[6], n, p = true_race_prop$true_prop[6],
+           alternative = "less")
+
+prop.test(count_df$n[6], n, p = true_race_prop$true_prop[6],
            alternative = "less")
 ```
