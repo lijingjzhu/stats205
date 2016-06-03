@@ -199,7 +199,7 @@ wilcox <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
 poverty_dataset <- data_frame(race = rep("U.S.", nrow(poverty_dataset)),
                               med_income = poverty_dataset$med_income,
                               poverty_pct = poverty_dataset$poverty_pct)
-  
+
 police_killings %>%
   select(race, med_income, poverty_pct) %>%
   bind_rows(poverty_dataset) %>%
@@ -213,7 +213,7 @@ boxplot(cbind(poverty_dataset$med_income, blacks_killed$med_income, whites_kille
 
 boxplot(cbind(poverty_dataset$poverty_pct, blacks_killed$poverty_pct, whites_killed$poverty_pct, hispanics_killed$poverty_pct), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Percent Below the Poverty Line")
 
-education <- read_csv("clean_data/education_attainment.csv", col_names = TRUE, skip = 1)
+education <- read_csv("clean_data/education_attainment.csv", col_names = TRUE)
 colnames(education) <- c("state", "county", "educ_pct")
 boxplot(cbind(education$educ_pct, blacks_killed$educ_pct, whites_killed$educ_pct, hispanics_killed$educ_pct), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Percent with High School Diploma/ GED", title ="title")
 ```
