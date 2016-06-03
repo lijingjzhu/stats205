@@ -193,13 +193,19 @@ p.adjust(p_values, method = "holm", n = length(p_values)) # holm method
 Now we will compare the values for the killed population to the national averages.
 ```{r}
 poverty_dataset <- read_csv("clean_data/poverty_income.csv", col_names = TRUE)
-wilcox <- wilcox.test(poverty_dataset$med_income, police_killings$med_income)
-wilcox <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
+education_dataset <- read_csv("clean_data/education_attainment.csv", col_names = TRUE)
+
 
 poverty_dataset <- data_frame(race = rep("U.S.", nrow(poverty_dataset)),
                               med_income = poverty_dataset$med_income,
                               poverty_pct = poverty_dataset$poverty_pct)
 
+<<<<<<< HEAD
+education_dataset <- data_frame(race = rep("U.S.", nrow(education_dataset)),
+                              educ_pct = education_dataset$educ_pct)
+#INCOME
+=======
+>>>>>>> 5e4ce766df59124f220154f5f7976831190b6d3c
 police_killings %>%
   select(race, med_income, poverty_pct) %>%
   bind_rows(poverty_dataset) %>%
@@ -207,15 +213,41 @@ police_killings %>%
                                         "Hispanic/Latino"))) %>%
   filter(race %in% c("U.S.", "Black", "White", "Hispanic/Latino")) %>%
   ggplot() +
-  geom_boxplot(mapping = aes(x = race, y = med_income))
+  geom_boxplot(mapping = aes(x = race, y = med_income)) +
+    labs(y= "Median Household Income (Dollars)", x= "Population", title="Median Income in Counties with Police Killings By Race")
 
-boxplot(cbind(poverty_dataset$med_income, blacks_killed$med_income, whites_killed$med_income, hispanics_killed$med_income), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Median Household Income")
+#POVERTY
+police_killings %>%
+  select(race, med_income, poverty_pct) %>%
+  bind_rows(poverty_dataset) %>%
+  mutate(race = factor(race, levels = c("U.S.", "Black", "White", 
+                                        "Hispanic/Latino"))) %>%
+  filter(race %in% c("U.S.", "Black", "White", "Hispanic/Latino")) %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = poverty_pct)) +
+    labs(y= "Percent Below the Poverty Line", x="Population", title="Poverty Level in Counties with Police Killings By Race")
 
-boxplot(cbind(poverty_dataset$poverty_pct, blacks_killed$poverty_pct, whites_killed$poverty_pct, hispanics_killed$poverty_pct), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Percent Below the Poverty Line")
+#EDUCATION
+police_killings %>%
+  select(race, educ_pct) %>%
+  bind_rows(education_dataset) %>%
+  mutate(race = factor(race, levels = c("U.S.", "Black", "White", 
+                                        "Hispanic/Latino"))) %>%
+  filter(race %in% c("U.S.", "Black", "White", "Hispanic/Latino")) %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = educ_pct)) +
+    labs(y= "Percent with High School Diploma/GED", x="Population", title="Educational Attainment in Counties with Police Killings By Race")
 
+
+wilcox <- wilcox.test(poverty_dataset$med_income, police_killings$med_income)
+wilcox <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
+
+<<<<<<< HEAD
+=======
 education <- read_csv("clean_data/education_attainment.csv", col_names = TRUE)
 colnames(education) <- c("state", "county", "educ_pct")
 boxplot(cbind(education$educ_pct, blacks_killed$educ_pct, whites_killed$educ_pct, hispanics_killed$educ_pct), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Percent with High School Diploma/ GED", title ="title")
+>>>>>>> 5e4ce766df59124f220154f5f7976831190b6d3c
 ```
 
 
