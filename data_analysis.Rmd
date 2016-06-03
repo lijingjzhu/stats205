@@ -200,9 +200,12 @@ poverty_dataset <- data_frame(race = rep("U.S.", nrow(poverty_dataset)),
                               med_income = poverty_dataset$med_income,
                               poverty_pct = poverty_dataset$poverty_pct)
 
+<<<<<<< HEAD
 education_dataset <- data_frame(race = rep("U.S.", nrow(education_dataset)),
                               educ_pct = education_dataset$educ_pct)
 #INCOME
+=======
+>>>>>>> 5e4ce766df59124f220154f5f7976831190b6d3c
 police_killings %>%
   select(race, med_income, poverty_pct) %>%
   bind_rows(poverty_dataset) %>%
@@ -239,6 +242,12 @@ police_killings %>%
 wilcox <- wilcox.test(poverty_dataset$med_income, police_killings$med_income)
 wilcox <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
 
+<<<<<<< HEAD
+=======
+education <- read_csv("clean_data/education_attainment.csv", col_names = TRUE)
+colnames(education) <- c("state", "county", "educ_pct")
+boxplot(cbind(education$educ_pct, blacks_killed$educ_pct, whites_killed$educ_pct, hispanics_killed$educ_pct), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Percent with High School Diploma/ GED", title ="title")
+>>>>>>> 5e4ce766df59124f220154f5f7976831190b6d3c
 ```
 
 
