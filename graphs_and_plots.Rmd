@@ -1,0 +1,353 @@
+---
+title: 'STATS 205: Graphs and Plots'
+author: "Julie Zhu and Emily Alsentzer"
+date: "May 31, 2016"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+```{r}
+# Libraries
+library(ggplot2)
+library(purrr)
+library(readr)
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(datasets)
+library(maps)
+library(ca)
+library(gridExtra)
+
+# Parameters
+file_in <- "data/police_killings.csv"
+race_file <- "clean_data/county_race.csv"
+total_file <- "clean_data/total_race.csv"
+population_file <- "clean_data/state_pop.csv"
+```
+
+We first read in the data files. 
+
+```{r}
+df <- read_csv(file_in)
+population <- read_csv(population_file, col_names = TRUE)
+ethnicity <- read_csv(race_file, col_names = TRUE)
+total_race <- read_csv(total_file, col_names = TRUE)
+```
+
+# Correspondence Analysis
+
+## Armed vs. Race
+
+```{r}
+armed_race_ca <- table(df$armed, df$race) %>% as.matrix()
+armed_ca <- ca(armed_race_ca)
+summary(armed_ca)
+plot(armed_ca, dim = c(1, 2), mass = c(TRUE, TRUE), 
+     contrib = "absolute", map = "rowgreen", 
+     arrows = c(FALSE, TRUE))
+```
+
+## Classification vs. Race
+
+```{r}
+class_race_ca <- table(df$classification, df$race)
+class_ca <- ca(class_race_ca)
+summary(class_ca)
+plot(class_ca, dim = c(1, 2), mass = c(TRUE, TRUE), 
+     contrib = "absolute", map = "rowgreen", 
+     arrows = c(FALSE, TRUE))
+```
+
+# Environmental Circumstances Boxplots
+
+## Unemployment Rate
+
+```{r}
+df %>%
+  filter(!is.na(race), !is.na(unemployment_rate),
+         race %in% c("White", "Black", "Hispanic/Latino")) %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = unemployment_rate)) +
+  theme_bw() + 
+  labs(x = "Ethnicity", y = "Unemployment Rate (%)")
+```
+
+## Educational Attainment
+
+```{r}
+df %>%
+    filter(!is.na(race), !is.na(educ_pct),
+         race %in% c("White", "Black", "Hispanic/Latino")) %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = educ_pct)) + 
+  theme_bw() + 
+  labs(x = "Ethnicity", y = "Educational Attainment (%)")
+```
+
+## Median Income
+
+```{r}
+df %>%
+  filter(!is.na(race), !is.na(med_income),
+         race %in% c("White", "Black", "Hispanic/Latino")) %>%  
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = med_income)) + 
+  theme_bw() + 
+  labs(x = "Ethnicity", y = "Median Income ($)")
+```
+
+## Poverty
+
+```{r}
+df %>%
+  filter(!is.na(race), !is.na(poverty_pct),
+         race %in% c("White", "Black", "Hispanic/Latino")) %>%  
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = poverty_pct)) +
+  theme_bw() + 
+  labs(x = "Ethnicity", y = "Poverty Rate (%)")
+```
+
+# Heatmaps
+
+## Normalized State Killings
+
+```{r, fig.width = 8, fig.height = 4}
+states <- map_data("state")
+
+new_df <- df %>%
+  count(state, state_name) %>%
+  left_join(population, by = c("state" = "state_abb")) %>%
+  mutate(Count = n/pop)
+  
+map_df <- states %>%
+  as.data.frame() %>%
+  tbl_df() %>%
+  select(-subregion) %>%
+  left_join(new_df, by = c("region" = "state_name"))
+
+map_df <- map_df[order(map_df$order),]
+
+map_df %>%
+  ggplot(mapping = aes(x = long, y = lat, group = group)) +
+  geom_polygon(mapping = aes(fill = Count)) +
+  geom_path() + 
+  theme_classic() + 
+  scale_x_continuous(breaks = seq(-120, -70, by = 10)) +
+  scale_fill_continuous(labels = scales::percent) +
+  theme(axis.line.x = element_line(),
+        axis.line.y = element_line()) +
+  labs(x = "Longitude", y = "Latitude")
+```
+
+## Un-normalized State Killings
+
+```{r, fig.width = 8, fig.height = 4}
+new_df <- df %>%
+  count(state_name) %>%
+  rename(Count = n)
+
+map_df <- states %>%
+  as.data.frame() %>%
+  tbl_df() %>%
+  select(-subregion) %>%
+  left_join(new_df, by = c("region" = "state_name"))
+
+map_df <- map_df[order(map_df$order),]
+
+map_df %>%
+  ggplot(mapping = aes(x = long, y = lat, group = group)) +
+  geom_polygon(mapping = aes(fill = Count)) +
+  geom_path() + 
+  theme_classic() + 
+  scale_x_continuous(breaks = seq(-120, -70, by = 10)) +
+  scale_fill_continuous(labels = scales::comma) +
+  theme(axis.line.x = element_line(),
+        axis.line.y = element_line()) +
+  labs(x = "Longitude", y = "Latitude")
+```
+
+## Un-Normalized County Killings
+
+```{r, fig.width = 8, fig.height = 4}
+counties <- map_data("county")
+
+new_df <- df %>%
+  count(state_name, county) %>%
+  rename(Count = n) %>%
+  mutate(county = lapply(str_split(county, " "), `[[`, 1) %>% unlist())
+
+map_df <- counties %>%
+  as.data.frame() %>%
+  tbl_df() %>%
+  left_join(new_df, by = c("subregion" = "county", "region" = "state_name")) %>%
+  filter(!is.na(Count))
+
+map_df <- map_df[order(map_df$order),]
+
+map_df %>%
+  ggplot(mapping = aes(x = long, y = lat, group = group)) +
+  geom_polygon(mapping = aes(fill = Count)) +
+  geom_path(data = states, colour = "black") +
+  scale_x_continuous(breaks = seq(-130, -70, by = 10)) +
+  theme_classic() + 
+  theme(axis.line.x = element_line(),
+        axis.line.y = element_line()) +
+  labs(x = "Longitude", y = "Latitude")
+```
+
+## Normalized County Killings
+
+```{r, fig.width = 8, fig.height = 4}
+new_df <- df %>%
+  count(state_name, county) %>%
+  left_join(ethnicity, by = c("county" = "county",
+                              "state_name" = "state")) %>%
+  filter(!is.na(total_county_pop)) %>%
+  select(state_name, county, n, total_county_pop) %>%
+  mutate(Count = n/total_county_pop,
+         county = lapply(str_split(county, " "), `[[`, 1) %>% unlist())
+
+map_df <- counties %>%
+  as.data.frame() %>%
+  tbl_df() %>%
+  left_join(new_df, by = c("subregion" = "county", "region" = "state_name")) %>%
+  filter(!is.na(Count))
+
+map_df <- map_df[order(map_df$order),]
+
+map_df %>%
+  ggplot(mapping = aes(x = long, y = lat, group = group)) +
+  geom_polygon(mapping = aes(fill = Count)) +
+  geom_path(data = states, colour = "black") +
+  theme_classic() + 
+  theme(axis.line.x = element_line(),
+        axis.line.y = element_line()) +
+  scale_x_continuous(breaks = seq(-130, -70, by = 10)) +
+  scale_fill_continuous(labels = scales::percent) +
+  labs(x = "Longitude", y = "Latitude")
+```
+
+# Descriptive Graphs
+
+## Age
+
+```{r, fig.width = 4, fig.height = 4}
+df %>%
+  filter(!is.na(age)) %>%
+  ggplot() +
+  geom_histogram(mapping = aes(x = age), binwidth = 3) +
+  theme_bw() + 
+  labs(x = "Age", y = "Count")
+```
+
+## Gender
+
+```{r, fig.width = 4, fig.height = 4}
+df %>%
+  filter(!is.na(gender)) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = gender)) +
+  theme_bw() + 
+  labs(x = "Gender", y = "Count")
+```
+
+## Ethnicity
+
+```{r, fig.width = 4, fig.height = 4}
+df %>%
+  filter(!is.na(race)) %>%
+  count(race) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(race, -n), y = n), 
+           stat = "identity") +
+  labs(x = "Ethnicity", y = "Count") +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+
+## Normalized Ethnicity
+
+```{r, fig.width = 5, fig.height = 4}
+df %>%
+  count(race) %>%
+  filter(!is.na(race)) %>%
+  left_join(total_race, by = c("race" = "race")) %>%
+  mutate(prop = (n/pop)*100000) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(race, -prop), y = prop), 
+           stat = "identity") +
+  labs(x = "Ethnicity", y = "Number Killed per 100,000") +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 35, hjust = 1)) 
+```
+
+## Armed
+
+Next, we examine whether the victims were armed. Firearms are the most common 
+form of armed victims. However, interestingly enough, we see that there are 
+also a lot of unarmed victims that were shot as well. 
+
+```{r, fig.width = 5, fig.height = 4}
+df %>%
+  count(armed) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(armed, -n), y = n), 
+           stat = "identity") +
+  labs(x = "Armed", y = "Count") +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+
+## State
+
+```{r, fig.width = 5, fig.height = 4}
+df %>%
+  count(state) %>%
+  top_n(10) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(state, -n), y = n), 
+           stat = "identity") +
+  labs(x = "State", y = "Count") +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Normalized by Population State
+
+```{r, fig.width = 5, fig.height = 4}
+df %>%
+  count(state) %>%
+  top_n(10) %>%
+  left_join(population, by = c("state" = "state_abb")) %>%
+  filter(!(state == "DC")) %>%
+  mutate(pop_pct = n/pop*100000) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(state, -pop_pct), y = pop_pct), 
+           stat = "identity") +
+  labs(x = "State", y = "Number Killed per 100,000") +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Month
+
+```{r, fig.width = 6, fig.height = 4}
+df %>%
+  mutate(month = month(date)) %>%
+  count(month) %>%
+  ggplot() +
+  geom_line(mapping = aes(x = factor(month), y = n), stat = "identity",
+            group = 1) +
+  labs(x = "Month", y = "Count") +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 30, hjust = 1)) +
+  scale_x_discrete(labels = c("January","February","March","April", "May", 
+                              "June", "July", "August", "September",
+                              "October", "November", "December"))
+```
