@@ -145,9 +145,8 @@ categorize the ones who don't quite fit (undetermiend and unknown) into the
 Disputed category. 
 
 ```{r}
-non_lethal_firearms <- c("nail gun", "toy weapon")
-firearms <- c("hand torch", "gun and knife","gun", "guns and explosives", 
-              "bean-bag gun")
+non_lethal_firearms <- c("nail gun", "toy weapon", "bean-bag gun")
+firearms <- c("hand torch", "gun and knife","gun", "guns and explosives")
 knives <- c("ax", "box cutter", "knife", "hatchet", "machete", 
             "lawn mower blade", "meat cleaver", "scissors", 
             "straight edge razor", "sword")

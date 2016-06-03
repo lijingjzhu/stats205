@@ -29,7 +29,6 @@ population data from the census: https://www.census.gov/popest/data/index.html
 
 In the data, we have:
 
-* Removed NAs
 * Removed 1 gender non-conforming victim
 * Combined Asian victims with Pacific Islander victims
 * Combined Arab-American victims with Other victims
