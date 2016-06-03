@@ -193,9 +193,21 @@ p.adjust(p_values, method = "holm", n = length(p_values)) # holm method
 Now we will compare the values for the killed population to the national averages.
 ```{r}
 poverty_dataset <- read_csv("clean_data/poverty_income.csv", col_names = TRUE)
-poverty_dataset <- poverty[,c(3, 4, 8, 23)] 
 wilcox <- wilcox.test(poverty_dataset$med_income, police_killings$med_income)
 wilcox <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
+
+poverty_dataset <- data_frame(race = rep("U.S.", nrow(poverty_dataset)),
+                              med_income = poverty_dataset$med_income,
+                              poverty_pct = poverty_dataset$poverty_pct)
+  
+police_killings %>%
+  select(race, med_income, poverty_pct) %>%
+  bind_rows(poverty_dataset) %>%
+  mutate(race = factor(race, levels = c("U.S.", "Black", "White", 
+                                        "Hispanic/Latino"))) %>%
+  filter(race %in% c("U.S.", "Black", "White", "Hispanic/Latino")) %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = race, y = med_income))
 
 boxplot(cbind(poverty_dataset$med_income, blacks_killed$med_income, whites_killed$med_income, hispanics_killed$med_income), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Median Household Income")
 
