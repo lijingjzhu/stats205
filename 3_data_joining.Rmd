@@ -870,5 +870,8 @@ in quickly for our next study. Since we got rid of the null values, we can
 output the new data into `police_killings.csv`.
 
 ```{r}
+df <- df %>%
+  distinct(name) 
+
 write_csv(x = df, path = file_out)
 ```
