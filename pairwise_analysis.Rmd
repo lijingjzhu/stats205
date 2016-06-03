@@ -9,6 +9,9 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+library(mice)
+md.pattern(df) %>% View()
+
 # Mental Illness
 
 Chi-squared test of homogeneity

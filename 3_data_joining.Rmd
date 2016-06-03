@@ -493,6 +493,15 @@ complete for this group of people. It would be better to leave them in the data
 and take them out of any demographic calculations where they have a missing
 value. 
 
+We first note that most of the missing demographic data like age and gender
+stem from lack of information or lack of careful observation during data
+collection. However, the lack of circumstantial environmental variables are
+due to the lack of information. We never observed unemployment rate, poverty 
+rate, educational attainment, and other variables for deaths occurring in 
+certain counties. We also need to note the the American Community Survey
+does not account for changes in county boundaries and such (only changes 
+in legal name). 
+
 ```{r}
 df %>% filter(is.na(age)) %>% head()
 ```

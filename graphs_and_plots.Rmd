@@ -133,7 +133,7 @@ map_df <- states %>%
 
 map_df <- map_df[order(map_df$order),]
 
-map_df %>%
+figure_1a <- map_df %>%
   ggplot(mapping = aes(x = long, y = lat, group = group)) +
   geom_polygon(mapping = aes(fill = Count)) +
   geom_path() + 
@@ -238,7 +238,7 @@ map_df %>%
 ## Age
 
 ```{r, fig.width = 4, fig.height = 4}
-df %>%
+figure_2a <- df %>%
   filter(!is.na(age)) %>%
   ggplot() +
   geom_histogram(mapping = aes(x = age), binwidth = 3) +
@@ -249,7 +249,7 @@ df %>%
 ## Gender
 
 ```{r, fig.width = 4, fig.height = 4}
-df %>%
+figure_2b <- df %>%
   filter(!is.na(gender)) %>%
   ggplot() +
   geom_bar(mapping = aes(x = gender)) +
@@ -260,7 +260,7 @@ df %>%
 ## Ethnicity
 
 ```{r, fig.width = 4, fig.height = 4}
-df %>%
+figure_4a <- df %>%
   filter(!is.na(race)) %>%
   count(race) %>%
   ggplot() +
@@ -274,7 +274,7 @@ df %>%
 ## Normalized Ethnicity
 
 ```{r, fig.width = 5, fig.height = 4}
-df %>%
+figure_4b <- df %>%
   count(race) %>%
   filter(!is.na(race)) %>%
   left_join(total_race, by = c("race" = "race")) %>%
@@ -289,17 +289,38 @@ df %>%
 
 ## Armed
 
-Next, we examine whether the victims were armed. Firearms are the most common 
-form of armed victims. However, interestingly enough, we see that there are 
-also a lot of unarmed victims that were shot as well. 
-
 ```{r, fig.width = 5, fig.height = 4}
-df %>%
+figure_3a <- df %>%
   count(armed) %>%
   ggplot() +
   geom_bar(mapping = aes(x = reorder(armed, -n), y = n), 
            stat = "identity") +
   labs(x = "Armed", y = "Count") +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+```
+
+## Signs of Mental Illness
+
+```{r, fig.width = 5, fig.height = 4}
+figure_3b <- df %>%
+  count(signs_of_mental_illness) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(signs_of_mental_illness, -n), y = n), 
+           stat = "identity") +
+  labs(x = "Signs of Mental Illness", y = "Count") +
+  theme_bw() 
+```
+
+## Classification 
+
+```{r, fig.width = 5, fig.height = 4}
+figure_3c <- df %>%
+  count(classification) %>%
+  ggplot() +
+  geom_bar(mapping = aes(x = reorder(classification, -n), y = n), 
+           stat = "identity") +
+  labs(x = "Manner of Death", y = "Count") +
   theme_bw() + 
   theme(axis.text.x = element_text(angle = 35, hjust = 1))
 ```
@@ -338,7 +359,8 @@ df %>%
 ## Month
 
 ```{r, fig.width = 6, fig.height = 4}
-df %>%
+figure_1b <- df %>%
+  filter(!is.na(month(date))) %>%
   mutate(month = month(date)) %>%
   count(month) %>%
   ggplot() +
@@ -350,4 +372,42 @@ df %>%
   scale_x_discrete(labels = c("January","February","March","April", "May", 
                               "June", "July", "August", "September",
                               "October", "November", "December"))
+```
+
+# Creating Figures
+
+## Figure 1
+
+```{r}
+figure1 <- grid.arrange(figure_1a, figure_1b, ncol = 2, 
+                        nrow = 1, widths = c(0.65, 0.35))
+ggsave(plot = figure1, filename = "graphs/figure1.png",
+       width = 11, height = 4)
+```
+
+## Figure 2
+
+```{r}
+figure2 <- grid.arrange(figure_2a, figure_2b, ncol = 2, nrow = 1, 
+                        widths = c(0.5, 0.5))
+ggsave(plot = figure2, filename = "graphs/figure2.png",
+       width = 7, height = 4)
+```
+
+## Figure 3
+
+```{r}
+figure3 <- grid.arrange(figure_3a, figure_3b, figure_3c, ncol = 3, nrow = 1,
+                        widths = c(0.4, 0.3, 0.4))
+ggsave(plot = figure3, filename = "graphs/figure3.png",
+       width = 11, height = 4)
+```
+
+## Figure 4
+
+```{r}
+figure4 <- grid.arrange(figure_4a, figure_4b, ncol = 2, nrow = 1,
+                        widths = c(0.5, 0.5))
+ggsave(plot = figure4, filename = "graphs/figure4.png",
+       width = 7, height = 4)
 ```
