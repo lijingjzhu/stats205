@@ -2,11 +2,16 @@
 title: 'STATS 205: Pairwise Chi-squared and Binomial Tests'
 author: "Julie Zhu"
 date: "June 3, 2016"
-output: html_document
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    theme: spacelab
+    tango: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
 ```{r}
