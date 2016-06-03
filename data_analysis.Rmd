@@ -155,14 +155,14 @@ native_american_killed <- police_killings[which(police_killings$race == "Native 
 
 census_test <- function(blacks, whites, race1, race2){
     wilcox <- wilcox.test(blacks, whites)
-    t.test(blacks, whites) 
-    black_mean = mean(blacks[!is.na(blacks)])
-    white_mean =  mean(whites[!is.na(whites)])
+   # t.test(blacks, whites) 
+    black_mean = mean(blacks)
+    white_mean =  mean(whites)
     census <-data.frame(factor(c(race1,  race2)), c(blacks, whites))
     colnames(census) <- c("Race", "Indicator")
 
-    ggplot(census, aes(x=Indicator, fill=Race)) +
-        geom_histogram( alpha=.5, position="identity")
+  #  ggplot(census, aes(x=Indicator, fill=Race)) +
+    #    geom_histogram( alpha=.5, position="identity")
 
     #2 = black; 6 = white
     boxplot(Indicator~Race, data=census)
@@ -172,21 +172,21 @@ census_test <- function(blacks, whites, race1, race2){
 #INCOME
 bw_income <- census_test(blacks_killed$med_income, whites_killed$med_income, blacks_killed$race, whites_killed$race) #significant
 hw_income <- census_test(hispanics_killed$med_income, whites_killed$med_income, hispanics_killed$race, whites_killed$race) #significant
-nw_income <- census_test(native_american_killed$med_income, whites_killed$med_income, native_american_killed$race, whites_killed$race) #NOT significant
+hb_income <- census_test(hispanics_killed$med_income, blacks_killed$med_income, hispanics_killed$race, blacks_killed$race) #significant
 
 #POVERTY
 bw_poverty <- census_test(blacks_killed$poverty_pct, whites_killed$poverty_pct, blacks_killed$race, whites_killed$race) # Not significant
+bh_poverty <- census_test(blacks_killed$poverty_pct, hispanics_killed$poverty_pct, blacks_killed$race, hispanics_killed$race)
+hw_poverty <- census_test(whites_killed$poverty_pct, hispanics_killed$poverty_pct, whites_killed$race, hispanics_killed$race)
 
 #EDUCATION
 bw_educ <- census_test(blacks_killed$educ_pct, whites_killed$educ_pct, blacks_killed$race, whites_killed$race) # Not significant
+hw_educ <- census_test(hispanics_killed$educ_pct, whites_killed$educ_pct, hispanics_killed$race, whites_killed$race) # Not significant
+bh_educ <- census_test(hispanics_killed$educ_pct, blacks_killed$educ_pct, hispanics_killed$race, blacks_killed$race) # Not significant
 
-#UNEMPLOYMENT
-bw_unemployment <- census_test(blacks_killed$unemployment_rate, whites_killed$unemployment_rate, blacks_killed$race, whites_killed$race) # not significant
 
-
-p_values <- c(bw_income$p.value, hw_income$p.value, nw_income$p.value, bw_poverty$p.value, bw_educ$p.value, bw_unemployment$p.value)
+p_values <- c(bw_income$p.value, hw_income$p.value,hb_income$p.value, bw_poverty$p.value, bh_poverty$p.value, hw_poverty$p.value, bw_educ$p.value, hw_educ$p.value, bh_educ$p.value)
 p.adjust(p_values, method = "holm", n = length(p_values)) # holm method
-
 
 ```
 
@@ -197,18 +197,13 @@ poverty_dataset <- poverty[,c(3, 4, 8, 23)]
 wilcox <- wilcox.test(poverty_dataset$med_income, police_killings$med_income)
 wilcox <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
 
-boxplot(cbind(poverty_dataset$med_income, blacks_killed$med_income, whites_killed$med_income, hispanics_killed$med_income, native_american_killed$med_income))
+boxplot(cbind(poverty_dataset$med_income, blacks_killed$med_income, whites_killed$med_income, hispanics_killed$med_income), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Median Household Income")
 
-
-unemployment <- read_csv("clean_data/unemployment_rate.csv", col_name = TRUE)
-wilcox <- wilcox.test(as.numeric(unemployment$unemployment_rate), police_killings$unemployment_rate)
-boxplot(cbind(as.numeric(unemployment$unemployment_rate), police_killings$unemployment_rate))
-boxplot(cbind(as.numeric(unemployment$unemployment_rate), blacks_killed$unemployment_rate, whites_killed$unemployment_rate))
-
+boxplot(cbind(poverty_dataset$poverty_pct, blacks_killed$poverty_pct, whites_killed$poverty_pct, hispanics_killed$poverty_pct), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Percent Below the Poverty Line")
 
 education <- read_csv("clean_data/education_attainment.csv", col_names = TRUE, skip = 1)
-education <- education[,6:8]
 colnames(education) <- c("state", "county", "educ_pct")
+boxplot(cbind(education$educ_pct, blacks_killed$educ_pct, whites_killed$educ_pct, hispanics_killed$educ_pct), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Percent with High School Diploma/ GED", title ="title")
 ```
 
 
