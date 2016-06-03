@@ -47,6 +47,7 @@ both_populations_t <- t(both_populations)
 ```
 
 Now we will perform a chi squared test of homogenity to see whether or not the distribution of race is the same for the killed population and normal population.
+
 ```{r}
 chifit <- chisq.test(both_populations_t)
 (chifit$residuals)^2

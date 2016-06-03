@@ -477,6 +477,7 @@ write_csv(x = education, path = "clean_data/education_attainment.csv")
 write_csv(x = unemployment, path = "clean_data/unemployment_rate.csv")
 write_csv(x = county_race, path = "clean_data/county_race.csv")
 write_csv(x = total_race, path = "clean_data/total_race.csv")
+write_csv(x = population, path = "clean_data/state_pop.csv")
 ```
 
 Now, note that we have two patterns of missing data in our data set. We have
@@ -869,9 +870,14 @@ Finally, we can write out our edited data to a new file so that we can load it
 in quickly for our next study. Since we got rid of the null values, we can 
 output the new data into `police_killings.csv`.
 
+We first do a validity check. We will make an assumption that no two victims
+have the same name, age, and date of death. We also enforce some validity
+checks on the data by limiting our percentages to be between 0 and 100. We
+also make sure there aren't any negative median incomes. 
+
 ```{r}
 df <- df %>%
-  distinct(name) 
+  distinct(name, age, date) 
 
 df$educ_pct[df$educ_pct > 100] <- 100
 df$educ_pct[df$educ_pct < 0] <- 0
