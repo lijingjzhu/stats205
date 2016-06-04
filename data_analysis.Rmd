@@ -34,7 +34,7 @@ chisq.test(ct3)
 ```
 Now the test no longer yields a significant result. 
 
-GOAL 2
+GOAL #2
 The goal is to see whether there is a difference in the distribution of races between killed population and normal population.
 ```{r}
 library(plyr)
@@ -48,7 +48,6 @@ both_populations_t <- t(both_populations)
 ```
 
 Now we will perform a chi squared test of homogenity to see whether or not the distribution of race is the same for the killed population and normal population.
-
 ```{r}
 chifit <- chisq.test(both_populations_t[,c(2,3,6)])
 (chifit$residuals)^2
@@ -103,8 +102,6 @@ RR_CI(rr_hw, nrow(histpanics_killed), nrow(whites_killed), total_race[3,2], tota
 rr_bh <- relative_risk(nrow(blacks_killed), nrow(histpanics_killed),  total_race[2,2], total_race[3,2])
 RR_CI(rr_bh, nrow(blacks_killed),nrow(histpanics_killed), total_race[2,2], total_race[3,2])
 
-
-
 ```
 
 Relative risk for armed vs not armed
@@ -146,7 +143,6 @@ RR_CI(rr_bh, nrow(armed_blacks_killed),nrow(armed_histpanics_killed), total_race
 GOAL 4
 Next we want to investigate what the socioeconomic status is between the areas where people of different races were killed.
 compare poverty, education, income, etc between areas where blacks vs whites were killed
-
 ```{r}
 blacks_killed <- police_killings[which(police_killings$race == "Black"),]
 whites_killed <- police_killings[which(police_killings$race == "White"),]
@@ -244,12 +240,24 @@ library(gridExtra)
 boxplots <- grid.arrange(income_plot, poverty_plot, educ_plot, ncol = 3, nrow = 1,
                         widths = c(0.5, 0.5, 0.5))
 
-wilcox <- wilcox.test(poverty_dataset$med_income, police_killings$med_income)
-wilcox <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
+aa_income <- wilcox.test(poverty_dataset$med_income, police_killings$med_income)
+ba_income <- wilcox.test(poverty_dataset$med_income, blacks_killed$med_income)
+wa_income <- wilcox.test(poverty_dataset$med_income, whites_killed$med_income)
+ha_income <- wilcox.test(poverty_dataset$med_income, hispanics_killed$med_income)
 
-education <- read_csv("clean_data/education_attainment.csv", col_names = TRUE)
-colnames(education) <- c("state", "county", "educ_pct")
-boxplot(cbind(education$educ_pct, blacks_killed$educ_pct, whites_killed$educ_pct, hispanics_killed$educ_pct), names=c("U.S.", "Black", "White", "Hispanic/Latino"), xlab = "Population", ylab= "Percent with High School Diploma/ GED", title ="title")
+aa_poverty <- wilcox.test(poverty_dataset$poverty_pct, police_killings$poverty_pct)
+ba_poverty <- wilcox.test(poverty_dataset$poverty_pct, blacks_killed$poverty_pct)
+wa_poverty <- wilcox.test(poverty_dataset$poverty_pct, whites_killed$poverty_pct)
+ha_poverty <- wilcox.test(poverty_dataset$poverty_pct, hispanics_killed$poverty_pct)
+
+aa_educ <- wilcox.test(education_dataset$educ_pct, police_killings$educ_pct)
+ba_educ <- wilcox.test(education_dataset$educ_pct, blacks_killed$educ_pct)
+wa_educ <- wilcox.test(education_dataset$educ_pct, whites_killed$educ_pct)
+ha_educ <- wilcox.test(education_dataset$educ_pct, hispanics_killed$educ_pct)
+
+
+p_values <- c(aa_income$p.value,ba_income$p.value, wa_income$p.value, ha_income$p.value, aa_poverty$p.value, ba_poverty$p.value,wa_poverty$p.value, ha_poverty$p.value, aa_educ$p.value , ba_educ$p.value, wa_educ$p.value, ha_educ$p.value)
+p.adjust(p_values, method = "holm", n = length(p_values)) # holm method
 
 ```
 
