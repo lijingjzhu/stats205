@@ -99,7 +99,8 @@ levels(factor(counted$armed))
 ```
 
 `Classification` denotes how the victim died. These include gunshot, death 
-in custody (though not specified how), and tasering. We have 5 levels here. No unknowns.
+in custody (though not specified how), and tasering. We have 5 levels here. 
+No unknowns.
 
 ```{r}
 levels(factor(counted$classification))
@@ -150,8 +151,7 @@ We now end up with `r nrow(counted)` rows with `r ncol(counted)` columns.
 In this section, we hope to explore the distribution of some variables by 
 visualizing them using plots.
 
-We obtain our census data for normalization from `https://www.census.gov/` and 
-our ethnicity data from `http://kff.org/other/state-indicator/distribution-by-raceethnicity/`.
+We obtain our census data for normalization from `https://www.census.gov/`.
 
 ## Age
 
@@ -218,7 +218,9 @@ ethnicity data so that it matches the race and ethinicites we have in our `polic
 total_pop <- ethnicity[2, 4] %>% as.numeric()
 ethnicity <- ethnicity[,c(3, seq(6, 26, by = 2))] 
 
-race_names <- c("state", "Total", "White", "Black", "Native American", "Asian", "Pacific Islander", "Other", "Other1", "Other2", "Other3", "Hispanic/Latino")
+race_names <- c("state", "Total", "White", "Black", "Native American", 
+                "Asian", "Pacific Islander", "Other", "Other1", "Other2", 
+                "Other3", "Hispanic/Latino")
 colnames(ethnicity) <- race_names
 
 ethnicity <- ethnicity[-1,]

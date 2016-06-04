@@ -85,32 +85,6 @@ camerafit <- chisq.test(contingency_table)
 (camerafit$residuals)^2
 ```
 
-## Threat Level
-
-```{r}
-threat_v_race <- df %>%
-  select(race, threat_level) %>%
-  filter(race %in% c("Black", "Hispanic/Latino", "White"))
-
-contingency_table <- t(table(threat_v_race))
-threatfit <- chisq.test(contingency_table)
-
-(threatfit$residuals)^2
-```
-
-## Flee
-
-```{r}
-flee_v_race <- df %>%
-  select(race, flee) %>%
-  filter(race %in% c("Black", "Hispanic/Latino", "White"))
-
-contingency_table <- t(table(flee_v_race))
-fleefit <- chisq.test(contingency_table)
-
-(fleefit$residuals)^2
-```
-
 ## Armed
 
 ```{r}
