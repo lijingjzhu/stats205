@@ -6,7 +6,7 @@ output: html_document
 ---
 GOAL #1
 First, we will perform a chi squared test of homogenity to see whether or not the distribution of race is the same for each type of "armed" status. Blacks make up 35% of all unarmed police killings, even though they make up 6% of the entire population.
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 library(readr)
 police_killings <- read.csv("data/police_killings.csv")
 armed_v_race <- data.frame(as.character(police_killings$race),  as.character(police_killings$armed))
@@ -37,7 +37,8 @@ Now the test no longer yields a significant result.
 GOAL #2
 The goal is to see whether there is a difference in the distribution of races between killed population and normal population.
 ```{r}
-library(plyr)
+library(dplyr)
+total_race <- read_csv("clean_data/total_race.csv")
 race_summary <- table(police_killings$race)
 true_pop <- total_race[,2]#/ sum(total_race[,2])*100000
 killed_pop <- race_summary#/sum(race_summary)*100000
@@ -65,13 +66,11 @@ blacks_killed <- police_killings[which(police_killings$race == "Black"),]
 whites_killed <- police_killings[which(police_killings$race == "White"),]
 histpanics_killed <- police_killings[which(police_killings$race == "Hispanic/Latino"),]
 
-
-total_race = read.csv("clean_data/total_race.csv")
 killed <- c(nrow(blacks_killed), nrow(whites_killed))
 not_killed <- c(total_race[2,2] - nrow(blacks_killed), total_race[6,2] - nrow(whites_killed))
 twoBytwo <- c(killed[1], not_killed[1], killed[2], not_killed[2])
-rownames(twoBytwo) <- c("Black", "White")
-oddsratio(twoBytwo, method="wald", conf.level=0.95)
+#rownames(twoBytwo) <- c("Black", "White")
+#oddsratio(twoBytwo, method="wald", conf.level=0.95)
 
 
 relative_risk <- function(race1_killed, race2_killed, total_race1, total_race2){
