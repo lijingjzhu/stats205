@@ -128,7 +128,7 @@ states <- map_data("state")
 new_df <- df %>%
   count(state, state_name) %>%
   left_join(population, by = c("state" = "state_abb")) %>%
-  mutate(Count = n/pop)
+  mutate(Count = n/pop*100000)
   
 map_df <- states %>%
   as.data.frame() %>%
@@ -144,7 +144,7 @@ figure_1a <- map_df %>%
   geom_path() + 
   theme_classic() + 
   scale_x_continuous(breaks = seq(-120, -70, by = 10)) +
-  scale_fill_continuous(labels = scales::percent) +
+  scale_fill_continuous(name = "Police Killings per \n100,000 People") +
   theme(axis.line.x = element_line(),
         axis.line.y = element_line()) +
   labs(x = "Longitude \n\n(a)", y = "Latitude")
