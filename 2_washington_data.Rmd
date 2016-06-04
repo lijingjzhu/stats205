@@ -150,13 +150,12 @@ firearms <- c("hand torch", "gun and knife","gun", "guns and explosives")
 knives <- c("ax", "box cutter", "knife", "hatchet", "machete", 
             "lawn mower blade", "meat cleaver", "scissors", 
             "straight edge razor", "sword")
-counted_armed <- c("No", "Vehicle", "Disputed", "Knife", 
+counted_armed <- c("No", "Vehicle", "Knife", 
                    "Non-lethal firearm", "Firearm")
 
 washington <- washington %>%
   mutate(armed = ifelse(armed == "unarmed", "No", armed),
          armed = ifelse(armed == "vehicle", "Vehicle", armed),
-         armed = ifelse(armed == "undetermined", "Disputed", armed),
          armed = ifelse(armed %in% knives, "Knife", armed),
          armed = ifelse(armed %in% non_lethal_firearms, "Non-lethal firearm", armed),
          armed = ifelse(armed %in% firearms, "Firearm", armed),

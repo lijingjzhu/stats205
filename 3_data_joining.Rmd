@@ -604,7 +604,6 @@ our random  sample. That's alright.
 
 ```{r}
 levels(factor(df$armed))
-a <- mean(df$armed == "Disputed", na.rm = TRUE)
 b <- mean(df$armed == "Firearm", na.rm = TRUE)
 c <- mean(df$armed == "Knife", na.rm = TRUE)
 d <- mean(df$armed == "No", na.rm = TRUE)
@@ -614,9 +613,9 @@ g <- mean(df$armed == "Vehicle", na.rm = TRUE)
 n <- sum(is.na(df$armed))
 
 set.seed(10)
-df$armed[is.na(df$armed)] <- sample(c("Disputed", "Firearm", "Knife", "No", 
+df$armed[is.na(df$armed)] <- sample(c("Firearm", "Knife", "No", 
                                       "Non-lethal firearm", "Other", "Vehicle"), 
-                                    prob = c(a, b, c, d, e, f, g), n, 
+                                    prob = c(b, c, d, e, f, g), n, 
                                     replace = TRUE)
 ```
 

@@ -122,7 +122,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 160,Matthew Lundy,2015-02-17T00:00:00Z,shot,Firearm,32,Male,White,Eaton Rapids Township,MI,False,attack,Not fleeing,False
 161,Douglas Sparks,2015-02-17T00:00:00Z,shot,Non-lethal firearm,30,Male,White,Tewksbury,MA,False,attack,Foot,False
 162,Pedro Juan Saldivar,2015-02-17T00:00:00Z,shot,Vehicle,50,Male,Hispanic/Latino,Del Rio,TX,False,other,Not fleeing,False
-163,Janisha Fonville,2015-02-18T00:00:00Z,shot,Disputed,20,Female,Black,Charlotte,NC,True,other,Not fleeing,False
+163,Janisha Fonville,2015-02-18T00:00:00Z,shot,Other,20,Female,Black,Charlotte,NC,True,other,Not fleeing,False
 584,Alejandro Salazar,2015-02-20T00:00:00Z,shot,Firearm,NA,Male,Hispanic/Latino,Houston,TX,False,attack,Car,False
 165,Ruben Villalpando,2015-02-20T00:00:00Z,shot,No,31,Male,Hispanic/Latino,Euless,TX,False,other,Not fleeing,False
 166,Stanley Lamar Grant,2015-02-20T00:00:00Z,shot,Firearm,38,Male,Black,Homewood,AL,False,attack,Not fleeing,False
@@ -219,12 +219,12 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 235,Enoch Gaver,2015-03-21T00:00:00Z,shot,Firearm,21,Male,White,Cottonwood,AZ,False,attack,Not fleeing,False
 231,Phillip Conley,2015-03-22T00:00:00Z,shot,Knife,37,Male,White,Vallejo,CA,True,other,Not fleeing,False
 233,Christopher Ryan Healy,2015-03-22T00:00:00Z,shot and Tasered,Knife,36,Male,White,Portland,OR,True,other,Foot,False
-234,Denzel Brown,2015-03-22T00:00:00Z,shot and Tasered,Disputed,21,Male,Black,Islip,NY,False,attack,Car,False
+234,Denzel Brown,2015-03-22T00:00:00Z,shot and Tasered,Other,21,Male,Black,Islip,NY,False,attack,Car,False
 237,Devin Gates,2015-03-23T00:00:00Z,shot,Firearm,24,Male,Black,Santa Clara,CA,False,attack,Not fleeing,False
 313,Stephen Snyder,2015-03-24T00:00:00Z,shot,Firearm,38,Male,White,Fond du Lac,WI,False,attack,Not fleeing,False
 238,Walter J. Brown III,2015-03-24T00:00:00Z,shot,Firearm,29,Male,Black,Portsmouth,VA,True,attack,Car,False
 247,Scott Dunham,2015-03-24T00:00:00Z,shot,Firearm,57,Male,White,San Jose,CA,True,attack,Not fleeing,False
-239,Nicholas Thomas,2015-03-25T00:00:00Z,shot,Disputed,23,Male,Black,Smyrna,GA,False,other,Car,True
+239,Nicholas Thomas,2015-03-25T00:00:00Z,shot,Other,23,Male,Black,Smyrna,GA,False,other,Car,True
 240,Jeremy Lorenza Kelly,2015-03-25T00:00:00Z,shot,Firearm,27,Male,Black,Johnsonville,SC,False,attack,Foot,False
 241,Victor Terrazas,2015-03-25T00:00:00Z,shot,Firearm,28,Male,Hispanic/Latino,South Los Angeles,CA,False,attack,Foot,False
 242,Joseph Tassinari,2015-03-25T00:00:00Z,shot and Tasered,Firearm,63,Male,White,Glendale,AZ,True,other,Not fleeing,False
@@ -277,7 +277,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 357,Richard Dale Weaver,2015-04-12T00:00:00Z,shot,Knife,83,Male,White,Oklahoma City,OK,True,other,Not fleeing,False
 362,Jason Lee Evans,2015-04-12T00:00:00Z,shot,Firearm,32,Male,White,Salemburg,NC,True,attack,Car,False
 356,Isaac Jimenez,2015-04-13T00:00:00Z,shot,Firearm,27,Male,Hispanic/Latino,Alton,IL,False,attack,Not fleeing,False
-363,Colby Robinson,2015-04-14T00:00:00Z,shot,Disputed,26,Male,Black,DeSoto,TX,False,undetermined,Foot,False
+363,Colby Robinson,2015-04-14T00:00:00Z,shot,Other,26,Male,Black,DeSoto,TX,False,undetermined,Foot,False
 364,Christopher Grant Finley,2015-04-14T00:00:00Z,shot,Knife,31,Male,White,Jonesboro,AR,True,attack,Not fleeing,False
 365,Tevin Barkley,2015-04-15T00:00:00Z,shot,Firearm,22,Male,Black,Miami,FL,False,undetermined,Foot,False
 366,Dante Noble,2015-04-15T00:00:00Z,shot,Knife,41,Male,Black,Spartanburg,SC,False,attack,Not fleeing,False
@@ -352,7 +352,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 444,Justin Way,2015-05-11T00:00:00Z,shot,Knife,28,Male,White,St. Augustine,FL,True,other,Not fleeing,False
 441,D'Angelo Stallworth,2015-05-12T00:00:00Z,shot,Firearm,28,Male,Black,Jacksonville,FL,False,other,Foot,False
 449,Bruce Zalonka,2015-05-12T00:00:00Z,shot and Tasered,Firearm,46,Male,Other,Honolulu,HI,False,attack,Not fleeing,False
-450,Alec Ouzounian,2015-05-12T00:00:00Z,shot,Disputed,40,Male,White,Rancho Santa Margarita,CA,True,other,Not fleeing,False
+450,Alec Ouzounian,2015-05-12T00:00:00Z,shot,Other,40,Male,White,Rancho Santa Margarita,CA,True,other,Not fleeing,False
 456,Sean Michael Pelletier,2015-05-14T00:00:00Z,shot,Firearm,37,Male,White,Portage,MI,True,attack,Car,False
 470,Cary Martin,2015-05-14T00:00:00Z,shot,Firearm,53,Male,White,St. Augustine,FL,True,attack,Not fleeing,False
 460,Mark Farrar,2015-05-15T00:00:00Z,shot,Firearm,41,Male,White,Rockford,IL,True,attack,Not fleeing,False
@@ -382,7 +382,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 476,Anthony Briggs,2015-05-25T00:00:00Z,shot,Knife,36,Male,Black,Huntsville,AL,True,attack,Not fleeing,False
 530,Millard Tallant III,2015-05-26T00:00:00Z,shot,Firearm,62,Male,White,Snohomish,WA,True,attack,Not fleeing,False
 477,Dalton Branch,2015-05-26T00:00:00Z,shot,Firearm,51,Male,Black,Queens,NY,False,attack,Not fleeing,False
-479,Jessie  Williams,2015-05-26T00:00:00Z,shot,Disputed,24,Male,White,Bossier City,LA,False,attack,Not fleeing,False
+479,Jessie  Williams,2015-05-26T00:00:00Z,shot,Other,24,Male,White,Bossier City,LA,False,attack,Not fleeing,False
 480,Scott McAllister,2015-05-27T00:00:00Z,shot,Knife,39,Male,White,Ideal Beach,NJ,False,attack,Not fleeing,False
 481,Garrett  Sandeno,2015-05-27T00:00:00Z,shot,Non-lethal firearm,24,Male,White,Edmond,OK,True,attack,Not fleeing,False
 482,Harry Davis,2015-05-27T00:00:00Z,shot,Knife,57,Male,White,Rockville,GA,True,attack,Not fleeing,False
@@ -426,7 +426,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 540,Isiah Hampton,2015-06-10T00:00:00Z,shot,Firearm,19,Male,Black,Bronx,NY,False,attack,Not fleeing,False
 541,Charles Ziegler,2015-06-11T00:00:00Z,shot,Firearm,40,Male,Black,Pompano Beach,FL,False,attack,Not fleeing,False
 542,Raymond  Phillips,2015-06-11T00:00:00Z,shot,Firearm,86,Male,NA,Columbia,TN,True,attack,Not fleeing,False
-543,Fritz Severe,2015-06-11T00:00:00Z,shot,Disputed,46,Male,Black,Miami,FL,False,other,Not fleeing,False
+543,Fritz Severe,2015-06-11T00:00:00Z,shot,Other,46,Male,Black,Miami,FL,False,other,Not fleeing,False
 544,Mark Flores,2015-06-11T00:00:00Z,shot,Firearm,28,Male,Hispanic/Latino,Bexar County,TX,True,attack,Not fleeing,False
 545,Raymond Peralta-Lantigua,2015-06-11T00:00:00Z,shot,Knife,22,Male,Hispanic/Latino,Hackensack,NJ,True,other,Not fleeing,False
 553,Shelly Haendiges,2015-06-12T00:00:00Z,shot,Non-lethal firearm,17,Female,White,Kokomo,IN,True,attack,Not fleeing,False
@@ -530,7 +530,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 651,Albert Joseph Davis,2015-07-17T00:00:00Z,shot and Tasered,No,23,Male,Black,Orlando,FL,False,attack,Foot,False
 655,Jackie Brand,2015-07-17T00:00:00Z,shot,Firearm,50,Male,White,Needles,CA,True,attack,Not fleeing,False
 657,Darrius Stewart,2015-07-17T00:00:00Z,shot,No,19,Male,Black,Memphis,TN,False,attack,Foot,False
-660,Jose Roman Rodriguez,2015-07-17T00:00:00Z,shot,Disputed,24,Male,Hispanic/Latino,Brownsville,TX,False,other,Other,False
+660,Jose Roman Rodriguez,2015-07-17T00:00:00Z,shot,Other,24,Male,Hispanic/Latino,Brownsville,TX,False,other,Other,False
 650,David  Wheat Jr.,2015-07-18T00:00:00Z,shot,Knife,22,Male,White,Fort Collins,CO,True,attack,Not fleeing,False
 652,Kevin Thomas Snyder,2015-07-18T00:00:00Z,shot,Firearm,46,Male,White,Phoenix,AZ,False,attack,Not fleeing,False
 654,Charles Edward Dewey,2015-07-18T00:00:00Z,shot,Firearm,65,Male,White,Colby,KS,False,attack,Not fleeing,False
@@ -575,7 +575,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 698,Joshua Malave,2015-08-03T00:00:00Z,shot,Firearm,18,Male,White,Campbelltown,PA,False,attack,Foot,False
 699,Franklin Short,2015-08-03T00:00:00Z,shot,Firearm,71,Male,White,Powhatan County,VA,False,attack,Not fleeing,False
 700,Shawn Ruble,2015-08-03T00:00:00Z,shot,Firearm,35,Male,White,Muncie,IN,True,attack,Not fleeing,False
-701,Daniel Robert Avila,2015-08-04T00:00:00Z,shot,Disputed,55,Male,Hispanic/Latino,San Diego County,CA,True,other,Not fleeing,False
+701,Daniel Robert Avila,2015-08-04T00:00:00Z,shot,Other,55,Male,Hispanic/Latino,San Diego County,CA,True,other,Not fleeing,False
 702,Darius D. Graves,2015-08-04T00:00:00Z,shot,Firearm,31,Male,Black,Rantoul,IL,True,undetermined,Not fleeing,True
 703,Tyler Alexander Dattilo,2015-08-05T00:00:00Z,shot,Knife,18,Male,White,Louisville,KY,False,attack,Not fleeing,False
 704,John Dieringer,2015-08-05T00:00:00Z,shot,Knife,51,Male,White,Greenfield,WI,True,other,Not fleeing,False
@@ -652,7 +652,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 782,Yonas Alehegne,2015-08-27T00:00:00Z,shot,Other,30,Male,Black,Oakland,CA,False,attack,Not fleeing,True
 783,Robert Hober,2015-08-27T00:00:00Z,shot,Knife,54,Male,White,San Diego,CA,False,other,Not fleeing,True
 784,Manuel Soriano,2015-08-27T00:00:00Z,shot,Other,29,Male,Hispanic/Latino,Los Angeles,CA,False,attack,Not fleeing,False
-785,Gilbert Flores,2015-08-28T00:00:00Z,shot,Disputed,41,Male,Hispanic/Latino,San Antonio,TX,True,undetermined,Not fleeing,False
+785,Gilbert Flores,2015-08-28T00:00:00Z,shot,Other,41,Male,Hispanic/Latino,San Antonio,TX,True,undetermined,Not fleeing,False
 786,William Evans,2015-08-28T00:00:00Z,shot,Firearm,28,Male,White,Spanish Fork,UT,True,attack,Not fleeing,True
 788,Felix Kumi,2015-08-28T00:00:00Z,shot,No,61,Male,Black,Mount Vernon,NY,False,other,Not fleeing,False
 793,Devin Brian Dial,2015-08-28T00:00:00Z,shot,Firearm,23,Male,White,Longview,TX,False,attack,Not fleeing,False
@@ -692,7 +692,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 823,Eddie Tapia,2015-09-10T00:00:00Z,shot,Firearm,41,Male,Hispanic/Latino,Downey,CA,False,attack,Car,False
 824,Robert T. Edwards,2015-09-11T00:00:00Z,shot,Firearm,31,Male,White,Chester,PA,False,attack,Not fleeing,False
 831,Phillip Pfleghardt,2015-09-11T00:00:00Z,shot,Firearm,44,Male,White,Broomfield,CO,False,attack,Car,False
-822,Derick Davis,2015-09-12T00:00:00Z,shot,Disputed,23,Male,White,Sylacauga,AL,False,undetermined,Other,False
+822,Derick Davis,2015-09-12T00:00:00Z,shot,Other,23,Male,White,Sylacauga,AL,False,undetermined,Other,False
 878,Jack Stevens Jr.,2015-09-12T00:00:00Z,shot,Firearm,45,Male,White,West Knox,TN,False,attack,Not fleeing,False
 821,Martin Francis Hammen,2015-09-13T00:00:00Z,shot,Firearm,39,Male,White,Wellman,IA,True,attack,Not fleeing,False
 825,Clifford Butler,2015-09-13T00:00:00Z,shot,Firearm,67,Male,Black,McAlester,OK,True,attack,Not fleeing,False
@@ -707,7 +707,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 835,Rory Lynn Gunderman,2015-09-16T00:00:00Z,shot,Firearm,31,Male,White,Lead,SD,True,attack,Foot,False
 838,Mark Gary,2015-09-17T00:00:00Z,shot,Firearm,50,Male,White,Beaverton,MI,False,attack,Not fleeing,False
 839,Lawrence Price,2015-09-17T00:00:00Z,shot,Firearm,NA,Male,White,Brodhead,KY,False,attack,Not fleeing,False
-844,Gregory Herrell,2015-09-18T00:00:00Z,shot,Disputed,47,Male,White,Dickson,TN,False,undetermined,Not fleeing,False
+844,Gregory Herrell,2015-09-18T00:00:00Z,shot,Other,47,Male,White,Dickson,TN,False,undetermined,Not fleeing,False
 842,Lucien Rolland,2015-09-19T00:00:00Z,shot,Firearm,46,Male,White,Slidell,LA,False,attack,Car,False
 846,Scott Beech,2015-09-19T00:00:00Z,shot,Firearm,57,Male,White,Washington County,AL,True,attack,Not fleeing,True
 845,Michael Thomas Pierce,2015-09-20T00:00:00Z,shot,Firearm,23,Male,White,Harrisonburg,VA,False,attack,Not fleeing,True
@@ -763,7 +763,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 904,William Combs,2015-10-10T00:00:00Z,shot,Vehicle,38,Male,White,Pinion Hills,CA,True,other,Car,False
 905,Travis Quay,2015-10-10T00:00:00Z,shot,Other,40,Male,White,Cato Township,MI,False,attack,Not fleeing,False
 906,Anthony Aguilar,2015-10-10T00:00:00Z,shot and Tasered,Other,35,Male,Hispanic/Latino,Lisle,IL,False,undetermined,Not fleeing,False
-899,Joe Pasquez Ortiz,2015-10-11T00:00:00Z,shot,Disputed,34,Male,Hispanic/Latino,San Bernardino,CA,False,undetermined,Other,False
+899,Joe Pasquez Ortiz,2015-10-11T00:00:00Z,shot,Other,34,Male,Hispanic/Latino,San Bernardino,CA,False,undetermined,Other,False
 900,Kevin Lau,2015-10-11T00:00:00Z,shot,Firearm,44,Male,Asian/Pacific Islander,Lakes Charles,LA,False,attack,Not fleeing,False
 901,Bernard Brandon Powers,2015-10-11T00:00:00Z,shot,Firearm,23,Male,Black,Taylors,SC,False,attack,Not fleeing,False
 907,Robert Humberto Medellin,2015-10-11T00:00:00Z,shot,Knife,43,Male,Hispanic/Latino,West Odessa,TX,False,other,Car,False
@@ -783,7 +783,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 923,Martin  Ryans Jr.,2015-10-15T00:00:00Z,shot,Firearm,20,Male,Black,Houston,TX,False,attack,Not fleeing,False
 924,Johnny Angel Rangel,2015-10-16T00:00:00Z,shot,No,27,Male,Hispanic/Latino,Valinda,CA,False,attack,Not fleeing,False
 926,Jason Foreman,2015-10-16T00:00:00Z,shot,Firearm,45,Male,NA,Barrow County,GA,False,attack,Not fleeing,False
-927,Ricky Javenta Ball,2015-10-16T00:00:00Z,shot,Disputed,33,Male,Black,Columbus,MS,False,undetermined,Foot,False
+927,Ricky Javenta Ball,2015-10-16T00:00:00Z,shot,Other,33,Male,Black,Columbus,MS,False,undetermined,Foot,False
 929,Gino Paredes,2015-10-17T00:00:00Z,shot,Non-lethal firearm,22,Male,Hispanic/Latino,Modesto,CA,False,attack,Not fleeing,False
 930,Dequan Williams,2015-10-17T00:00:00Z,shot and Tasered,Knife,28,Male,Black,York,PA,True,other,Not fleeing,False
 931,Corey Jones,2015-10-18T00:00:00Z,shot,Firearm,31,Male,Black,Palm Beach Gardens,FL,False,undetermined,Not fleeing,False
@@ -799,14 +799,14 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 944,Timothy Arnold,2015-10-21T00:00:00Z,shot,Firearm,47,Male,White,Kentwood,MI,True,attack,Not fleeing,False
 943,Lawrence Green,2015-10-22T00:00:00Z,shot,Knife,38,Male,Black,Shreveport,LA,False,attack,Not fleeing,False
 945,Adriene Jamarr Ludd,2015-10-22T00:00:00Z,shot,Firearm,36,Male,Black,Carmichael,CA,False,attack,Car,False
-946,Stephen H. Brock,2015-10-22T00:00:00Z,shot,Disputed,53,Male,White,Pine Top,KY,False,other,Not fleeing,False
+946,Stephen H. Brock,2015-10-22T00:00:00Z,shot,Other,53,Male,White,Pine Top,KY,False,other,Not fleeing,False
 1283,John Tozzi,2015-10-24T00:00:00Z,shot,Firearm,NA,Male,NA,New Paltz,NY,False,attack,Not fleeing,False
 947,Juan Ulloa,2015-10-24T00:00:00Z,shot,Firearm,34,Male,Hispanic/Latino,Highgrove,CA,False,attack,Not fleeing,False
 948,Rolly Thomas,2015-10-24T00:00:00Z,shot,Firearm,NA,Male,Black,Cape Coral,FL,False,attack,Not fleeing,False
-950,Dominic Hutchinson,2015-10-24T00:00:00Z,shot,Disputed,30,Male,Black,Cathedral City,CA,False,undetermined,Not fleeing,False
+950,Dominic Hutchinson,2015-10-24T00:00:00Z,shot,Other,30,Male,Black,Cathedral City,CA,False,undetermined,Not fleeing,False
 951,Arthur West,2015-10-24T00:00:00Z,shot,Firearm,28,Male,White,Zanesville,OH,True,attack,Not fleeing,False
 952,Darren Myron Fude,2015-10-24T00:00:00Z,shot,Firearm,47,Male,White,Paddock Lake,WI,False,attack,Not fleeing,False
-953,Jon Ployhar,2015-10-24T00:00:00Z,shot,Disputed,49,Male,White,Kenai Peninsula,AK,False,attack,Not fleeing,False
+953,Jon Ployhar,2015-10-24T00:00:00Z,shot,Other,49,Male,White,Kenai Peninsula,AK,False,attack,Not fleeing,False
 949,John Harley Turner,2015-10-25T00:00:00Z,shot,Firearm,36,Male,White,Talking Rock,GA,False,attack,Not fleeing,False
 954,Kevin Brunson,2015-10-26T00:00:00Z,shot,Vehicle,45,Male,Black,Frederick,MD,False,other,Not fleeing,False
 955,Marquesha McMillan,2015-10-26T00:00:00Z,shot,Firearm,21,Female,Black,Washington,DC,False,attack,Not fleeing,False
@@ -855,7 +855,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1000,Ryan Quinn Martin,2015-11-11T00:00:00Z,shot,Firearm,32,Male,Black,Baltimore,MD,False,attack,Not fleeing,False
 1002,Moises Nero,2015-11-12T00:00:00Z,shot,Knife,42,Male,Black,Sunnyvale,CA,False,other,Not fleeing,False
 1005,Michael Joseph Bartkiewicz,2015-11-13T00:00:00Z,shot,Other,52,Male,White,Gibson County,TN,False,attack,Not fleeing,False
-1007,Ernesto Gamino,2015-11-13T00:00:00Z,shot,Disputed,25,Male,Hispanic/Latino,Jurupa Valley,CA,False,undetermined,NA,False
+1007,Ernesto Gamino,2015-11-13T00:00:00Z,shot,Other,25,Male,Hispanic/Latino,Jurupa Valley,CA,False,undetermined,NA,False
 1008,Matthew Coleman,2015-11-13T00:00:00Z,shot,Firearm,25,Male,White,Eden,GA,False,attack,Foot,False
 1006,Ramon Salazar,2015-11-14T00:00:00Z,shot,Other,31,Male,Hispanic/Latino,Jurupa Valley,CA,False,other,Not fleeing,False
 1003,Richard Perkins,2015-11-15T00:00:00Z,shot,Non-lethal firearm,39,Male,Black,Oakland,CA,False,attack,Not fleeing,False
@@ -899,7 +899,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1042,Zachary Grigsby,2015-11-29T00:00:00Z,shot,Firearm,29,Male,White,Lincoln,NE,False,attack,NA,False
 1043,Tuan Hoang,2015-11-30T00:00:00Z,shot,Vehicle,25,Male,Asian/Pacific Islander,Aurora,CO,False,attack,Car,False
 1044,Darius Smith,2015-11-30T00:00:00Z,shot,Firearm,18,Male,Black,Atlanta,GA,False,attack,Foot,False
-1227,Fernando Sauceda,2015-11-30T00:00:00Z,shot,Disputed,31,Male,Hispanic/Latino,Wink,TX,False,other,Not fleeing,False
+1227,Fernando Sauceda,2015-11-30T00:00:00Z,shot,Other,31,Male,Hispanic/Latino,Wink,TX,False,other,Not fleeing,False
 1045,Joshua  Jozefowicz,2015-12-01T00:00:00Z,shot,Firearm,23,Male,White,Bangor,ME,False,attack,Foot,False
 1047,John Anthony Gonzalez,2015-12-01T00:00:00Z,shot,Firearm,18,Male,Hispanic/Latino,Norwalk,CA,False,attack,Not fleeing,False
 1049,Phillip Munoz,2015-12-02T00:00:00Z,shot,Firearm,35,Male,Hispanic/Latino,Denver,CO,False,attack,Car,False
@@ -941,10 +941,10 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1089,Enrique Gonzalez,2015-12-13T00:00:00Z,shot,Firearm,32,Male,Hispanic/Latino,Mountain View,CO,False,attack,Not fleeing,False
 1085,Calvin McKinnis,2015-12-14T00:00:00Z,shot,Firearm,33,Male,Black,New Orleans,LA,False,attack,Not fleeing,True
 1088,Jeffrey Gene Evans,2015-12-14T00:00:00Z,shot and Tasered,Knife,52,Male,White,Middle River,MD,True,other,Not fleeing,False
-1090,Michael  Thomason,2015-12-14T00:00:00Z,shot,Disputed,56,Male,White,Humboldt,TN,False,undetermined,Not fleeing,False
+1090,Michael  Thomason,2015-12-14T00:00:00Z,shot,Other,56,Male,White,Humboldt,TN,False,undetermined,Not fleeing,False
 1091,Brenda Dean Kimberling,2015-12-14T00:00:00Z,shot,Firearm,48,Female,White,Las Vegas,NV,True,attack,Not fleeing,False
 1092,Mharloun Verdejo  Saycon,2015-12-14T00:00:00Z,shot,Knife,39,Male,Asian/Pacific Islander,Long Beach,CA,False,other,Not fleeing,False
-1093,Hector Alvarez,2015-12-14T00:00:00Z,shot,Disputed,19,Male,Hispanic/Latino,Gilroy,CA,False,undetermined,NA,True
+1093,Hector Alvarez,2015-12-14T00:00:00Z,shot,Other,19,Male,Hispanic/Latino,Gilroy,CA,False,undetermined,NA,True
 1094,Roberto Sanchez,2015-12-14T00:00:00Z,shot,Firearm,45,Male,Hispanic/Latino,Las Vegas,NV,False,attack,Not fleeing,False
 1095,Mark Toney,2015-12-14T00:00:00Z,shot,Firearm,33,Male,White,Mount Hope,WV,False,attack,Not fleeing,False
 1096,Ronnie Dubose Carter,2015-12-15T00:00:00Z,shot,Vehicle,51,Male,Black,Dallas,NC,False,attack,Car,False
@@ -955,7 +955,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1101,Amos Frerichs,2015-12-18T00:00:00Z,shot,Vehicle,32,Male,White,Knoxville,TN,False,attack,Car,False
 1102,Robert L. Martinez,2015-12-18T00:00:00Z,shot,Firearm,58,Male,Hispanic/Latino,Taos,NM,False,attack,Not fleeing,False
 1103,Trayvon Scruggs,2015-12-19T00:00:00Z,shot,Firearm,24,Male,Black,Concord,VA,False,attack,NA,False
-1105,Ruben Jose Herrera,2015-12-19T00:00:00Z,shot,Disputed,26,Male,Hispanic/Latino,Los Angeles,CA,True,attack,Not fleeing,False
+1105,Ruben Jose Herrera,2015-12-19T00:00:00Z,shot,Other,26,Male,Hispanic/Latino,Los Angeles,CA,True,attack,Not fleeing,False
 1106,Leroy Browning,2015-12-20T00:00:00Z,shot,Firearm,30,Male,Black,Palmdale,CA,False,attack,Not fleeing,False
 1107,Mark  Ramirez,2015-12-20T00:00:00Z,shot,Firearm,31,Male,Hispanic/Latino,Amarillo,TX,True,attack,Not fleeing,False
 1108,Guadalupe Quiroz,2015-12-21T00:00:00Z,shot,Firearm,34,Male,Hispanic/Latino,Hemet,CA,False,attack,Not fleeing,False
@@ -967,7 +967,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1119,Brandon Barsnick,2015-12-21T00:00:00Z,shot,Firearm,30,Male,White,Smartsville,CA,False,attack,Not fleeing,False
 1114,Charles Reynolds,2015-12-22T00:00:00Z,shot,Firearm,61,Male,NA,Ludlow,KY,False,attack,Not fleeing,True
 1115,Kenneth Stephens,2015-12-22T00:00:00Z,shot,Firearm,56,Male,White,Burlington,VT,False,attack,Not fleeing,True
-1116,Michael Hilber,2015-12-22T00:00:00Z,shot,Disputed,29,Male,White,Brooksville,FL,False,undetermined,Car,False
+1116,Michael Hilber,2015-12-22T00:00:00Z,shot,Other,29,Male,White,Brooksville,FL,False,undetermined,Car,False
 1117,Jose  Rodriguez,2015-12-22T00:00:00Z,shot,Firearm,19,Male,Hispanic/Latino,Albuquerque,NM,False,undetermined,Foot,True
 1118,Kevin Matthews,2015-12-23T00:00:00Z,shot,No,35,Male,Black,Dearborn,MI,True,other,Not fleeing,False
 1120,Schuylar Gunning,2015-12-24T00:00:00Z,shot,Vehicle,36,Male,White,Winnsboro,LA,False,other,Car,False
@@ -980,14 +980,14 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1123,Bettie Jones,2015-12-26T00:00:00Z,shot,No,55,Female,Black,Chicago,IL,False,other,NA,False
 1124,Quintonio LeGrier,2015-12-26T00:00:00Z,shot,Other,19,Male,Black,Chicago,IL,True,undetermined,Not fleeing,False
 1151,Gilbert Heredia,2015-12-26T00:00:00Z,shot,Firearm,38,Male,Hispanic/Latino,Homedale,ID,False,attack,Not fleeing,True
-1128,Michael Parker,2015-12-27T00:00:00Z,shot,Disputed,36,Male,White,Lucedale,MS,False,undetermined,Car,False
+1128,Michael Parker,2015-12-27T00:00:00Z,shot,Other,36,Male,White,Lucedale,MS,False,undetermined,Car,False
 1132,Sean Mould,2015-12-27T00:00:00Z,shot,Knife,34,Male,White,Tempe,AZ,True,other,Not fleeing,True
-1143,Gayneaux Paul Trahan,2015-12-27T00:00:00Z,shot,Disputed,52,Male,White,Franklin,LA,False,undetermined,Not fleeing,False
+1143,Gayneaux Paul Trahan,2015-12-27T00:00:00Z,shot,Other,52,Male,White,Franklin,LA,False,undetermined,Not fleeing,False
 1131,Corey Jason Achstein,2015-12-28T00:00:00Z,shot,Non-lethal firearm,28,Male,White,Suffolk,VA,False,attack,Not fleeing,True
 1133,Siolosega Velega-Nuufolau,2015-12-29T00:00:00Z,shot,Knife,50,Female,Other,Santa Nella,CA,True,other,Not fleeing,False
 1134,Tien Hua,2015-12-29T00:00:00Z,shot,Other,NA,Male,Asian/Pacific Islander,Rosemead,CA,False,undetermined,Not fleeing,False
 1135,Fred Perez,2015-12-30T00:00:00Z,shot,Knife,55,Male,Hispanic/Latino,Fresno,CA,False,attack,Not fleeing,True
-1136,John Randell Veach,2015-12-30T00:00:00Z,shot,Disputed,39,Male,NA,Rawlins,WY,False,undetermined,NA,False
+1136,John Randell Veach,2015-12-30T00:00:00Z,shot,Other,39,Male,NA,Rawlins,WY,False,undetermined,NA,False
 1137,Keith Childress,2015-12-31T00:00:00Z,shot,No,23,Male,Black,Las Vegas,NV,False,other,Not fleeing,True
 1139,Joshua Sisson,2016-01-01T00:00:00Z,shot,Knife,30,Male,White,San Diego,CA,False,other,Not fleeing,True
 1138,Sean O'Brien,2016-01-02T00:00:00Z,shot and Tasered,Knife,37,Male,White,Livingston,MT,False,other,Not fleeing,False
@@ -1042,7 +1042,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1190,Jim Redmond,2016-01-19T00:00:00Z,shot,Firearm,28,Male,White,Valdosta,GA,False,attack,Not fleeing,False
 1191,Timothy Albert,2016-01-20T00:00:00Z,shot,Firearm,40,Male,Black,Port Barre,LA,False,attack,Not fleeing,False
 1194,Randy Joe Sanders,2016-01-20T00:00:00Z,shot,Firearm,33,Male,White,Meridianville,AL,False,other,Foot,True
-1202,Michael Clyde Lynch,2016-01-20T00:00:00Z,shot,Disputed,37,Male,White,Kerrville,TX,False,other,Other,False
+1202,Michael Clyde Lynch,2016-01-20T00:00:00Z,shot,Other,37,Male,White,Kerrville,TX,False,other,Other,False
 1201,Cedric Norris,2016-01-21T00:00:00Z,shot,Firearm,39,Male,Black,Eufaula,OK,True,attack,Car,False
 1200,Michael Lamar Robinson,2016-01-23T00:00:00Z,shot,Non-lethal firearm,43,Male,White,Clanton,AL,False,undetermined,Not fleeing,True
 1199,Sergio Alvardo-Morales,2016-01-25T00:00:00Z,shot,Knife,38,Male,Hispanic/Latino,Reno,NV,False,other,Not fleeing,False
@@ -1055,7 +1055,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1209,Janet Wilson,2016-01-27T00:00:00Z,shot,Vehicle,31,Female,Black,Dearborn,MI,True,other,Car,False
 1210,Nathan Lee Bailey,2016-01-27T00:00:00Z,shot,Firearm,30,Male,White,Mansfield,TX,False,attack,Not fleeing,False
 1212,Israel Vladimir Rodriguez,2016-01-27T00:00:00Z,shot,Firearm,26,Male,Hispanic/Latino,Cobb County,GA,False,attack,Car,False
-1214,William A. Adams,2016-01-28T00:00:00Z,shot,Disputed,33,Male,White,Omaha,NE,False,undetermined,Foot,False
+1214,William A. Adams,2016-01-28T00:00:00Z,shot,Other,33,Male,White,Omaha,NE,False,undetermined,Foot,False
 1215,Christopher Kalonji,2016-01-28T00:00:00Z,shot,Firearm,19,Male,Black,Clackamas County,OR,True,other,Not fleeing,False
 1213,Jacqueline D. Salyers,2016-01-29T00:00:00Z,shot,Vehicle,32,Female,White,Tacoma,WA,False,undetermined,Not fleeing,False
 1216,Randolph McClain,2016-01-29T00:00:00Z,shot,Firearm,33,Male,Black,Lynn,MA,False,attack,Other,False
@@ -1113,14 +1113,14 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1269,Marc Stoddart,2016-02-14T00:00:00Z,shot,Knife,50,Male,White,Bradenton,FL,True,other,Not fleeing,False
 1271,Eduardo Rodriguez,2016-02-14T00:00:00Z,shot,Firearm,29,Male,Hispanic/Latino,Los Angeles,CA,False,other,Not fleeing,False
 1282,Guadalupe Sauceda,2016-02-15T00:00:00Z,shot,Firearm,52,Male,Hispanic/Latino,Jal,NM,False,attack,Not fleeing,False
-1274,Brandon Lee Witt,2016-02-15T00:00:00Z,shot,Disputed,39,Male,White,Yorba Linda,CA,False,undetermined,Not fleeing,False
+1274,Brandon Lee Witt,2016-02-15T00:00:00Z,shot,Other,39,Male,White,Yorba Linda,CA,False,undetermined,Not fleeing,False
 1275,Christopher Andrews,2016-02-16T00:00:00Z,shot,Knife,51,Male,White,Fairfield,CT,False,other,Not fleeing,False
 1278,Destry Meikle,2016-02-16T00:00:00Z,shot,Vehicle,48,Male,White,Republic,MO,False,other,Other,False
 1279,Shawn Henry Allen Dickens,2016-02-16T00:00:00Z,shot,Firearm,30,Male,White,Mena,AR,False,other,Foot,False
 1281,Paul Gaston,2016-02-17T00:00:00Z,shot,Non-lethal firearm,37,Male,Black,Cincinnati,OH,False,other,Foot,False
-1284,Joseph Noel,2016-02-18T00:00:00Z,shot,Disputed,25,Male,White,Commerce,GA,False,other,Not fleeing,False
-1285,Jose Quintanilla,2016-02-18T00:00:00Z,shot,Disputed,30,Male,Hispanic/Latino,Santa Ana,CA,False,undetermined,Not fleeing,False
-1286,Oscar Reyes,2016-02-18T00:00:00Z,shot,Disputed,35,Male,NA,Santa Ana,CA,False,undetermined,Not fleeing,False
+1284,Joseph Noel,2016-02-18T00:00:00Z,shot,Other,25,Male,White,Commerce,GA,False,other,Not fleeing,False
+1285,Jose Quintanilla,2016-02-18T00:00:00Z,shot,Other,30,Male,Hispanic/Latino,Santa Ana,CA,False,undetermined,Not fleeing,False
+1286,Oscar Reyes,2016-02-18T00:00:00Z,shot,Other,35,Male,NA,Santa Ana,CA,False,undetermined,Not fleeing,False
 1287,Ronnie Padron,2016-02-18T00:00:00Z,shot,Firearm,32,Male,Hispanic/Latino,Reno,TX,False,attack,Not fleeing,False
 1295,Justin Patrick Moses,2016-02-19T00:00:00Z,shot,Knife,35,Male,White,Ogden,UT,True,attack,Not fleeing,False
 1297,Curtis James Dugger,2016-02-19T00:00:00Z,shot,Firearm,NA,Male,White,Elizabethton,TN,False,attack,Not fleeing,False
@@ -1145,24 +1145,24 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1313,Martin Wirth,2016-02-24T00:00:00Z,shot,Firearm,58,Male,White,Bailey,CO,True,attack,Not fleeing,False
 1314,Victor Rivera,2016-02-24T00:00:00Z,shot,Vehicle,27,Male,Hispanic/Latino,Phoenix,AZ,False,other,Car,False
 1316,Francisco Garcia,2016-02-24T00:00:00Z,shot,Vehicle,26,Male,Hispanic/Latino,Cerritos,CA,False,undetermined,Not fleeing,False
-1318,Christopher J. Davis,2016-02-24T00:00:00Z,shot,Disputed,21,Male,Black,East Troy,WI,False,undetermined,Car,False
+1318,Christopher J. Davis,2016-02-24T00:00:00Z,shot,Other,21,Male,Black,East Troy,WI,False,undetermined,Car,False
 1312,Luke Miller,2016-02-25T00:00:00Z,shot,Firearm,37,Male,White,Evans,CO,False,attack,Foot,True
 1315,Greg Gunn,2016-02-25T00:00:00Z,shot,Other,56,Male,Black,Montgomery,AL,False,undetermined,Not fleeing,True
 1319,Tristan Conti,2016-02-25T00:00:00Z,shot,Firearm,19,Male,White,Silver Springs,NV,False,attack,Not fleeing,True
 1320,Cedric Ford,2016-02-25T00:00:00Z,shot,Firearm,38,Male,Black,Hesston,KS,True,attack,Not fleeing,False
 1322,Kionte DeShaun Spencer,2016-02-26T00:00:00Z,shot,Non-lethal firearm,18,Male,Black,Roanoke,VA,False,other,Not fleeing,False
-1324,Abraham Mitchell Fryer,2016-02-26T00:00:00Z,shot,Disputed,35,Male,White,Rapid Valley,SD,False,attack,Not fleeing,False
+1324,Abraham Mitchell Fryer,2016-02-26T00:00:00Z,shot,Other,35,Male,White,Rapid Valley,SD,False,attack,Not fleeing,False
 1325,Fernando Hernandez,2016-02-27T00:00:00Z,shot,Firearm,23,Male,Hispanic/Latino,San Antonio,TX,False,attack,Car,True
 1321,Nathan Grissom,2016-02-28T00:00:00Z,shot,Firearm,41,Male,White,Ashville,AL,False,attack,Not fleeing,False
 1323,Earl Hicks,2016-02-28T00:00:00Z,shot,Firearm,44,Male,White,Rapid City,SD,True,attack,Not fleeing,False
-1327,Akiel Denkins,2016-02-29T00:00:00Z,shot,Disputed,24,Male,Black,Raleigh,NC,False,other,Foot,False
+1327,Akiel Denkins,2016-02-29T00:00:00Z,shot,Other,24,Male,Black,Raleigh,NC,False,other,Foot,False
 1328,Dimitri Corcino,2016-03-01T00:00:00Z,shot,Firearm,39,Male,Hispanic/Latino,Palm Bay,FL,True,attack,Not fleeing,False
 1329,Jorge Brian Gonzalez,2016-03-01T00:00:00Z,shot,Firearm,22,Male,Hispanic/Latino,Euless,TX,False,attack,Not fleeing,False
 1330,Mickey Dewayne Sweatt,2016-03-01T00:00:00Z,shot,Firearm,37,Male,White,Gautier,MS,False,attack,Not fleeing,False
 1331,Travis Boyd Bradley,2016-03-02T00:00:00Z,shot,No,36,Male,White,Bel Air,MD,True,other,Not fleeing,False
 1341,Daniel Burkhardt,2016-03-02T00:00:00Z,shot and Tasered,Knife,41,Male,White,Johnstown,PA,False,other,Not fleeing,False
 1335,Sergio Ochoa,2016-03-03T00:00:00Z,shot,Knife,27,Male,Hispanic/Latino,Gilbert,AZ,False,other,Car,False
-1338,John Alan Chamberlain,2016-03-04T00:00:00Z,shot,Disputed,66,Male,NA,Sims,AR,False,undetermined,NA,False
+1338,John Alan Chamberlain,2016-03-04T00:00:00Z,shot,Other,66,Male,NA,Sims,AR,False,undetermined,NA,False
 1342,Brandon Stanley,2016-03-04T00:00:00Z,shot,No,30,Male,White,East Berstadt,KY,False,undetermined,Not fleeing,False
 1334,Darrell Bosell,2016-03-05T00:00:00Z,shot,Firearm,34,Male,White,Cheektowaga,NY,True,attack,Not fleeing,False
 1336,Herbert Ballance,2016-03-05T00:00:00Z,shot,Firearm,22,Male,White,Beaumont,TX,False,undetermined,Not fleeing,False
@@ -1171,7 +1171,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1340,Osvaldo Torres,2016-03-06T00:00:00Z,shot,Firearm,41,Male,Hispanic/Latino,South Gate,CA,False,attack,Other,False
 1339,Philip Vitullo,2016-03-07T00:00:00Z,shot,Firearm,49,Male,White,Rochester,NY,True,attack,Not fleeing,False
 1343,Bryon Rosas,2016-03-07T00:00:00Z,shot,Knife,45,Male,White,San Jose,CA,False,other,Not fleeing,False
-1344,Randall J. Selsor,2016-03-07T00:00:00Z,shot,Disputed,45,Male,White,Topeka,KS,False,undetermined,Not fleeing,False
+1344,Randall J. Selsor,2016-03-07T00:00:00Z,shot,Other,45,Male,White,Topeka,KS,False,undetermined,Not fleeing,False
 1345,"John Charles ""JC"" Graham",2016-03-07T00:00:00Z,shot,Firearm,42,Male,White,Billings,MT,False,attack,Not fleeing,False
 1348,Daniel H. Chavez,2016-03-07T00:00:00Z,shot,Vehicle,41,Male,Hispanic/Latino,Carlsbad,NM,False,undetermined,Car,False
 1347,Jeffery Glen Casale,2016-03-08T00:00:00Z,shot,Non-lethal firearm,27,Male,White,Tampa,FL,True,other,Not fleeing,False
@@ -1188,7 +1188,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1365,Marco Loud,2016-03-12T00:00:00Z,shot and Tasered,No,20,Male,Black,Houston,TX,False,attack,Not fleeing,False
 1476,Christopher Michael Tokazowski,2016-03-12T00:00:00Z,shot,Firearm,43,Male,NA,Greensboro,NC,False,attack,Not fleeing,True
 1356,Gevork Alachadzhyan,2016-03-13T00:00:00Z,shot,Vehicle,45,Male,White,Glendale,CA,True,attack,Car,False
-1358,Jose Raul Cruz,2016-03-13T00:00:00Z,shot,Disputed,16,Male,Hispanic/Latino,Addison,TX,False,undetermined,Not fleeing,False
+1358,Jose Raul Cruz,2016-03-13T00:00:00Z,shot,Other,16,Male,Hispanic/Latino,Addison,TX,False,undetermined,Not fleeing,False
 1359,Joshua Grubb,2016-03-13T00:00:00Z,shot,No,30,Male,White,Lenoir City,TN,False,other,Car,True
 1360,Wesley Chad Deerman,2016-03-13T00:00:00Z,shot,Firearm,26,Male,White,Piedmont,AL,False,attack,Car,False
 1361,Keith Montgomery Jr.,2016-03-13T00:00:00Z,shot,Firearm,24,Male,Black,Chester,PA,False,attack,Not fleeing,False
@@ -1209,7 +1209,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1390,Ryan Shorak,2016-03-18T00:00:00Z,shot,Firearm,37,Male,White,Ohioville,PA,False,attack,Not fleeing,False
 1401,David Alma Giles,2016-03-18T00:00:00Z,shot,Other,60,Male,White,Idaho Falls,ID,False,attack,Not fleeing,False
 1382,India Beaty,2016-03-19T00:00:00Z,shot,Non-lethal firearm,25,Female,Black,Norfolk,VA,False,attack,Not fleeing,False
-1387,Joshua Douglas,2016-03-19T00:00:00Z,shot,Disputed,24,Male,White,Covington,LA,False,undetermined,Car,False
+1387,Joshua Douglas,2016-03-19T00:00:00Z,shot,Other,24,Male,White,Covington,LA,False,undetermined,Car,False
 1388,Thurman Reynolds,2016-03-19T00:00:00Z,shot,Firearm,21,Male,Black,Chicago,IL,False,attack,Foot,False
 1392,Dylan R. Whitaker,2016-03-19T00:00:00Z,shot,Firearm,23,Male,White,White Plains,KY,False,attack,Other,False
 1380,Boyd Keith Ballard,2016-03-20T00:00:00Z,shot,Knife,61,Male,White,Hopewell,VA,True,other,Not fleeing,True
@@ -1257,7 +1257,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1428,Raul Salvador Marquez,2016-04-04T00:00:00Z,shot,Knife,50,Male,Hispanic/Latino,Minneapolis,MN,True,attack,Not fleeing,False
 1437,Peter J. Doherty,2016-04-05T00:00:00Z,shot,Knife,NA,Male,White,West Springfield,MA,False,other,Not fleeing,False
 1438,Kevin Hicks,2016-04-05T00:00:00Z,shot,No,44,Male,Black,Indianapolis,IN,False,attack,Not fleeing,True
-1439,Marvin Cremeans,2016-04-06T00:00:00Z,shot,Disputed,60,Male,White,Oak Hill,OH,False,undetermined,Not fleeing,False
+1439,Marvin Cremeans,2016-04-06T00:00:00Z,shot,Other,60,Male,White,Oak Hill,OH,False,undetermined,Not fleeing,False
 1441,Laronda Sweatt,2016-04-06T00:00:00Z,shot,Knife,40,Female,Black,Gallatin,TN,False,attack,Not fleeing,True
 1442,Cesar Frias,2016-04-06T00:00:00Z,shot and Tasered,Knife,20,Male,Hispanic/Latino,Sylmar,CA,True,undetermined,NA,False
 1443,Luis Gongora,2016-04-07T00:00:00Z,shot,Knife,45,Male,Hispanic/Latino,San Francisco,CA,False,other,Not fleeing,False
@@ -1271,8 +1271,8 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1451,William Clark,2016-04-10T00:00:00Z,shot,Knife,30,Male,White,Rotterdam,NY,False,attack,Not fleeing,False
 1452,Arturo Yobani-Torrez Valdez,2016-04-10T00:00:00Z,shot,Knife,28,Male,Hispanic/Latino,Los Angeles,CA,False,attack,Not fleeing,False
 1454,Efrem Trujillo,2016-04-11T00:00:00Z,shot,Firearm,22,Male,Hispanic/Latino,Las Vegas,NV,False,attack,Not fleeing,False
-1455,Pierre Loury,2016-04-11T00:00:00Z,shot,Disputed,16,Male,Black,Chicago,IL,False,undetermined,Foot,False
-1456,Dion Daman,2016-04-12T00:00:00Z,shot,Disputed,40,Male,White,Denver,CO,False,undetermined,Car,False
+1455,Pierre Loury,2016-04-11T00:00:00Z,shot,Other,16,Male,Black,Chicago,IL,False,undetermined,Foot,False
+1456,Dion Daman,2016-04-12T00:00:00Z,shot,Other,40,Male,White,Denver,CO,False,undetermined,Car,False
 1457,Joshua Moreno,2016-04-12T00:00:00Z,shot,Firearm,38,Male,NA,Benton,IL,False,attack,Car,False
 1458,Travis Wood,2016-04-12T00:00:00Z,shot,Vehicle,20,Male,White,Noma,FL,False,other,Car,True
 1459,Rodney Watts,2016-04-13T00:00:00Z,shot,No,35,Male,Black,Stockton,CA,False,attack,Not fleeing,False
@@ -1281,7 +1281,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1463,Jeff Robertson,2016-04-14T00:00:00Z,shot and Tasered,No,54,Male,NA,McPherson,KS,True,attack,Not fleeing,False
 1465,Clemente Najeda,2016-04-15T00:00:00Z,shot,Other,38,Male,NA,Lake Elsinore,CA,False,other,Not fleeing,False
 1469,David Swatsky,2016-04-15T00:00:00Z,shot,Firearm,52,Male,NA,Cache,OK,True,attack,Not fleeing,False
-1471,Storm Allen Smith,2016-04-15T00:00:00Z,shot,Disputed,26,Male,NA,Muncie,IN,False,undetermined,Foot,True
+1471,Storm Allen Smith,2016-04-15T00:00:00Z,shot,Other,26,Male,NA,Muncie,IN,False,undetermined,Foot,True
 1473,Gerald Robert Boyes,2016-04-16T00:00:00Z,shot,Firearm,53,Male,White,Antioch,IL,False,attack,Not fleeing,False
 1464,Kisha Arrone,2016-04-17T00:00:00Z,shot,Firearm,35,Female,Black,Dayton,OH,False,undetermined,Car,False
 1466,Eric John Wilson,2016-04-17T00:00:00Z,shot,No,22,Male,NA,El Paso,TX,True,other,Not fleeing,False
@@ -1294,7 +1294,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1477,Jorevis Scruggs,2016-04-19T00:00:00Z,shot,Firearm,15,Male,Black,St. Louis,MO,False,attack,Other,False
 1478,Daniel Eric Blackmon,2016-04-19T00:00:00Z,shot,Firearm,38,Male,NA,Brooksville,AL,False,attack,Car,False
 1480,Francis Scot Dufore,2016-04-20T00:00:00Z,shot,Firearm,41,Male,White,Homestead,FL,False,attack,Not fleeing,False
-1481,TK TK,2016-04-20T00:00:00Z,shot,Disputed,NA,Male,NA,Perryville,AR,False,undetermined,Not fleeing,False
+1481,TK TK,2016-04-20T00:00:00Z,shot,Other,NA,Male,NA,Perryville,AR,False,undetermined,Not fleeing,False
 1482,Mario Martinez,2016-04-21T00:00:00Z,shot,Knife,48,Male,Hispanic/Latino,Everett,MA,False,other,Not fleeing,False
 1484,Tyler Hunkin,2016-04-22T00:00:00Z,shot,Knife,29,Male,White,Austin,TX,True,attack,Not fleeing,False
 1485,Carl Baranishyn,2016-04-22T00:00:00Z,shot,Knife,51,Male,White,Berne,NY,True,attack,Not fleeing,False
@@ -1313,7 +1313,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1498,Kendar del Rosario,2016-04-28T00:00:00Z,shot,Knife,37,Male,NA,Miami,FL,False,undetermined,Not fleeing,False
 1499,Lee Easter,2016-04-28T00:00:00Z,shot,Firearm,53,Male,NA,Boise,ID,True,attack,Not fleeing,False
 1500,Michael Kurtz,2016-04-28T00:00:00Z,shot and Tasered,Knife,45,Male,NA,Spokane,WA,False,undetermined,Not fleeing,True
-1501,TK TK,2016-04-28T00:00:00Z,shot,Disputed,NA,Male,NA,Houston,TX,False,attack,Car,False
+1501,TK TK,2016-04-28T00:00:00Z,shot,Other,NA,Male,NA,Houston,TX,False,attack,Car,False
 1506,Jeffrey Darrell Hobbs,2016-04-29T00:00:00Z,shot,Vehicle,48,Male,White,Jackson,MO,False,attack,Car,False
 1504,Oswald Mattner,2016-04-30T00:00:00Z,shot,Knife,42,Male,NA,Wausau,WI,False,other,Foot,False
 1505,Mark Daniel Bess,2016-04-30T00:00:00Z,shot,Knife,33,Male,White,Spanish Fork,UT,False,other,Foot,False
@@ -1325,7 +1325,7 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1509,Richard Ferretti,2016-05-04T00:00:00Z,shot,Vehicle,52,Male,NA,Philadelphia,PA,False,undetermined,Not fleeing,False
 1511,Cayce A. DiTullio,2016-05-04T00:00:00Z,shot,Firearm,39,Male,NA,Burien,WA,False,undetermined,Car,False
 1512,Matthew Tucker,2016-05-04T00:00:00Z,shot,Knife,18,Male,NA,Temecula,CA,False,other,Not fleeing,False
-1513,Gerry J. Thompson,2016-05-04T00:00:00Z,shot,Disputed,40,Male,White,Buffalo,MO,False,attack,Not fleeing,False
+1513,Gerry J. Thompson,2016-05-04T00:00:00Z,shot,Other,40,Male,White,Buffalo,MO,False,attack,Not fleeing,False
 1516,Corey DiGiovanni,2016-05-05T00:00:00Z,shot,Vehicle,36,Male,White,Gretna,LA,False,attack,Car,False
 1517,Burt Johnson,2016-05-05T00:00:00Z,shot,Firearm,38,Male,NA,Milwaukee,WI,False,attack,Foot,False
 1518,Deresha Armstrong,2016-05-05T00:00:00Z,shot,Firearm,26,Female,Black,Orlando,FL,False,attack,Not fleeing,False
@@ -1351,8 +1351,8 @@ id,name,date,manner_of_death,armed,age,gender,race,city,state,signs_of_mental_il
 1540,Ryan Johnson,2016-05-14T00:00:00Z,shot and Tasered,Firearm,34,Male,White,Stockbridge,GA,True,undetermined,Not fleeing,False
 1541,Dracy Pendleton,2016-05-15T00:00:00Z,shot,Firearm,35,Male,White,Shawnee National Forest,IL,False,attack,Foot,False
 1542,Jabril Robinson,2016-05-16T00:00:00Z,shot,Firearm,23,Male,NA,Riverdale,GA,False,attack,Foot,False
-1544,TK TK,2016-05-17T00:00:00Z,shot,Disputed,NA,NA,NA,Siskiyou County,CA,True,undetermined,Not fleeing,False
+1544,TK TK,2016-05-17T00:00:00Z,shot,Other,NA,NA,NA,Siskiyou County,CA,True,undetermined,Not fleeing,False
 1543,Garry Conrad,2016-05-18T00:00:00Z,shot,Knife,46,Male,White,New York,NY,False,other,Not fleeing,False
 1545,Joseph Weatherby,2016-05-18T00:00:00Z,shot,Firearm,44,Male,White,Sullivan,MO,False,attack,Other,False
 1546,TK TK,2016-05-18T00:00:00Z,shot,Firearm,NA,Male,NA,Phoenix,AZ,False,attack,Not fleeing,False
-1547,TK TK,2016-05-19T00:00:00Z,shot,Disputed,NA,Male,NA,Las Vegas,NV,False,attack,Not fleeing,False
+1547,TK TK,2016-05-19T00:00:00Z,shot,Other,NA,Male,NA,Las Vegas,NV,False,attack,Not fleeing,False

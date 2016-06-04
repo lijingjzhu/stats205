@@ -156,95 +156,40 @@ true_race_prop <- total_race %>%
 ## Asian and Pacific Islander
 
 ```{r}
-binom.test(count_df$n[1], n, p = true_race_prop$true_prop[1],
-           alternative = "greater")
-
-prop.test(count_df$n[1], n, p = true_race_prop$true_prop[1],
-           alternative = "greater")
-
-binom.test(count_df$n[1], n, p = true_race_prop$true_prop[1],
-           alternative = "less")
-
-prop.test(count_df$n[1], n, p = true_race_prop$true_prop[1],
+asian_binom <- binom.test(count_df$n[1], n, p = true_race_prop$true_prop[1],
            alternative = "less")
 ```
 
 ## Black
 
 ```{r}
-binom.test(count_df$n[2], n, p = true_race_prop$true_prop[2],
+black_binom <- binom.test(count_df$n[2], n, p = true_race_prop$true_prop[2],
            alternative = "greater")
-
-prop.test(count_df$n[2], n, p = true_race_prop$true_prop[2],
-           alternative = "greater")
-
-binom.test(count_df$n[2], n, p = true_race_prop$true_prop[2],
-           alternative = "less")
-
-prop.test(count_df$n[2], n, p = true_race_prop$true_prop[2],
-           alternative = "less")
 ```
 
 ## Hispanic/Latino
 
 ```{r}
-binom.test(count_df$n[3], n, p = true_race_prop$true_prop[3],
-           alternative = "greater")
-
-prop.test(count_df$n[3], n, p = true_race_prop$true_prop[3],
-           alternative = "greater")
-
-binom.test(count_df$n[3], n, p = true_race_prop$true_prop[3],
-           alternative = "less")
-
-prop.test(count_df$n[3], n, p = true_race_prop$true_prop[3],
-           alternative = "less")
+hispanic_binom <- binom.test(count_df$n[3], n, p = true_race_prop$true_prop[3])
 ```
 
 ## Native American
 
 ```{r}
-binom.test(count_df$n[4], n, p = true_race_prop$true_prop[4],
+native_binom <- binom.test(count_df$n[4], n, p = true_race_prop$true_prop[4],
            alternative = "greater")
-
-prop.test(count_df$n[4], n, p = true_race_prop$true_prop[4],
-           alternative = "greater")
-
-binom.test(count_df$n[4], n, p = true_race_prop$true_prop[4],
-           alternative = "less")
-
-prop.test(count_df$n[4], n, p = true_race_prop$true_prop[4],
-           alternative = "less")
-```
-
-## Other
-
-```{r}
-binom.test(count_df$n[5], n, p = true_race_prop$true_prop[5],
-           alternative = "greater")
-
-prop.test(count_df$n[5], n, p = true_race_prop$true_prop[5],
-           alternative = "greater")
-
-binom.test(count_df$n[5], n, p = true_race_prop$true_prop[5],
-           alternative = "less")
-
-prop.test(count_df$n[5], n, p = true_race_prop$true_prop[5],
-           alternative = "less")
 ```
 
 ## White
 
 ```{r}
-binom.test(count_df$n[6], n, p = true_race_prop$true_prop[6],
-           alternative = "greater")
-
-prop.test(count_df$n[6], n, p = true_race_prop$true_prop[6],
-           alternative = "greater")
-
-binom.test(count_df$n[6], n, p = true_race_prop$true_prop[6],
-           alternative = "less")
-
-prop.test(count_df$n[6], n, p = true_race_prop$true_prop[6],
+whte_binom <- binom.test(count_df$n[6], n, p = true_race_prop$true_prop[6],
            alternative = "less")
 ```
+
+```{r}
+p_values <- c(asian_binom$p.value, black_binom$p.value, hispanic_binom$p.value,
+              native_binom$p.value, white_binom$p.value)
+p.adjust(p_values, length(p_values), method = "holm")
+```
+
